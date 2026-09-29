@@ -1,43 +1,28 @@
-# GitHub Pages deployment proposal
+# Course hosting and validation plan
 
-Status: proposed; owner approval required before workflow or hosting mutations.
+Status: GitHub Pages explicitly rejected by the owner. CI validation/security workflows approved and prepared. Cloudflare hosting address and integration remain under discussion; no deployment or DNS mutation is authorized by this document.
 
-## Goal and target
+## Existing personal site
 
-Publish the independent French static course at `https://benoit-bremaud.github.io/cpp-learning-course/`. This is the expected URL, not a deployed endpoint. GitHub Actions is enabled; the Pages API currently returns 404. Verify authorization if enabling Pages fails rather than assuming the endpoint is accessible.
+Inspected `/home/vev/Documents/02_personal/portfolio/benoitbremaud.fr` (Git remote `benoit-bremaud/benoitbremaud.fr`). Its accepted ADR uses Cloudflare Pages Git integration and static HTML/CSS with no build command. The existing Projects section contains CAN Sniffer, BB Homelab and Kaggle Watcher. The adjacent `website` checkout is the separate StudioB22 commercial website and is not the personal portfolio. Untracked product documents were left untouched.
 
-Astro already uses site `https://benoit-bremaud.github.io` and base `/cpp-learning-course`. No custom domain, backend, account, new paid service or practice-repository deployment is needed.
+## Proposed integration
 
-## Proposed files and behavior
+Prefer a separate Cloudflare Pages project for `cpp-learning-course`, linked from a new entry in the personal site's existing Projects section. Proposed host: `cpp.benoitbremaud.fr`; not accepted or provisioned yet. Alternative: `benoitbremaud.fr/cpp/`, requiring a combined publication pipeline or path routing. Both can keep separate repositories, but subdomain deployment minimizes release coupling.
 
-- `.github/workflows/validate.yml`: pull requests and pushes to main run npm ci, npm run check and npm test. The test command builds output itself; do not build twice.
-- `.github/workflows/pages.yml`: on main or a manual dispatch restricted to main, install locked dependencies, check, build/test, upload dist and deploy the validated artifact with official Pages actions. Grant pages:write and id-token:write only to the deployment job; other jobs have contents:read. Serialize production deployments and never deploy PR code with write permissions.
-- `.github/workflows/gitleaks.yml`: secret scanning on pushes, PRs and weekly; findings fail validation; upload SARIF where available.
-- `.github/workflows/codeql.yml`: analyze JavaScript/TypeScript using CodeQL with security-events permission limited to reporting jobs.
-- `.github/workflows/dependency-review.yml`: review dependency changes on PRs and fail on actionable known vulnerabilities under the chosen policy.
-- `README.md` and `docs/validation.md`: explain actual hosting, required checks, commands and measured verification results after deployment.
+For an accepted subdomain: change Astro site to the chosen canonical origin and base to `/`, update the diagram asset reference and tests, and configure the Pages output directory as `dist`. Build command should include `npm run check && npm test`; tests already build output. GitHub security checks do not automatically gate Cloudflare Git-integrated deployments: enforce PR checks before main merges or select an explicitly gated deployment mechanism. Do not claim that enabling CI alone guarantees this ordering.
 
-Resolve supported action versions and pin immutable commit SHAs during implementation. Use Node compatible with the pinned Astro engine (minimum 22.12), not an unverified default runner version. Do not add personal access tokens to workflow files.
+Native Cloudflare branch previews can provide staging. Production comes from main. No QA data tier, backend or framework migration is required. DNS and custom-domain association are only configured after the hosting choice and implementation are validated. Existing apex and www routing must be preserved.
 
-## Environments
+## Approved CI implementation
 
-Use local preview for current review and a protected `prod` GitHub environment for Pages deployment, restricted to main. No QA environment is justified for a static reader with no data. Disposable hosted staging previews are deferred; initial review remains local plus downloadable build artifacts. This is an explicit limited initial scope, not a claim that hosted previews exist.
+- validate.yml: PR/main install, type check and fresh production-output tests.
+- dependency-review.yml: PR dependency vulnerability review, failure threshold low.
+- codeql.yml: JavaScript/TypeScript analysis on PR/main and weekly.
+- gitleaks.yml: secret scanning on PR/push/weekly, reports uploaded when produced.
 
-## Repository settings
+Actions are pinned to verified upstream commit SHAs. Default permission is contents:read; security report upload jobs additionally use security-events:write. No pull_request_target, deployment token or hosting workflow. Node 22.21.1 matches the locally verified runtime.
 
-Enable Pages with GitHub Actions as source. Restrict production environment deployment branches to main. Review the workflow PR before merging. Branch protection/required-check changes are a separate decision after initial checks exist; do not silently enable bypasses or overwrite existing rules.
+## Remaining review
 
-## Acceptance
-
-1. Workflow syntax validated; action SHAs and their provenance checked.
-2. PR jobs validate code without publishing the site; build/test failure prevents deployment.
-3. Main deployment succeeds through the official Pages artifact mechanism.
-4. Public home, guided example, local SVG, styles and search work under the project base.
-5. Mobile navigation works; published practice links retain the accepted revision.
-6. No deployment is reported complete until the live URL and workflow result are verified.
-
-## Review and scope
-
-Content feeds a static build, the build feeds Pages, and practice remains independent. No application architectural change or new framework is required. Security checks are separate workflows and minimal permissions are job-scoped. Main deployment follows reviewed changes; the workflow must first pass its own PR review. No merge or branch deletion is authorized by this proposal alone.
-
-Reference: https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages
+Validate the hosting address and portfolio entry content, implement the selected deployment design, then verify previews and live navigation/search/assets before reporting public availability. Current Astro GitHub-origin configuration is a legacy placeholder awaiting that decision, not an enabled GitHub Pages deployment.
