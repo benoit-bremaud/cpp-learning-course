@@ -9,10 +9,11 @@ Requires Node.js >=22.12.0 and npm >=9.6.5.
 ```sh
 npm ci
 npm run check
-npm run build
 npm test
 npm run preview
 ```
+
+`npm test` builds fresh production output before running the reader checks. A failed build stops the command before tests run. Use `npm run build` when only a build is needed.
 
 Open the printed local address under `/cpp-learning-course/`. Search is indexed during production builds.
 

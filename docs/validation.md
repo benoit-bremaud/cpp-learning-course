@@ -25,3 +25,7 @@ Separated the build-chain overview from stable module TOOL-01. Simplified CPP-01
 ## Publication review
 
 Must Have: updated the README to reflect the published practice catalog and corrected the built page count. Done. Guided-example links were verified against published practice commit 6f6da4c; its code excerpt matches the source. The generated UML SVG is an unchanged snapshot with provenance documented in design.md. Existing production-output tests cover its local asset and navigation. No remaining blocking finding from the local self-review.
+
+## Approved PR review correction
+
+Copilot comment 4134840929 was verified and the owner approved building before output tests. `npm test` now runs the production build and only runs tests if it succeeds. The README avoids a duplicate build. An isolated source copy with copied installed dependencies and no dist directory passed both tests; after changing its source while retaining the old dist, npm test rebuilt the changed content and passed again. An initial dependency-symlink setup failed in Astro path resolution; using independent copied dependencies resolved that test-fixture issue. No production sources were modified for the freshness probe.
