@@ -20,7 +20,7 @@ cd cpp-learning
 Ouvre ensuite ce dossier dans VS Code ou un autre IDE. Tu pourras revenir dans un module sans cloner un nouveau dépôt à chaque séance.
 
 :::note[Disponibilité]
-Le dépôt distant contient actuellement son amorce. Les études et exercices ne sont pas encore publiés. Le clonage fonctionne, mais il ne fournit pas encore de programme à compiler.
+Le premier exemple de référence est publié : [le voyant au seuil de 30 °C](../exemple-voyant/), avec son étude UML, son code et ses tests. Les autres exercices seront ajoutés progressivement.
 :::
 
 ## Retrouver un exercice

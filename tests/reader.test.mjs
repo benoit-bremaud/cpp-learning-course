@@ -41,6 +41,9 @@ test('built reader keeps all local navigation and assets inside the project base
 test('production search index exists and practice availability is explicit', async () => {
   await stat(path.join(root, 'pagefind/pagefind.js'));
   const practice = await readFile(path.join(root, 'pratique/index.html'), 'utf8');
-  assert.match(practice, /ne sont pas encore publiés/);
+  assert.match(practice, /premier exemple de référence est publié/);
+  const example = await readFile(path.join(root, 'exemple-voyant/index.html'), 'utf8');
+  assert.match(example, /6f6da4c440153c0709e35b823a3ef5b85c6b6b68/);
+  await stat(path.join(root, 'diagrams/threshold-indicator.svg'));
   assert.match(practice, /https:\/\/github.com\/benoit-bremaud\/cpp-learning/);
 });

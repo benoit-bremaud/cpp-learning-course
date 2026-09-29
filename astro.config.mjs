@@ -16,6 +16,7 @@ export default defineConfig({
       { label: 'Du source au programme', slug: 'du-source-au-programme' },
       { label: 'Concevoir avant de coder', slug: 'methode-uml' },
       { label: 'Pratiquer dans son IDE', slug: 'pratique' },
+      { label: 'Exemple guidé du voyant', slug: 'exemple-voyant' },
       { label: 'Premières notions', items: [{ slug: 'notions/tool-01' }, { slug: 'notions/cpp-01' }, { slug: 'notions/cpp-09' }] },
     ],
   })],

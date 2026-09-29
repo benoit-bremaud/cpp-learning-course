@@ -5,7 +5,7 @@ description: "À partir d’une alarme de température, comprendre ce que vérif
 
 **Objectif :** expliquer ce qu’une compilation réussie permet de conclure, et ce qu’elle ne garantit pas. **Prérequis :** aucun ; il n’est pas nécessaire de connaître la syntaxe C++ pour suivre cette page.
 
-**État :** cours illustré par des situations commentées. Les fichiers d’exemple et l’exercice local ne sont pas encore disponibles ; leur étude UML reste à valider.
+**État :** cours illustré par des situations commentées. Le cas de la moyenne reste illustratif. Un [exemple guidé distinct sur le voyant](../../exemple-voyant/) est publié avec son UML, son code et ses tests.
 
 ## Partons d’une alarme de température
 
@@ -88,13 +88,13 @@ Ce n’est pas la seule explication possible. Il faudra vérifier le transfert, 
 
 Un **avertissement** est un autre type de diagnostic : il attire l’attention sur un problème potentiel. Selon la configuration, il peut être toléré ou traité comme une erreur. Il ne faut pas le masquer sans comprendre sa cause ; TOOL-03 lui sera consacré.
 
-## Concevoir avant la future pratique
+## Relier le cours à la pratique
 
 Le cas de la moyenne illustre le cours ; ce n’est pas encore un exercice prêt à cloner. Son étude devra fixer les entrées acceptées, le résultat attendu, les cas limites et la correspondance entre UML, code et tests. Elle sera validée avant d’écrire les fichiers d’exemple.
 
 Aucun design pattern n’est nécessaire pour expliquer la compilation. En revanche, deux bonnes pratiques sont déjà visibles : **écrire le résultat attendu avant de vérifier le programme** et **distinguer une erreur de traduction d’une erreur de comportement**.
 
-La pratique se déroulera exclusivement dans ton IDE, depuis le dépôt dédié. Le cours ne propose ni compilateur ni exercice à exécuter dans le navigateur.
+Pour passer à un exemple publié, lis [le voyant au seuil de 30 °C](../../exemple-voyant/). Sa conception est validée et son code est disponible. La pratique se déroule exclusivement dans ton IDE, depuis le dépôt dédié. Le cours ne propose ni compilateur ni exercice à exécuter dans le navigateur.
 
 ## L’essentiel à retrouver plus tard
 

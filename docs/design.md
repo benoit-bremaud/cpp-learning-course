@@ -27,3 +27,7 @@ Requirements map to content/navigation or explicit availability statements. Depe
 ## Accepted teaching refinement
 
 The owner approved situation-led teaching: concrete need, one question, progressive explanation, worked example, counterexample, independently cloned practice and a retrieval summary. TOOL-01 uses non-executable temperature scenarios and an explicitly illustrative diagnostic. No executable example or exercise implementation is implied before its own UML conception gate. Good practices start immediately; design-pattern modules require a concrete motivating force and a comparison with a simpler solution.
+
+## Published example integration
+
+The guided threshold page references practice revision `6f6da4c440153c0709e35b823a3ef5b85c6b6b68`. `public/diagrams/threshold-indicator.svg` is an unchanged snapshot of its generated SVG; the authoritative PlantUML stays exclusively in the practice repository. The code excerpt is verbatim from that revision. Update diagram, excerpt and pinned links together if the teaching reference changes. Practice is still exclusively local.
