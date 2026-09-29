@@ -23,3 +23,7 @@ White paper (#ffffff), navy ink (#192e4d), blue links (#2856a5), pale blue empha
 ## Review
 
 Requirements map to content/navigation or explicit availability statements. Dependency direction is content into static build, with external practice independent. KISS/YAGNI: no custom client application or speculative abstraction. Patterns: no application pattern needed. CI/deployment remains outside this accepted implementation; workflows need owner approval.
+
+## Accepted teaching refinement
+
+The owner approved situation-led teaching: concrete need, one question, progressive explanation, worked example, counterexample, independently cloned practice and a retrieval summary. TOOL-01 uses non-executable temperature scenarios and an explicitly illustrative diagnostic. No executable example or exercise implementation is implied before its own UML conception gate. Good practices start immediately; design-pattern modules require a concrete motivating force and a comparison with a simpler solution.
