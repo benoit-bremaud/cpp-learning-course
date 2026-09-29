@@ -11,7 +11,7 @@ Le parcours se découpe en petits modules centrés sur une seule notion. Les fam
 
 | Famille | Notions principales | Point d’entrée |
 | --- | --- | --- |
-| Outils | Compilation, édition de liens, diagnostics, débogage, tests | [TOOL-01 : chaîne de compilation](../notions/tool-01/) |
+| Outils | Compilation, édition de liens, diagnostics, débogage, tests | [TOOL-01 : compilation](../notions/tool-01/) |
 | C++ fondamental | Initialisation, types, conversions, conditions, fonctions, portée | [CPP-01 : initialisation](../notions/cpp-01/) |
 | Objets constants | Intention et limites de `const` | [CPP-09 : objets constants](../notions/cpp-09/) |
 | UML | Structure, interactions, activités et états | [Méthode de conception](../methode-uml/) |

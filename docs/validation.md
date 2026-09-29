@@ -1,7 +1,7 @@
 # Local validation
 
 - `npm run check`: no errors, warnings or hints.
-- `npm run build`: eight static pages generated and Pagefind indexed. Starlight emits non-blocking notices for the absent optional custom i18n collection and custom 404 entry; its built-in French UI and fallback page are used.
+- `npm run build`: nine static pages generated and Pagefind indexed. Starlight emits non-blocking notices for the absent optional custom i18n collection and custom 404 entry; its built-in French UI and fallback page are used.
 - `npm test`: two production-output tests pass, covering internal links, anchors, assets, project-base paths, French language metadata and search artifacts.
 - Headless Chrome: desktop 1440px and mobile 390px inspected; no horizontal overflow or page errors on the home page. Search for `const` returns CPP-09 and opens its page. Mobile menu opens the progression successfully.
 - npm install audit: no known dependency vulnerabilities reported.
@@ -17,3 +17,7 @@ Should Have: ordered the three introductions by prerequisites rather than alphab
 Nice to Have: custom 404/i18n overrides are unnecessary for this initial reader; retained framework defaults.
 
 No push, PR, CI changes or deployment performed. Human push gate remains in effect.
+
+## Pedagogical review corrections
+
+Separated the build-chain overview from stable module TOOL-01. Simplified CPP-01 and CPP-09 to match their entry prerequisites, retaining explicit future-study boundaries. Updated introductory navigation and local implementation status. Type checks, production build, and both output tests pass after these edits. Browser interaction checks above describe the initial reader verification, not a new browser run.

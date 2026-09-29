@@ -10,7 +10,7 @@ Ce cours s’adresse à toi si tu veux progresser en C++ pour programmer des mic
 ## Choisir son point de départ
 
 - [Voir le parcours progressif](./parcours/) pour situer les sujets et leurs prérequis.
-- [Comprendre la chaîne de compilation](./notions/tool-01/) pour distinguer source, programme et firmware.
+- [Comprendre la chaîne de compilation](./du-source-au-programme/) pour distinguer source, programme et firmware.
 - [Découvrir la méthode UML](./methode-uml/) pour relier conception et implémentation.
 - [Préparer la pratique locale](./pratique/) pour comprendre l’organisation du dépôt.
 
@@ -20,6 +20,6 @@ Aucune date, aucun délai et aucune obligation de terminer une famille entière 
 
 ## Ce qui est disponible
 
-Cette première version contient le parcours, la méthode et trois introductions théoriques. Le catalogue détaillé de 121 modules reste une proposition pédagogique à relire ensemble. Les exercices et leurs études UML seront ajoutés progressivement après validation ; aucun exercice exécutable n’est annoncé comme disponible aujourd’hui.
+Cette première version contient le parcours, la méthode, une vue d’ensemble de la construction et trois introductions théoriques. Le catalogue détaillé de 121 modules reste une proposition pédagogique à relire ensemble. Les exercices et leurs études UML seront ajoutés progressivement après validation ; aucun exercice exécutable n’est annoncé comme disponible aujourd’hui.
 
 Le site sert à lire. Les exemples exécutables et les exercices auront leur place dans le dépôt de pratique, à cloner et ouvrir dans ton IDE.

@@ -1,35 +1,34 @@
 ---
 title: "CPP-09 — Exprimer une valeur constante"
-description: "Comprendre ce que garantit const et ce qu’il ne garantit pas."
+description: "Utiliser const pour exprimer qu’une valeur ne doit pas être modifiée."
 ---
 
-**Objectif :** expliquer les limites de `const`. **Prérequis :** [CPP-01](../cpp-01/). **État :** introduction théorique disponible ; étude et exercice à venir.
+**Objectif :** expliquer l’intention de `const` pour une variable simple. **Prérequis :** [CPP-01](../cpp-01/). **État :** introduction théorique disponible ; étude et exercice à venir.
 
-## Exprimer une intention
+## Identifier ce qui doit rester stable
 
-Qualifier un objet avec `const` restreint les modifications autorisées. Une limite configurée au démarrage, puis seulement consultée, peut ainsi porter une intention claire : le traitement ne doit pas la réaffecter.
+Imagine une limite du nombre de mesures à conserver. Si cette limite ne doit pas changer pendant le traitement, le programme doit exprimer cette intention clairement.
 
-`const` participe au système de types. Une tentative de modification directement interdite par ce type doit être diagnostiquée ; ce n’est pas seulement une convention de nommage.
+Pour une variable simple telle qu’un entier, `const` indique que sa valeur ne peut pas être modifiée après son initialisation. Sa valeur de départ reste donc nécessaire : déclarer une variable constante ne signifie pas remettre son initialisation à plus tard.
 
-## Distinguer objet et accès
+## Faire vérifier cette intention
 
-Une référence vers un objet constant et une référence constante au sens courant de « valeur qui ne change jamais » ne sont pas des concepts interchangeables. Un accès par référence à `const` empêche certaines modifications par cet accès ; l’objet sous-jacent peut parfois être modifié par un autre accès autorisé s’il n’est pas lui-même constant.
+Si le code tente directement d’affecter une autre valeur à cet entier constant, le compilateur doit signaler le problème. Le nom de la variable peut expliquer son rôle ; `const` ajoute une contrainte que les outils peuvent contrôler.
 
-Les pointeurs ajoutent deux questions : peut-on changer l’adresse conservée, et peut-on modifier l’objet pointé ? Le module consacré aux pointeurs séparera explicitement ces deux propriétés.
+Cette contrainte ne garantit pas que la valeur choisie est pertinente. Une limite constante mais incorrecte reste une erreur de conception.
 
-## Ne pas confondre avec constexpr
+## Une valeur connue pendant l’exécution
 
-Une valeur `const` peut être obtenue pendant l’exécution. `const` seul ne garantit donc pas qu’elle soit utilisable dans tous les contextes exigeant une expression constante. `constexpr` introduit d’autres exigences ; il sera étudié avec les calculs à la compilation.
+Une valeur constante peut être obtenue au démarrage du programme puis rester stable. `const` ne signifie donc pas nécessairement « valeur déjà connue lors de la compilation ».
 
-## Lien avec la conception
+Le calcul à la compilation, avec notamment `constexpr`, sera traité séparément. Il n’est pas nécessaire pour comprendre ce premier usage de `const`.
 
-L’étude doit préciser quelles données restent stables après construction et quelles opérations peuvent changer l’état. Le mot-clé aide à exprimer une partie de ce contrat ; il ne décrit pas à lui seul un invariant métier complet.
+## Lien avec l’embarqué
 
-En embarqué, `const` ne garantit ni un placement particulier en mémoire flash, ni une synchronisation entre tâches. Ces sujets dépendent de la chaîne de compilation, de la cible et des mécanismes de concurrence.
+Dans une conception de traitement de mesures, distingue la limite stable et le compteur qui évolue. Le choix de ce qui reste constant dépend du besoin : une limite réglable pendant le fonctionnement ne respecte pas le même contrat.
 
-**À retenir :** demande toujours « qu’est-ce qui est constant, et à travers quel accès ? ». La réponse est plus utile que l’idée vague de « variable protégée ».
+**À retenir :** pour une variable entière simple, `const` exprime l’interdiction de modifier sa valeur après son initialisation. Il ne remplace pas la réflexion sur la bonne valeur de départ.
 
+## Plus tard
 
-## Pour approfondir
-
-[Projet de norme C++ : dcl.type.cv](https://eel.is/c++draft/dcl.type.cv) — référence technique en anglais ; le projet de norme évolue et doit être distingué de la version du langage choisie pour un exercice.
+Les références et les pointeurs nécessitent de distinguer un objet constant d’un accès qui interdit certaines modifications. Cette nuance sera abordée après leurs modules dédiés. Elle n’est pas un prérequis de cette introduction.

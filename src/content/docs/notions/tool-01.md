@@ -1,41 +1,34 @@
 ---
-title: "TOOL-01 — Du source au programme"
-description: "Distinguer compilation, édition de liens et transfert sur la cible."
+title: "TOOL-01 — Comprendre la compilation"
+description: "Comprendre le rôle du compilateur et reconnaître ses limites."
 ---
 
-**Objectif :** expliquer les étapes qui séparent un fichier source du programme exécuté. **Prérequis :** aucun. **État :** introduction théorique disponible ; pratique à venir.
+**Objectif :** expliquer comment un fichier source est traduit et à quoi sert un diagnostic du compilateur. **Prérequis :** aucun. **État :** introduction théorique disponible ; étude et exercice à venir.
 
-## Le source n’est pas le programme exécuté
+## Traduire le source
 
-Un fichier C++ contient une description destinée aux outils et aux humains. Le processeur exécute des instructions machine. La chaîne de construction transforme les sources et assemble les éléments nécessaires pour produire un programme adapté à une cible.
+Un fichier source contient le programme écrit en C++. Le compilateur analyse ce texte et le traduit pour une cible, c’est-à-dire le processeur et l’environnement auxquels le programme est destiné.
 
-## Une traduction par unité
+Dans une construction classique en plusieurs étapes, on obtient un fichier objet : un fichier contenant notamment du code traduit, qui sera ensuite assemblé avec d’autres éléments pour former le programme. Cet assemblage sera étudié dans TOOL-02, consacré à l’édition de liens.
 
-Le prétraitement traite notamment les inclusions et les directives conditionnelles. Une unité de traduction correspond, de manière simplifiée, au contenu résultant d’un fichier source après ce traitement. Le compilateur analyse le programme et peut diagnostiquer des erreurs de syntaxe ou de types. La production de code machine passe généralement aussi par une étape d’assemblage.
+## Lire un diagnostic
 
-Les fichiers objets ne constituent pas nécessairement un programme complet : ils peuvent faire référence à des fonctions définies dans d’autres unités.
+Le compilateur peut signaler une erreur, par exemple lorsqu’une instruction ne respecte pas la syntaxe du langage. Le message indique généralement un fichier, une position et une explication.
 
-## Assembler les définitions
+Une erreur peut en provoquer plusieurs autres. Commence par comprendre la première cause identifiée, corrige-la, puis relance la compilation avant d’interpréter les messages suivants.
 
-L’éditeur de liens combine les fichiers objets et les bibliothèques. Une fonction déclarée et appelée, mais dont aucune définition nécessaire n’est fournie, peut produire une erreur à cette étape. Une déclaration permet de connaître un contrat ; elle ne remplace pas l’implémentation.
+Un avertissement attire l’attention sur un problème potentiel, même si les outils parviennent à poursuivre la construction. Le module TOOL-03 expliquera comment les examiner.
 
-Toutes les violations du langage ne sont pas nécessairement détectées. Une construction réussie n’est donc pas une preuve de correction.
+## Comprendre la limite
 
-## Choisir une cible
+Une compilation réussie ne prouve pas que le programme produit le résultat voulu. Le compilateur ne connaît pas ton intention : un calcul peut être accepté tout en utilisant la mauvaise formule.
 
-Un programme construit pour ton ordinateur n’est pas automatiquement exécutable sur un ESP32. Architecture du processeur, ABI, bibliothèques et disposition mémoire interviennent dans le résultat. Une chaîne de compilation croisée fonctionne sur une machine et produit du code pour une autre cible.
+La compilation n’exécute pas non plus le programme sur une carte. Le transfert et les vérifications sur microcontrôleur seront abordés séparément.
 
-Pour un microcontrôleur, la construction peut produire plusieurs artefacts destinés à la mémoire flash. Le transfert sur la carte est une étape distincte de la compilation. La réussite du transfert ne prouve pas davantage le bon fonctionnement du programme.
+## À retenir
 
-## Retenir les distinctions
+Le compilateur traduit et diagnostique. Les tests servent à vérifier des comportements attendus ; ils ne sont pas remplacés par une compilation réussie.
 
-| Étape | Question principale |
-| --- | --- |
-| Compilation | Cette unité peut-elle être traduite pour la cible choisie ? |
-| Édition de liens | Les éléments requis peuvent-ils être assemblés ? |
-| Transfert | Les artefacts ont-ils été écrits sur la carte ? |
-| Exécution et tests | Le comportement respecte-t-il le contrat ? |
+**Pour se repérer :** [vue d’ensemble de la chaîne de construction](../../du-source-au-programme/). Cette lecture est facultative.
 
-Le diagnostic utile est le premier message qui explique une cause, pas nécessairement la dernière ligne affichée par l’IDE.
-
-**Suite :** [initialiser une variable](../cpp-01/). La future pratique permettra de distinguer volontairement plusieurs catégories de diagnostics à partir d’une étude validée.
+**Suite disponible :** [initialiser une variable](../cpp-01/). TOOL-02 et TOOL-03 restent prévus ; aucun exercice exécutable n’est encore publié.
