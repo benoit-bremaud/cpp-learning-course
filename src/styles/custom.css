@@ -1,0 +1,22 @@
+/* Course reading tokens; framework components retain their accessible behavior. */
+:root {
+  --course-blue: #2856a5;
+  --course-ink: #192e4d;
+  --course-paper: #ffffff;
+  --course-pale: #e9f0fc;
+  --course-muted: #53647b;
+  --sl-font: "Segoe UI", "Noto Sans", sans-serif;
+  --sl-content-width: 48rem;
+  --sl-color-accent-low: #182e52;
+  --sl-color-accent: #719ff0;
+  --sl-color-accent-high: #d7e5ff;
+}
+:root[data-theme='light'] {
+  --sl-color-accent-low: var(--course-pale);
+  --sl-color-accent: var(--course-blue);
+  --sl-color-accent-high: var(--course-ink);
+}
+.sl-markdown-content { line-height: 1.8; }
+.sl-markdown-content p { max-width: 72ch; }
+.sl-markdown-content h2 { margin-top: 2.4rem; }
+.sl-markdown-content img { background: var(--course-paper); border-radius: .25rem; }
