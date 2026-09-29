@@ -18,7 +18,7 @@ Open the printed local address under `/cpp-learning-course/`. Search is indexed 
 
 ## Scope and decisions
 
-Three introductory theory pages, the proposed progression, the UML method, and local practice instructions are available. The threshold-indicator worked reference is published in the independent practice repository and linked from a guided course page. The 121-module planning catalog remains in the practice repository's local design branch pending joint review and publication.
+Three introductory theory pages, the proposed progression, the UML method, and local practice instructions are available. The threshold-indicator worked reference is published in the independent practice repository and linked from a guided course page. The 121-module planning catalog is published in the practice repository; its detailed pedagogical content still requires joint review.
 
 Teaching content and UI are French by explicit owner approval. Engineering documents and code are English. The owner approved a default export only in `astro.config.mjs`, as required by standard Astro configuration; other authored code uses named exports.
 
