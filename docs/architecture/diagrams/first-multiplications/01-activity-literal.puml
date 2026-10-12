@@ -1,0 +1,9 @@
+@startuml
+skinparam defaultFontSize 16
+skinparam shadowing false
+title act — Compter les composants de trois kits
+start
+:Calculer 3 * 4\nRésultat : 12;
+:Initialiser component_count\navec le résultat : 12;
+stop
+@enduml

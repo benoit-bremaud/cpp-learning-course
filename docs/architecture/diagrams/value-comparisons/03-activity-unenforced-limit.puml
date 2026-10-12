@@ -1,0 +1,11 @@
+@startuml
+title act — Observer une limite non contrôlée
+start
+:Initialiser measurement_limit constant à 3;
+note right: Valeur observée : limite 3
+:Initialiser measurement_count à 0;
+note right: Valeur observée : limite 3, compteur 0
+:Affecter 4 à measurement_count;
+note right: Valeur observée : limite 3, compteur 4
+stop
+@enduml

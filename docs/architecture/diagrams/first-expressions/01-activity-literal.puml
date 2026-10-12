@@ -1,0 +1,9 @@
+@startuml
+skinparam defaultFontSize 16
+skinparam shadowing false
+title act — Addition de deux quantités
+start
+:Calculer 2 + 3\nRésultat : 5;
+:Initialiser component_count\navec le résultat : 5;
+stop
+@enduml

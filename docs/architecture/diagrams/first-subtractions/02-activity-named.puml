@@ -1,0 +1,11 @@
+@startuml
+skinparam defaultFontSize 16
+skinparam shadowing false
+title act — Soustraire la quantité utilisée
+start
+:Initialiser initial_count à 12;
+:Initialiser used_count à 5;
+:Calculer initial_count - used_count\nRésultat : 7;
+:Initialiser remaining_count\navec le résultat : 7;
+stop
+@enduml

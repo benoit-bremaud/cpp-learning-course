@@ -1,0 +1,10 @@
+@startuml
+skinparam defaultFontSize 16
+skinparam shadowing false
+title act — Affecter un résultat calculé
+start
+:Initialiser component_count à 0;
+:Calculer 2 + 3\nRésultat : 5;
+:Affecter le résultat à component_count\nNouvelle valeur : 5;
+stop
+@enduml

@@ -1,0 +1,13 @@
+@startuml
+title stm — ExampleExplorer reading state
+[*] --> Closed
+Closed --> Open : activate opener / select first context, focus heading
+state Open {
+ [*] --> OtherContexts
+ OtherContexts --> Deeper : activate deeper tab / select first sheet, reset scroll
+ Deeper --> OtherContexts : activate contexts tab / select first sheet, reset scroll
+ OtherContexts --> OtherContexts : select sheet / reset reading scroll
+ Deeper --> Deeper : select sheet / reset reading scroll
+}
+Open --> Closed : Escape or close / restore opener focus and course position
+@enduml

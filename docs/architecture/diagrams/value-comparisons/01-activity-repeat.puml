@@ -1,0 +1,10 @@
+@startuml
+skinparam defaultFontSize 16
+skinparam shadowing false
+title Répéter une affectation
+start
+:Initialiser\nmeasurement_count à 0;
+:Affecter 1 à\nmeasurement_count;
+:Affecter encore 1 à\nmeasurement_count;
+stop
+@enduml

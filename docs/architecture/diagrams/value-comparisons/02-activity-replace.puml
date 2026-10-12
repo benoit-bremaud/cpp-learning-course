@@ -1,0 +1,11 @@
+@startuml
+title act — Remplacer le total connu
+start
+:Initialiser measurement_count à 0;
+note right: Valeur observée : 0
+:Affecter 2 à measurement_count;
+note right: Valeur observée : 2
+:Affecter 5 à measurement_count;
+note right: Valeur observée : 5
+stop
+@enduml

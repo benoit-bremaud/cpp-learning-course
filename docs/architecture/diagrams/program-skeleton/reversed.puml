@@ -1,0 +1,10 @@
+@startuml
+skinparam defaultFontSize 16
+skinparam shadowing false
+title Inverser les messages
+start
+:Écrire Program finished\npuis un saut de ligne;
+:Écrire Program started\npuis un saut de ligne;
+:Renvoyer 0;
+stop
+@enduml

@@ -1,0 +1,11 @@
+@startuml
+skinparam defaultFontSize 16
+skinparam shadowing false
+title act — Un seul kit
+start
+:Initialiser kit_count à 1;
+:Initialiser components_per_kit à 4;
+:Calculer kit_count * components_per_kit\nRésultat : 4;
+:Initialiser component_count\navec le résultat : 4;
+stop
+@enduml

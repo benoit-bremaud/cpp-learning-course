@@ -1,0 +1,11 @@
+@startuml
+skinparam defaultFontSize 16
+skinparam shadowing false
+title act — Division exacte
+start
+:Initialiser component_count à 12;
+:Initialiser components_per_kit à 4;
+:Calculer le quotient entier\ncomponent_count / components_per_kit\nRésultat : 3;
+:Initialiser kit_count à 3;
+stop
+@enduml

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="271px" preserveAspectRatio="none" style="width:275px;height:271px;" version="1.1" viewBox="0 0 275 271" width="275px" zoomAndPan="magnify"><defs/><g><text fill="#000000" font-family="sans-serif" font-size="16" lengthAdjust="spacingAndGlyphs" textLength="251" x="12" y="27.104">act — Addition de deux quantités</text><ellipse cx="138" cy="41.792" fill="#000000" rx="10" ry="10" style="stroke: none; stroke-width: 1.0;"/><rect fill="#FEFECE" height="63.5841" rx="12.5" ry="12.5" style="stroke: #A80036; stroke-width: 1.5;" width="120" x="78" y="71.792"/><text fill="#000000" font-family="sans-serif" font-size="16" lengthAdjust="spacingAndGlyphs" textLength="100" x="88" y="98.8961">Calculer 2 + 3</text><text fill="#000000" font-family="sans-serif" font-size="16" lengthAdjust="spacingAndGlyphs" textLength="83" x="88" y="120.6881">Résultat : 5</text><rect fill="#FEFECE" height="63.5841" rx="12.5" ry="12.5" style="stroke: #A80036; stroke-width: 1.5;" width="233" x="21.5" y="155.3761"/><text fill="#000000" font-family="sans-serif" font-size="16" lengthAdjust="spacingAndGlyphs" textLength="213" x="31.5" y="182.4802">Initialiser component_count</text><text fill="#000000" font-family="sans-serif" font-size="16" lengthAdjust="spacingAndGlyphs" textLength="135" x="31.5" y="204.2722">avec le résultat : 5</text><ellipse cx="138" cy="249.9602" fill="#FFFFFF" rx="11" ry="11" style="stroke: #000000; stroke-width: 1.0;"/><ellipse cx="138" cy="249.9602" fill="#000000" rx="6" ry="6" style="stroke: #7F7F7F; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.5;" x1="138" x2="138" y1="51.792" y2="71.792"/><polygon fill="#A80036" points="134,61.792,138,71.792,142,61.792,138,65.792" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.5;" x1="138" x2="138" y1="135.3761" y2="155.3761"/><polygon fill="#A80036" points="134,145.3761,138,155.3761,142,145.3761,138,149.3761" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.5;" x1="138" x2="138" y1="218.9602" y2="238.9602"/><polygon fill="#A80036" points="134,228.9602,138,238.9602,142,228.9602,138,232.9602" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[ff4434af1d480420c5c1d7b3e2ffc795]
+@startuml
+skinparam defaultFontSize 16
+skinparam shadowing false
+title act — Addition de deux quantités
+start
+:Calculer 2 + 3\nRésultat : 5;
+:Initialiser component_count\navec le résultat : 5;
+stop
+@enduml
+
+PlantUML version 1.2020.02(Sun Mar 01 11:22:07 CET 2020)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Java Version: 21.0.12.1+1-1-24.04.4-Ubuntu
+Operating System: Linux
+Default Encoding: UTF-8
+Language: en
+Country: null
+--></g></svg>

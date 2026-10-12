@@ -1,0 +1,8 @@
+@startuml
+skinparam defaultFontSize 16
+skinparam shadowing false
+title Corps de main
+start
+:Renvoyer 0\n(statut de réussite);
+stop
+@enduml

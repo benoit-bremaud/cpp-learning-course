@@ -1,0 +1,9 @@
+@startuml
+skinparam defaultFontSize 16
+skinparam shadowing false
+title act — Calculer le stock restant
+start
+:Calculer 12 - 5\nRésultat : 7;
+:Initialiser remaining_count\navec le résultat : 7;
+stop
+@enduml

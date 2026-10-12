@@ -1,0 +1,11 @@
+@startuml
+skinparam defaultFontSize 16
+skinparam shadowing false
+title act — Aucun kit, aucun composant
+start
+:Initialiser kit_count à 0;
+:Initialiser components_per_kit à 4;
+:Calculer kit_count * components_per_kit\nRésultat : 0;
+:Initialiser component_count\navec le résultat : 0;
+stop
+@enduml

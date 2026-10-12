@@ -1,0 +1,8 @@
+@startuml
+skinparam defaultFontSize 16
+skinparam shadowing false
+title Terminer sans afficher
+start
+:Renvoyer 0;
+stop
+@enduml

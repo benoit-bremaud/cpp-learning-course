@@ -1,0 +1,15 @@
+@startuml
+skinparam defaultFontSize 16
+skinparam shadowing false
+title Seuil strict
+start
+:Recevoir\ntemperature_celsius;
+:Initialiser\nthreshold_celsius à 30;
+if (temperature_celsius\n> threshold_celsius ?) then (true)
+ :Renvoyer true;
+ stop
+else (false)
+ :Renvoyer false;
+ stop
+endif
+@enduml

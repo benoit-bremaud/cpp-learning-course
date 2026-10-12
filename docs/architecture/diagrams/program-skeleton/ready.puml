@@ -1,0 +1,9 @@
+@startuml
+skinparam defaultFontSize 16
+skinparam shadowing false
+title Un premier message
+start
+:Écrire Ready\npuis un saut de ligne;
+:Renvoyer 0;
+stop
+@enduml

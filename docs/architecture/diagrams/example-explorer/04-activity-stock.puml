@@ -1,0 +1,9 @@
+@startuml
+skinparam defaultFontSize 16
+skinparam shadowing false
+title Stock de composants
+start
+:Initialiser\ncomponent_count à 12;
+:Affecter 11 à\ncomponent_count;
+stop
+@enduml

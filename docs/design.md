@@ -31,3 +31,7 @@ The owner approved situation-led teaching: concrete need, one question, progress
 ## Published example integration
 
 The guided threshold page references practice revision `6f6da4c440153c0709e35b823a3ef5b85c6b6b68`. `public/diagrams/threshold-indicator.svg` is an unchanged snapshot of its generated SVG; the authoritative PlantUML stays exclusively in the practice repository. The code excerpt is verbatim from that revision. Update diagram, excerpt and pinned links together if the teaching reference changes. Practice is still exclusively local.
+
+## Site-wide example requirements
+
+The accepted [pedagogical example charter](example-charter.md) governs every course section. Consult its requirements and review checklist before authoring examples or implementing the explorer. The charter records accepted interaction/editorial choices separately from the accepted Markdown storage format and the approved schema/technical design. The shared explorer is implemented on CPP-01, the guided indicator page and the first-expressions lesson.

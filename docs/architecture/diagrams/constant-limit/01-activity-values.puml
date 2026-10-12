@@ -1,0 +1,10 @@
+@startuml
+skinparam defaultFontSize 16
+skinparam shadowing false
+title Limite fixe\nCompteur modifiable
+start
+:Initialiser l’entier constant\nmeasurement_limit à 3;
+:Initialiser\nmeasurement_count à 0;
+:Affecter 1 à\nmeasurement_count;
+stop
+@enduml

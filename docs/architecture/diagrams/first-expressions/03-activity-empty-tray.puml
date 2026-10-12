@@ -1,0 +1,11 @@
+@startuml
+skinparam defaultFontSize 16
+skinparam shadowing false
+title act — Un plateau vide
+start
+:Initialiser left_tray_count à 0;
+:Initialiser right_tray_count à 3;
+:Calculer left_tray_count + right_tray_count\nRésultat : 3;
+:Initialiser component_count\navec le résultat : 3;
+stop
+@enduml

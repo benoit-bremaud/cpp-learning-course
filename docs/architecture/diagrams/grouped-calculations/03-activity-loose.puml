@@ -1,0 +1,13 @@
+@startuml
+skinparam defaultFontSize 16
+skinparam shadowing false
+title act — Composants en vrac et en kits
+start
+:Initialiser loose_component_count à 3;
+:Initialiser kit_count à 2;
+:Initialiser components_per_kit à 4;
+:Calculer kit_count * components_per_kit\nRésultat : 8 composants;
+:Ajouter loose_component_count à ce résultat\nRésultat : 11 composants;
+:Initialiser component_count à 11;
+stop
+@enduml

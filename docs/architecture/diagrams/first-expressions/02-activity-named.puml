@@ -1,0 +1,11 @@
+@startuml
+skinparam defaultFontSize 16
+skinparam shadowing false
+title act — Addition de deux variables
+start
+:Initialiser left_tray_count à 2;
+:Initialiser right_tray_count à 3;
+:Calculer left_tray_count + right_tray_count\nRésultat : 5;
+:Initialiser component_count\navec le résultat : 5;
+stop
+@enduml
