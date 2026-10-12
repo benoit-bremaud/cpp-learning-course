@@ -1,0 +1,272 @@
+---
+title: "CPP-01 — Initialiser une variable"
+description: "Suivre une donnée, de sa valeur initiale à sa première modification."
+examples: [component-stock, independent-copy]
+---
+
+import ExampleExplorer from '../../../components/ExampleExplorer.astro';
+
+**Objectif :** reconnaître ce qui donne sa première valeur à une variable et ce qui la modifie ensuite. **Prérequis :** [lire un programme et suivre ses instructions](../premiers-affichages/). La syntaxe nécessaire est expliquée ici ; tu n’as pas besoin de savoir écrire une fonction.
+
+**Disponible :** des exemples de lecture, une comparaison valide/invalide avec leurs UML et deux fiches complémentaires. L’exercice autonome correspondant, à cloner dans ton IDE, n’est pas encore publié.
+
+**Pour cette lecture :** concentre-toi sur trois repères : le nom de la donnée, sa valeur de départ et sa valeur après l’affectation. Écrire une fonction complète ou connecter un capteur n’est pas encore demandé. Le bouton UML sous le code ouvre la carte de correspondance ; toutes les explications nécessaires restent dans la page.
+
+## Quelle donnée voulons-nous représenter ?
+
+Un dispositif reçoit des mesures de température. Nous voulons représenter **le nombre de mesures déjà reçues**. Ce nombre n’est pas la température : après une mesure de 23 °C, le nombre de mesures reçues serait **1**, pas 23.
+
+Au départ, aucune mesure n’a été reçue : le total vaut **0**. Pour étudier une mise à jour, nous prendrons ensuite un nouveau total connu : **1**.
+
+Une **variable** permet ici de conserver une valeur sous un nom et de la retrouver dans le programme. Nous choisirons `measurement_count`, qui signifie « nombre de mesures ». Ce nom exprime le rôle de la donnée ; il ne déclenche aucune action matérielle.
+
+## Prévoir les valeurs avant le code
+
+| Moment de l’exemple | Valeur attendue de `measurement_count` |
+| --- | --- |
+| À sa création | 0 : aucune mesure reçue |
+| Après la mise à jour | 1 : le nouveau total connu |
+
+Nous étudions seulement **comment enregistrer ces deux valeurs**. Le futur extrait ne lira pas de capteur et n’attendra pas l’arrivée d’une mesure. La réception réelle sera traitée dans un autre module.
+
+## Lire l’activité du compteur de mesures
+
+![Début, initialiser measurement_count à zéro, lui affecter un, puis terminer. Les tableaux de la page indiquent les valeurs observées.](/diagrams/examples/measurement-count.svg)
+
+<a href="/diagrams/examples/measurement-count.svg" target="_blank" rel="noopener noreferrer">Ouvrir le diagramme en grand — nouvel onglet</a>
+
+Lis ce diagramme de haut en bas :
+
+1. Le point noir marque le début.
+2. La première action crée la variable avec la valeur **0**.
+3. La seconde action remplace cette valeur par **1**.
+4. Le symbole final marque la fin de ce traitement.
+
+Les rectangles arrondis représentent les actions. Les valeurs observées sont détaillées dans les tableaux de la page, pour garder le diagramme compact. Aucun symbole n’attend un événement matériel.
+
+## Retrouver ces actions dans le code
+
+Voici les deux instructions correspondant au diagramme. Elles seraient placées à l’intérieur d’une **fonction**, un traitement nommé contenant des instructions. Cet extrait n’est donc pas, à lui seul, un programme complet.
+
+{/* example:measurement-primary */}
+```cpp
+int measurement_count = 0;
+measurement_count = 1;
+```
+
+<details class="uml-panel" data-uml="measurement">
+<summary>Voir la conception UML</summary>
+
+**Quelle action crée la valeur et quelle action la remplace ?**
+
+![Diagramme de référence : Quelle action crée la valeur et quelle action la remplace ?](/diagrams/examples/measurement-count.svg)
+
+<a href="/diagrams/examples/measurement-count.svg" target="_blank" rel="noopener noreferrer">Ouvrir le diagramme en grand — nouvel onglet</a>
+
+| Élément de conception | Correspondance C++ |
+| --- | --- |
+| Initialiser à 0 | `int measurement_count = 0;` |
+| Affecter 1 | `measurement_count = 1;` |
+
+On suit les deux actions de haut en bas : la valeur vaut d’abord 0, puis 1. Aucune action ne lit de capteur.
+
+</details>
+
+### Première ligne : créer avec une valeur de départ
+
+Dans `int measurement_count = 0;` :
+
+- `int` est le **type** choisi : il permet ici de représenter un nombre entier ;
+- `measurement_count` est le **nom** choisi pour retrouver cette donnée ;
+- `0` est la **valeur initiale**, cohérente avec « aucune mesure reçue » ;
+- le point-virgule `;` termine cette déclaration.
+
+Cette ligne déclare la variable, la définit — elle la crée ici — et l’initialise à zéro. **L’initialisation établit sa première valeur.** Nous approfondirons plus tard la distinction générale entre déclaration et définition.
+
+### Seconde ligne : modifier une variable existante
+
+Dans `measurement_count = 1;`, la variable existe déjà. Nous utilisons son nom pour lui donner une nouvelle valeur. Cette opération est une **affectation** ; le point-virgule termine l’instruction.
+
+On peut lire cette ligne : « affecter la valeur 1 à `measurement_count` ». Le signe `=` ne pose pas une question d’égalité. Il apparaît aussi dans la première ligne, mais le contexte est différent : création avec une valeur initiale d’abord, remplacement d’une valeur ensuite.
+
+**Attention :** affecter 1 ne signifie pas « ajouter un à la valeur précédente ». Ajouter un à un compteur s’appelle l’incrémenter ; cette opération sera étudiée avec les expressions. La comparaison suivante montre précisément ce qui se passe lorsqu’on répète l’affectation.
+
+## Relier besoin, UML et résultat
+
+| Besoin | Action UML | Instruction C++ | Valeur après l’action |
+| --- | --- | --- | --- |
+| Représenter le total initial | Initialiser à 0 | `int measurement_count = 0;` | 0 |
+| Enregistrer le nouveau total connu | Affecter 1 | `measurement_count = 1;` | 1 |
+
+Après la seconde action, la valeur courante est 1. Cette variable ne conserve pas en plus un historique de ses anciennes valeurs.
+
+## Comparer : affecter deux fois la même valeur
+
+Dans le premier exemple, nous enregistrons le nouveau total connu : 1. Reprenons ce traitement depuis le début, puis enregistrons **une seconde fois ce même total**. Le besoin n’est pas de compter deux arrivées : aucune instruction ne reçoit de mesure.
+
+La seule différence avec le premier extrait est la troisième instruction. L’activité prévoit donc les valeurs **0, puis 1, puis encore 1**.
+
+![Initialiser à zéro, affecter un, puis affecter encore un à la même variable.](/diagrams/examples/repeated-assignment.svg)
+
+<a href="/diagrams/examples/repeated-assignment.svg" target="_blank" rel="noopener noreferrer">Ouvrir le diagramme en grand — nouvel onglet</a>
+
+Comme le premier extrait, ces instructions seraient placées dans un même bloc de fonction. C’est un exemple indépendant : on ne colle pas sa déclaration à la suite de celle du premier extrait dans le même bloc.
+
+{/* example:measurement-repeated */}
+```cpp
+int measurement_count = 0;
+measurement_count = 1;
+measurement_count = 1;
+```
+
+<details class="uml-panel" data-uml="measurement-repeated">
+<summary>Voir la conception UML</summary>
+
+**Pourquoi la dernière action ne donne-t-elle pas 2 ?**
+
+![Trois actions successives : initialisation, première affectation, affectation répétée.](/diagrams/examples/repeated-assignment.svg)
+
+<a href="/diagrams/examples/repeated-assignment.svg" target="_blank" rel="noopener noreferrer">Ouvrir le diagramme en grand — nouvel onglet</a>
+
+| Action UML | Instruction C++ | Valeur après l’action |
+| --- | --- | --- |
+| Initialiser à zéro | `int measurement_count = 0;` | 0 |
+| Affecter un | `measurement_count = 1;` | 1 |
+| Affecter encore un | `measurement_count = 1;` | 1 |
+
+Chaque action correspond à une instruction. La dernière enregistre à nouveau 1 ; elle ne calcule rien à partir de la valeur précédente. Aucun losange, boucle ou événement de capteur n’est nécessaire pour décrire ces trois actions.
+
+</details>
+
+| Après quelle instruction ? | Valeur précédente | Valeur obtenue |
+| --- | --- | --- |
+| Initialiser la variable | Elle n’existe pas encore | 0 |
+| Première affectation | 0 | 1 |
+| Seconde affectation | 1 | 1 |
+
+Ce tableau est une trace explicative, **pas un affichage du programme** : l’extrait ne contient aucune instruction `std::cout`.
+
+**Pourquoi pas 2 ?** Le nombre à droite de `=` est 1 dans les deux affectations. L’ordinateur enregistre cette valeur ; il ne compte pas les occurrences de l’instruction. La dernière affectation est bien exécutée, mais la valeur observée ne change pas.
+
+**Lien avec le stock :** remplacer 12 par 11 ne calcule pas automatiquement une soustraction. Ici, enregistrer 1 deux fois ne calcule pas une addition. Dans les deux cas, nous fournissons directement le total à conserver. Calculer à partir d’une ancienne valeur viendra avec les expressions.
+
+## Éviter deux confusions
+
+### Modifier n’est pas redéclarer
+
+Un **bloc** regroupe des instructions entre des accolades. Voici le traitement dans un programme complet : les deux instructions qui concernent la variable appartiennent au même bloc, le corps de `main`. Chaque programme ci-dessous se lit séparément.
+
+**Besoin inchangé :** créer un entier local égal à 0, remplacer sa valeur par 1, puis terminer normalement. Le diagramme décrit ce cas valide.
+
+![Conception attendue : initialiser measurement_count à zéro, lui affecter un, puis renvoyer zéro depuis main.](/diagrams/examples/assignment-main.svg)
+
+<a href="/diagrams/examples/assignment-main.svg" target="_blank" rel="noopener noreferrer">Ouvrir le diagramme en grand — nouvel onglet</a>
+
+{/* example:assignment-valid */}
+```cpp
+int main() {
+    int measurement_count = 0;
+    measurement_count = 1;
+    return 0;
+}
+```
+
+<details class="uml-panel" data-uml="assignment-valid">
+<summary>Voir la conception UML</summary>
+
+**Quelle instruction modifie la variable déjà créée ?**
+
+![Conception attendue : initialiser measurement_count à zéro, lui affecter un, puis renvoyer zéro depuis main.](/diagrams/examples/assignment-main.svg)
+
+<a href="/diagrams/examples/assignment-main.svg" target="_blank" rel="noopener noreferrer">Ouvrir le diagramme en grand — nouvel onglet</a>
+
+| Action UML | Instruction |
+| --- | --- |
+| Initialiser à 0 | `int measurement_count = 0;` |
+| Affecter 1 | `measurement_count = 1;` |
+| Terminer normalement | `return 0;` |
+
+La variable vaut 0 après son initialisation, puis 1 après l’affectation. Le zéro renvoyé par main est un statut de fin : il ne remet pas la variable à zéro.
+
+</details>
+
+**Résultat attendu :** la variable prend les valeurs 0 puis 1 ; le programme termine avec le statut 0 sans afficher de texte. Le `0` de `return 0;` n’est pas une nouvelle affectation au compteur.
+
+Avec les avertissements activés, le compilateur peut signaler que cette variable reçoit une valeur sans être utilisée ensuite. C’est une limite volontaire de cet exemple de lecture, à distinguer de l’erreur ci-dessous ; un avertissement peut aussi bloquer la construction si la configuration le traite comme une erreur.
+
+**Erreur volontaire :** nous ajoutons seulement `int` devant la seconde instruction. Cette ligne cherche alors à définir une nouvelle variable portant le même nom dans le même bloc, au lieu de modifier celle qui existe.
+
+{/* example:assignment-rejected */}
+```cpp
+int main() {
+    int measurement_count = 0;
+    int measurement_count = 1;
+    return 0;
+}
+```
+
+<details class="uml-panel" data-uml="assignment-rejected">
+<summary>Comprendre l’écart avec la conception</summary>
+
+**Pourquoi la seconde définition ne remplace-t-elle pas l’affectation ?**
+
+![Conception attendue : initialiser measurement_count à zéro, lui affecter un, puis renvoyer zéro depuis main.](/diagrams/examples/assignment-main.svg)
+
+<a href="/diagrams/examples/assignment-main.svg" target="_blank" rel="noopener noreferrer">Ouvrir le diagramme en grand — nouvel onglet</a>
+
+| Conception attendue | Écart dans le code |
+| --- | --- |
+| Créer une fois la variable à 0 | La première déclaration respecte cette action. |
+| Modifier la variable existante | `int measurement_count = 1;` tente une seconde définition dans le même bloc. |
+
+Ce diagramme représente le programme valide de référence. Le programme incorrect est refusé à la compilation : on ne doit pas lui attribuer un parcours exécuté de 0 vers 1, ni une fin réussie.
+
+</details>
+
+Extrait du diagnostic obtenu avec **GCC/g++ 13.3.0**, en mode C++17 :
+
+```text
+error: redeclaration of 'int measurement_count'
+```
+
+Il signifie que le nom a déjà été déclaré ici. Le diagnostic complet indique aussi la première déclaration, ce qui permet de retrouver les deux lignes en conflit. Sa formulation exacte dépend du compilateur.
+
+| Seconde instruction | Rôle | Conclusion |
+| --- | --- | --- |
+| `measurement_count = 1;` | Affecter à la variable existante | Conforme au besoin. |
+| `int measurement_count = 1;` | Définir à nouveau ce même nom dans le bloc | Refusé à la compilation. |
+
+La correction est de retirer le second `int`, pour retrouver l’affectation du cas valide. Renommer la seconde variable créerait une autre donnée et ne réaliserait pas la modification demandée.
+
+Cette règle concerne les deux définitions de cet entier local dans le même bloc. Elle ne signifie pas que toute redéclaration est interdite en C++ ; les autres portées et formes de déclaration seront étudiées séparément.
+
+### La valeur zéro doit être choisie explicitement
+
+Un entier local ordinaire — comme celui de notre exemple, créé dans une fonction — ne reçoit pas automatiquement zéro si on ne lui donne pas de valeur initiale. Il ne faut pas lire une telle variable avant de lui avoir donné une valeur. Observer un résultat par hasard ne constituerait pas une garantie.
+
+Ici, nous choisissons zéro dès la création parce qu’il correspond au besoin. **Zéro est un nombre de mesures valable ; il ne signifie pas automatiquement qu’une mesure de température absente vaut 0 °C.**
+
+## À retenir
+
+- Le nom identifie la donnée ; son type précise ici qu’elle contient un entier.
+- L’initialisation établit la première valeur lors de la création.
+- L’affectation remplace ensuite la valeur d’une variable existante.
+- Modifier une donnée du programme ne configure pas le capteur et ne détecte pas une mesure.
+
+## Explorer d’autres situations
+
+Ces lectures répondent à des questions différentes, dans cet ordre :
+
+| Exemple | Ce qu’il apporte |
+| --- | --- |
+| Mesures : 0 puis 1 | Distinguer création et modification. |
+| Affectation répétée : 0, 1, 1 | Comprendre qu’affecter n’est pas ajouter. |
+| Affecter ou redéclarer dans le même bloc | Distinguer modification et seconde définition refusée. |
+| Stock : 12 puis 11, dans « Autres contextes » | Choisir une valeur initiale selon le besoin et enregistrer un total plus petit. |
+| Copie indépendante, dans « Pour aller plus loin » | Suivre deux variables : modifier l’une ne met pas automatiquement l’autre à jour. |
+
+Ouvre d’abord le stock si tu souhaites retrouver la même notion dans une autre situation. La copie ajoute une difficulté : suivre deux valeurs plutôt qu’une.
+
+<ExampleExplorer ids={frontmatter.examples} />
+
+**Suite :** [exprimer une valeur constante](../cpp-09/). Les formes d’initialisation, la portée des noms et l’acquisition matérielle seront approfondies dans leurs modules dédiés.

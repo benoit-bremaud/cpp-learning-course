@@ -1,0 +1,175 @@
+---
+title: "Premières expressions — calculer une somme"
+description: "Comprendre comment une addition produit une valeur pour initialiser ou modifier un entier."
+examples: [empty-tray, independent-copy]
+---
+
+import ExampleExplorer from '../../../components/ExampleExplorer.astro';
+
+**Objectif :** expliquer comment un calcul fournit une valeur à une variable. **Prérequis :** [initialiser et modifier un entier](../cpp-01/). La notion de constante n’est pas nécessaire pour comprendre les exemples.
+
+**Disponible :** quatre nouveaux exemples de lecture avec leur UML, dont un dans les compléments. Le projet d’exercice autonome à cloner n’est pas encore publié.
+
+## Préparer un total de composants
+
+Sur l’établi, un plateau contient **2 composants** et un autre **3 composants**. Nous voulons conserver leur total : **5 composants**. Les deux quantités comptent la même chose ; nous n’additionnons pas, par exemple, un nombre de composants et une température.
+
+Nous choisissons des quantités comprises entre 0 et 10 par plateau, donc des sommes comprises entre 0 et 20. Ces petits nombres conviennent au type `int`. Ce domaine est une hypothèse de nos exemples : le code ne contrôle aucune saisie. Il ne définit pas les limites générales de `int`, que nous étudierons plus tard.
+
+Les extraits suivants sont **indépendants** et se placeraient chacun dans le corps de `main`. Ce ne sont pas des programmes complets à coller les uns à la suite des autres. Ils ne lisent aucun capteur et ne contiennent pas d’instruction d’affichage : les tableaux montrent notre lecture des valeurs, pas du texte produit par le programme.
+
+## 1 — Calculer avant d’initialiser
+
+Le besoin se décrit en deux actions : **calculer la somme 2 + 3**, puis **créer `component_count` avec le résultat 5**.
+
+![Calculer deux plus trois, puis initialiser component_count avec le résultat cinq.](/diagrams/examples/expression-literal.svg)
+
+<a href="/diagrams/examples/expression-literal.svg" target="_blank" rel="noopener noreferrer">Ouvrir le diagramme en grand — nouvel onglet</a>
+
+Dans ce diagramme d’activité UML, le point noir marque le début, les rectangles arrondis décrivent les actions et le symbole final termine le fragment. La flèche indique leur enchaînement. La fin n’ajoute pas une instruction `return` au fragment.
+
+{/* example:expression-literal */}
+```cpp
+int component_count = 2 + 3;
+```
+
+<details class="uml-panel" data-uml="expression-literal">
+<summary>Voir la conception UML</summary>
+
+![Calculer deux plus trois, puis initialiser component_count avec le résultat cinq.](/diagrams/examples/expression-literal.svg)
+
+<a href="/diagrams/examples/expression-literal.svg" target="_blank" rel="noopener noreferrer">Ouvrir le diagramme en grand — nouvel onglet</a>
+
+| Action UML | Correspondance C++ |
+| --- | --- |
+| Calculer la somme | `2 + 3` produit `5`. |
+| Initialiser le total | `int component_count = 2 + 3;` crée l’entier avec ce résultat. |
+
+Les actions « calculer » et « initialiser » ou « affecter » détaillent le raisonnement. Elles ne correspondent pas nécessairement à des instructions C++ séparées. Aucun stockage intermédiaire nommé n’est ajouté au code.
+
+</details>
+
+Une **expression** décrit ici une valeur à obtenir : `2 + 3` est une expression, et son évaluation donne **5**. Les valeurs sur lesquelles porte l’opération sont les **opérandes** : ici, `2` et `3`. Le signe `+` est l’**opérateur** d’addition.
+
+| Dans la ligne | Rôle |
+| --- | --- |
+| `int component_count` | Déclarer et créer ici l’entier nommé `component_count`. |
+| `2 + 3` | Calculer sa valeur initiale. |
+| `;` | Terminer la déclaration. |
+
+Le `=` appartient ici à une **initialisation**, puisque la variable est créée sur cette ligne. La déclaration complète et son expression initiale ne sont pas la même chose.
+
+Tu as déjà utilisé une expression : le nombre `0` dans les premières initialisations en est une aussi. Un nombre écrit directement dans le code est un **littéral**. Une expression n’a donc pas besoin de contenir un opérateur.
+
+**Résultat :** `component_count` vaut 5. Elle conserve le résultat entier ; elle ne conserve pas la formule écrite dans le code.
+
+## 2 — Calculer avec des quantités nommées
+
+Donnons maintenant un nom à la quantité de chaque plateau : `left_tray_count` pour celui de gauche, `right_tray_count` pour celui de droite. Le besoin reste d’obtenir 5 composants, en conservant les quantités 2 et 3 dans leurs variables.
+
+L’activité prévoit d’abord les deux initialisations, puis le calcul à partir des valeurs disponibles et la création du total.
+
+![Initialiser les quantités gauche et droite à deux et trois, calculer leur somme et initialiser le total à cinq.](/diagrams/examples/expression-named.svg)
+
+<a href="/diagrams/examples/expression-named.svg" target="_blank" rel="noopener noreferrer">Ouvrir le diagramme en grand — nouvel onglet</a>
+
+{/* example:expression-named */}
+```cpp
+int left_tray_count = 2;
+int right_tray_count = 3;
+int component_count = left_tray_count + right_tray_count;
+```
+
+<details class="uml-panel" data-uml="expression-named">
+<summary>Voir la conception UML</summary>
+
+![Initialiser les quantités gauche et droite à deux et trois, calculer leur somme et initialiser le total à cinq.](/diagrams/examples/expression-named.svg)
+
+<a href="/diagrams/examples/expression-named.svg" target="_blank" rel="noopener noreferrer">Ouvrir le diagramme en grand — nouvel onglet</a>
+
+| Action UML | Correspondance C++ |
+| --- | --- |
+| Initialiser les deux quantités | Les deux premières déclarations donnent `2` et `3`. |
+| Calculer leur somme | `left_tray_count + right_tray_count` donne `5`. |
+| Initialiser le total | La troisième déclaration crée `component_count` avec `5`. |
+
+Les actions « calculer » et « initialiser » ou « affecter » détaillent le raisonnement. Elles ne correspondent pas nécessairement à des instructions C++ séparées. Aucun stockage intermédiaire nommé n’est ajouté au code.
+
+</details>
+
+Dans la dernière ligne, les noms permettent de retrouver les valeurs **2** et **3**. L’addition produit **5**. Elle ne déplace pas les composants et ne retire rien aux variables utilisées.
+
+| Après l’instruction | `left_tray_count` | `right_tray_count` | `component_count` |
+| --- | --- | --- | --- |
+| Première déclaration | 2 | Pas encore créée | Pas encore créée |
+| Deuxième déclaration | 2 | 3 | Pas encore créée |
+| Déclaration du total | 2 | 3 | 5 |
+
+**Piège à éviter :** lire une variable dans une addition ne la modifie pas. À la fin, les trois entiers contiennent respectivement 2, 3 et 5.
+
+Le diagramme ordonne les déclarations. L’action unique « calculer » n’impose pas un ordre de lecture des deux opérandes de `+` ; ces lectures ne modifient rien ici.
+
+Le total est calculé au passage sur cette déclaration. Ce n’est pas une formule de tableur qui se recalculerait automatiquement si une autre variable changeait ensuite. Le complément sur la copie permet de revoir cette idée de valeur conservée.
+
+## 3 — Affecter un résultat à une variable existante
+
+Repartons d’un exemple indépendant : `component_count` existe d’abord avec la valeur **0**. Nous voulons ensuite lui donner le total calculé à partir de **2 et 3**. La trace attendue est **0, puis 5**.
+
+![Initialiser component_count à zéro, calculer deux plus trois, puis affecter cinq à la variable existante.](/diagrams/examples/expression-assigned.svg)
+
+<a href="/diagrams/examples/expression-assigned.svg" target="_blank" rel="noopener noreferrer">Ouvrir le diagramme en grand — nouvel onglet</a>
+
+{/* example:expression-assigned */}
+```cpp
+int component_count = 0;
+component_count = 2 + 3;
+```
+
+<details class="uml-panel" data-uml="expression-assigned">
+<summary>Voir la conception UML</summary>
+
+![Initialiser component_count à zéro, calculer deux plus trois, puis affecter cinq à la variable existante.](/diagrams/examples/expression-assigned.svg)
+
+<a href="/diagrams/examples/expression-assigned.svg" target="_blank" rel="noopener noreferrer">Ouvrir le diagramme en grand — nouvel onglet</a>
+
+| Action UML | Correspondance C++ |
+| --- | --- |
+| Initialiser à zéro | `int component_count = 0;` |
+| Calculer puis affecter | `component_count = 2 + 3;` remplace la valeur par `5`. |
+
+Les actions « calculer » et « initialiser » ou « affecter » détaillent le raisonnement. Elles ne correspondent pas nécessairement à des instructions C++ séparées. Aucun stockage intermédiaire nommé n’est ajouté au code.
+
+</details>
+
+La seconde ligne ne répète pas `int` : elle modifie la variable existante. À droite de `=`, l’expression produit 5 ; l’affectation enregistre ensuite ce résultat.
+
+| Moment | Valeur de `component_count` |
+| --- | --- |
+| Après sa création | 0 |
+| Après l’affectation du résultat | 5 |
+
+L’ancienne valeur **0** ne participe pas à l’addition : elle n’apparaît pas dans l’expression `2 + 3`. Même si la variable contenait auparavant 8, cette même affectation lui donnerait 5. Calculer à partir de son ancienne valeur sera une étape distincte.
+
+## Explorer le cas d’un plateau vide
+
+Si le plateau gauche contient **0** composant et le droit **3**, la somme attendue est **3**. Dans « Autres contextes », l’exemple complet montre pourquoi zéro reste une quantité valide, sans traitement particulier.
+
+« Pour aller plus loin » reprend la fiche existante sur la **copie indépendante** : elle aide à distinguer une valeur conservée d’une liaison permanente entre variables. Cette fiche est un rappel facultatif, pas une nouvelle notion indispensable à l’addition.
+
+<ExampleExplorer ids={frontmatter.examples} />
+
+## Vérifier sa lecture
+
+Avant de relire les tableaux, explique avec tes mots :
+
+- Dans le premier extrait, quelle est l’expression et quelle est sa valeur ?
+- Dans le deuxième, les quantités des deux plateaux changent-elles ?
+- Dans le troisième, l’ancienne valeur de la variable intervient-elle dans le calcul ?
+
+**Repères pour te corriger :** `2 + 3` donne 5 ; les quantités restent 2 et 3 ; la dernière affectation remplace l’ancienne valeur par 5 sans l’utiliser. Ce sont des questions de lecture, sans note ni bilan automatique.
+
+**Suite :** [calculer ce qu’il reste avec la soustraction](../premieres-soustractions/). Les autres opérations, les parenthèses et la mise à jour à partir d’une ancienne valeur suivront dans le [parcours progressif](../../parcours/).
+
+## Pour retrouver les références
+
+La progression s’appuie sur l’[introduction aux expressions de LearnCpp](https://www.learncpp.com/cpp-tutorial/introduction-to-expressions/). Les règles des [opérations additives](https://eel.is/c++draft/expr.add) et de l’[affectation](https://eel.is/c++draft/expr.assign) sont consultables dans une présentation HTML du projet de norme C++. Ce projet évolutif n’est pas l’édition ISO C++17 publiée ; nos extraits sont vérifiés avec un compilateur en mode C++17.

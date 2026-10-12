@@ -1,0 +1,90 @@
+---
+import { getCollection, render } from 'astro:content';
+import { randomUUID } from 'node:crypto';
+interface Props { ids: string[] }
+const { ids } = Astro.props;
+const entries = await getCollection('examples');
+const docs = await getCollection('docs');
+const byId = new Map(entries.map(entry => [entry.data.id, entry]));
+if (byId.size !== entries.length) throw new Error('Duplicate example id');
+for (const entry of entries) {
+  for (const prerequisite of entry.data.prerequisites) {
+    if (!docs.some(doc => doc.id === prerequisite)) throw new Error(`Unknown prerequisite: ${prerequisite}`);
+  }
+}
+if (new Set(ids).size !== ids.length) throw new Error('Duplicate example reference');
+const selected = await Promise.all(ids.map(async id => {
+  const entry = byId.get(id);
+  if (!entry) throw new Error(`Unknown example: ${id}`);
+  return { entry, ...(await render(entry)) };
+}));
+const categories = [
+  { id: 'other-contexts', label: 'Autres contextes' },
+  { id: 'deeper', label: 'Pour aller plus loin' },
+];
+for (const category of categories) {
+  if (!selected.some(item => item.entry.data.category === category.id)) throw new Error(`Empty example category: ${category.id}`);
+}
+const uid = `examples-${randomUUID()}`;
+---
+<section class="example-explorer" data-explorer data-pagefind-ignore>
+  <button type="button" class="explore-button" data-open hidden>Explorer d’autres exemples</button>
+  <dialog aria-labelledby={`${uid}-title`}>
+    <div class="dialog-layout">
+      <header class="explorer-header">
+        <h2 id={`${uid}-title`}>Explorer d’autres exemples</h2>
+        <button type="button" data-close aria-label="Fermer les exemples">Fermer ✕</button>
+      </header>
+      <div class="explorer-tabs" role="tablist" aria-label="Type d’exemples">
+        {categories.map((category, index) => <button type="button" role="tab" id={`${uid}-tab-${category.id}`} aria-controls={`${uid}-panel-${category.id}`} aria-selected={index === 0 ? 'true' : 'false'} tabindex={index === 0 ? 0 : -1} data-category={category.id}>{category.label}</button>)}
+      </div>
+      <div data-reading class="explorer-reading" tabindex="-1" aria-label="Lecture de l’exemple"></div>
+    </div>
+  </dialog>
+  <div data-fallback>
+    {categories.map(category => {
+      const items = selected.filter(item => item.entry.data.category === category.id);
+      return <section data-panel={category.id} id={`${uid}-panel-${category.id}`}>
+        <h3 data-fallback-heading>{category.label}</h3>
+        {items.length > 1 && <label class="example-selector">Choisir un exemple
+          <select data-select>{items.map(({entry}) => <option value={entry.data.id}>{entry.data.title}</option>)}</select>
+        </label>}
+        {items.map(({entry, Content}) => <article data-example={entry.data.id}>
+          <h3>{entry.data.title}</h3>
+          {entry.data.prerequisites.length > 0 && <p>Prérequis : {entry.data.prerequisites.map(id => <a href={`/${id}/`}>{docs.find(doc => doc.id === id)?.data.title}</a>)}</p>}
+          <Content />
+        </article>)}
+      </section>;
+    })}
+  </div>
+</section>
+<script>
+  import { initializeExplorers } from '../scripts/example-explorer';
+  initializeExplorers();
+  document.addEventListener('astro:page-load', () => initializeExplorers());
+</script>
+<style>
+  .example-explorer { --example-gap: 1rem; --example-radius: .5rem; --example-border: var(--sl-color-gray-4); }
+  [hidden] { display: none !important; }
+  button, select { font: inherit; color: var(--sl-color-text); background: var(--sl-color-bg); border: 1px solid var(--example-border); border-radius: var(--example-radius); padding: .6rem .85rem; cursor: pointer; }
+  button:focus-visible, select:focus-visible { outline: 3px solid var(--sl-color-text-accent); outline-offset: 2px; }
+  .explore-button, [aria-selected='true'] { background: var(--sl-color-accent-low); border-color: var(--sl-color-text-accent); }
+  dialog { color: var(--sl-color-text); background: var(--sl-color-bg); border: 1px solid var(--example-border); border-radius: var(--example-radius); width: min(54rem, 96vw); max-width: 96vw; height: min(50rem, 92dvh); max-height: 92dvh; padding: 0; margin: auto; overflow: hidden; }
+  dialog::backdrop { background: rgb(0 0 0 / .65); }
+  .dialog-layout { height: 100%; display: flex; flex-direction: column; }
+  .explorer-header { display: flex; justify-content: space-between; align-items: start; gap: var(--example-gap); padding: var(--example-gap); }
+  .explorer-header > *, .explorer-tabs > * { margin: 0; }
+  .explorer-header, .explorer-tabs { flex-shrink: 0; }
+  .explorer-header h2 { margin: 0; font-size: var(--sl-text-h4); }
+  .explorer-header button { flex-shrink: 0; }
+  .explorer-tabs { display: flex; gap: .5rem; padding: 0 var(--example-gap) var(--example-gap); margin: 0; border-bottom: 1px solid var(--example-border); }
+  .explorer-tabs button { flex: 1; }
+  .explorer-reading { overflow-y: auto; overscroll-behavior: contain; min-height: 0; padding: var(--example-gap) clamp(1rem, 3vw, 2rem); margin: 0; }
+  .explorer-reading :global(img) { max-width: 100%; height: auto; }
+  .explorer-reading :global(pre) { max-width: 100%; overflow-x: auto; }
+  .explorer-reading :global(article > :first-child) { margin-top: 0; }
+  .example-selector { display: grid; gap: .5rem; margin-bottom: var(--example-gap); }
+  .example-selector select { width: 100%; min-width: 0; }
+  @media (max-width: 40rem) { dialog { height: 96dvh; max-height: 96dvh; } .explorer-header h2 { font-size: var(--sl-text-lg); } }
+  :global(html:has(dialog[open])) { overflow: hidden; }
+</style>

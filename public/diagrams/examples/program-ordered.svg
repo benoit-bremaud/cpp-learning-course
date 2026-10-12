@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="333px" preserveAspectRatio="none" style="width:222px;height:333px;" version="1.1" viewBox="0 0 222 333" width="222px" zoomAndPan="magnify"><defs/><g><text fill="#000000" font-family="sans-serif" font-size="16" lengthAdjust="spacingAndGlyphs" textLength="197" x="12" y="27.104">Deux messages ordonnés</text><ellipse cx="111" cy="41.792" fill="#000000" rx="10" ry="10" style="stroke: none; stroke-width: 1.0;"/><rect fill="#FEFECE" height="63.5841" rx="12.5" ry="12.5" style="stroke: #A80036; stroke-width: 1.5;" width="195" x="13.5" y="71.792"/><text fill="#000000" font-family="sans-serif" font-size="16" lengthAdjust="spacingAndGlyphs" textLength="175" x="23.5" y="98.8961">Écrire Program started</text><text fill="#000000" font-family="sans-serif" font-size="16" lengthAdjust="spacingAndGlyphs" textLength="157" x="23.5" y="120.6881">puis un saut de ligne</text><rect fill="#FEFECE" height="63.5841" rx="12.5" ry="12.5" style="stroke: #A80036; stroke-width: 1.5;" width="201" x="10.5" y="155.3761"/><text fill="#000000" font-family="sans-serif" font-size="16" lengthAdjust="spacingAndGlyphs" textLength="181" x="20.5" y="182.4802">Écrire Program finished</text><text fill="#000000" font-family="sans-serif" font-size="16" lengthAdjust="spacingAndGlyphs" textLength="157" x="20.5" y="204.2722">puis un saut de ligne</text><rect fill="#FEFECE" height="41.792" rx="12.5" ry="12.5" style="stroke: #A80036; stroke-width: 1.5;" width="104" x="59" y="238.9602"/><text fill="#000000" font-family="sans-serif" font-size="16" lengthAdjust="spacingAndGlyphs" textLength="84" x="69" y="266.0643">Renvoyer 0</text><ellipse cx="111" cy="311.7523" fill="#FFFFFF" rx="11" ry="11" style="stroke: #000000; stroke-width: 1.0;"/><ellipse cx="111" cy="311.7523" fill="#000000" rx="6" ry="6" style="stroke: #7F7F7F; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.5;" x1="111" x2="111" y1="51.792" y2="71.792"/><polygon fill="#A80036" points="107,61.792,111,71.792,115,61.792,111,65.792" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.5;" x1="111" x2="111" y1="135.3761" y2="155.3761"/><polygon fill="#A80036" points="107,145.3761,111,155.3761,115,145.3761,111,149.3761" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.5;" x1="111" x2="111" y1="218.9602" y2="238.9602"/><polygon fill="#A80036" points="107,228.9602,111,238.9602,115,228.9602,111,232.9602" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.5;" x1="111" x2="111" y1="280.7523" y2="300.7523"/><polygon fill="#A80036" points="107,290.7523,111,300.7523,115,290.7523,111,294.7523" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[322b479a03b76bdac0873c6f9a9a3621]
+@startuml
+skinparam defaultFontSize 16
+skinparam shadowing false
+title Deux messages ordonnés
+start
+:Écrire Program started\npuis un saut de ligne;
+:Écrire Program finished\npuis un saut de ligne;
+:Renvoyer 0;
+stop
+@enduml
+
+PlantUML version 1.2020.02(Sun Mar 01 11:22:07 CET 2020)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Java Version: 21.0.12.1+1-1-24.04.4-Ubuntu
+Operating System: Linux
+Default Encoding: UTF-8
+Language: en
+Country: null
+--></g></svg>

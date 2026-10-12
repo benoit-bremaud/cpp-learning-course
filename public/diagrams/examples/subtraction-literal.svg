@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="271px" preserveAspectRatio="none" style="width:253px;height:271px;" version="1.1" viewBox="0 0 253 271" width="253px" zoomAndPan="magnify"><defs/><g><text fill="#000000" font-family="sans-serif" font-size="16" lengthAdjust="spacingAndGlyphs" textLength="229" x="12" y="27.104">act — Calculer le stock restant</text><ellipse cx="127" cy="41.792" fill="#000000" rx="10" ry="10" style="stroke: none; stroke-width: 1.0;"/><rect fill="#FEFECE" height="63.5841" rx="12.5" ry="12.5" style="stroke: #A80036; stroke-width: 1.5;" width="125" x="64.5" y="71.792"/><text fill="#000000" font-family="sans-serif" font-size="16" lengthAdjust="spacingAndGlyphs" textLength="105" x="74.5" y="98.8961">Calculer 12 - 5</text><text fill="#000000" font-family="sans-serif" font-size="16" lengthAdjust="spacingAndGlyphs" textLength="83" x="74.5" y="120.6881">Résultat : 7</text><rect fill="#FEFECE" height="63.5841" rx="12.5" ry="12.5" style="stroke: #A80036; stroke-width: 1.5;" width="223" x="15.5" y="155.3761"/><text fill="#000000" font-family="sans-serif" font-size="16" lengthAdjust="spacingAndGlyphs" textLength="203" x="25.5" y="182.4802">Initialiser remaining_count</text><text fill="#000000" font-family="sans-serif" font-size="16" lengthAdjust="spacingAndGlyphs" textLength="135" x="25.5" y="204.2722">avec le résultat : 7</text><ellipse cx="127" cy="249.9602" fill="#FFFFFF" rx="11" ry="11" style="stroke: #000000; stroke-width: 1.0;"/><ellipse cx="127" cy="249.9602" fill="#000000" rx="6" ry="6" style="stroke: #7F7F7F; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.5;" x1="127" x2="127" y1="51.792" y2="71.792"/><polygon fill="#A80036" points="123,61.792,127,71.792,131,61.792,127,65.792" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.5;" x1="127" x2="127" y1="135.3761" y2="155.3761"/><polygon fill="#A80036" points="123,145.3761,127,155.3761,131,145.3761,127,149.3761" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.5;" x1="127" x2="127" y1="218.9602" y2="238.9602"/><polygon fill="#A80036" points="123,228.9602,127,238.9602,131,228.9602,127,232.9602" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[092d317a369f7b1f1e643fed68eca32a]
+@startuml
+skinparam defaultFontSize 16
+skinparam shadowing false
+title act — Calculer le stock restant
+start
+:Calculer 12 - 5\nRésultat : 7;
+:Initialiser remaining_count\navec le résultat : 7;
+stop
+@enduml
+
+PlantUML version 1.2020.02(Sun Mar 01 11:22:07 CET 2020)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Java Version: 21.0.12.1+1-1-24.04.4-Ubuntu
+Operating System: Linux
+Default Encoding: UTF-8
+Language: en
+Country: null
+--></g></svg>

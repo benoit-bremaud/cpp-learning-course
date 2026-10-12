@@ -105,4 +105,4 @@ Pour passer à un exemple publié, lis [le voyant au seuil de 30 °C](../../exem
 
 **Pour se repérer :** [vue d’ensemble de la chaîne de construction](../../du-source-au-programme/).
 
-**Suite disponible :** [initialiser une variable](../cpp-01/). Les modules TOOL-02, TOOL-03 et TOOL-07 restent prévus.
+**Suite disponible :** [lire un premier programme](../programme-minimal/). Les modules TOOL-02, TOOL-03 et TOOL-07 restent prévus.

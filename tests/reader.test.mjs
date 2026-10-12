@@ -4,7 +4,7 @@ import { readFile, readdir, stat } from 'node:fs/promises';
 import path from 'node:path';
 
 const root = path.resolve('dist');
-const base = '/cpp-learning-course/';
+const base = '/';
 async function pages(dir) {
   const entries = await readdir(dir, { withFileTypes: true });
   const groups = await Promise.all(entries.map(async (entry) => {
@@ -20,8 +20,8 @@ test('built reader keeps all local navigation and assets inside the project base
   for (const file of files) {
     const html = await readFile(file, 'utf8');
     assert.match(html, /lang="fr"/);
-    const current = new URL(base + path.relative(root, file).replace(/index\.html$/, ''), 'https://course.test');
-    for (const match of html.matchAll(/(?:href|src)="([^"]+)"/g)) {
+    const current = new URL(base + path.relative(root, file).replace(/index\.html$/, ''), 'https://cpp.benoitbremaud.fr');
+    for (const match of html.replace(/<link\b[^>]*rel="canonical"[^>]*>/g, '').matchAll(/(?:href|src)="([^"]+)"/g)) {
       const url = new URL(match[1].replaceAll('&amp;', '&'), current);
       if (url.origin !== current.origin) continue;
       assert.ok(url.pathname.startsWith(base), `${file}: outside base: ${url}`);
@@ -46,4 +46,11 @@ test('production search index exists and practice availability is explicit', asy
   assert.match(example, /6f6da4c440153c0709e35b823a3ef5b85c6b6b68/);
   await stat(path.join(root, 'diagrams/threshold-indicator.svg'));
   assert.match(practice, /https:\/\/github.com\/benoit-bremaud\/cpp-learning/);
+});
+
+test('homepage identifies the public course origin and links back to the portfolio', async () => {
+  const html = await readFile(path.join(root, 'index.html'), 'utf8');
+  assert.match(html, /<link[^>]+rel="canonical"[^>]+href="https:\/\/cpp\.benoitbremaud\.fr\/"/);
+  assert.match(html, /href="https:\/\/benoitbremaud\.fr\/"/);
+  assert.doesNotMatch(html, /benoit-bremaud\.github\.io/);
 });

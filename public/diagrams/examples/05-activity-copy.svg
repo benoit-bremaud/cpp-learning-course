@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="377px" preserveAspectRatio="none" style="width:237px;height:377px;" version="1.1" viewBox="0 0 237 377" width="237px" zoomAndPan="magnify"><defs/><g><text fill="#000000" font-family="sans-serif" font-size="16" lengthAdjust="spacingAndGlyphs" textLength="134" x="50.5" y="27.104">Copier une valeur</text><ellipse cx="118" cy="41.792" fill="#000000" rx="10" ry="10" style="stroke: none; stroke-width: 1.0;"/><rect fill="#FEFECE" height="63.5841" rx="12.5" ry="12.5" style="stroke: #A80036; stroke-width: 1.5;" width="194" x="21" y="71.792"/><text fill="#000000" font-family="sans-serif" font-size="16" lengthAdjust="spacingAndGlyphs" textLength="70" x="31" y="98.8961">Initialiser</text><text fill="#000000" font-family="sans-serif" font-size="16" lengthAdjust="spacingAndGlyphs" textLength="174" x="31" y="120.6881">component_count à 12</text><rect fill="#FEFECE" height="85.3761" rx="12.5" ry="12.5" style="stroke: #A80036; stroke-width: 1.5;" width="216" x="10" y="155.3761"/><text fill="#000000" font-family="sans-serif" font-size="16" lengthAdjust="spacingAndGlyphs" textLength="196" x="20" y="182.4802">Initialiser snapshot_count</text><text fill="#000000" font-family="sans-serif" font-size="16" lengthAdjust="spacingAndGlyphs" textLength="125" x="20" y="204.2722">avec la valeur de</text><text fill="#000000" font-family="sans-serif" font-size="16" lengthAdjust="spacingAndGlyphs" textLength="139" x="20" y="226.0643">component_count</text><rect fill="#FEFECE" height="63.5841" rx="12.5" ry="12.5" style="stroke: #A80036; stroke-width: 1.5;" width="159" x="38.5" y="260.7523"/><text fill="#000000" font-family="sans-serif" font-size="16" lengthAdjust="spacingAndGlyphs" textLength="96" x="48.5" y="287.8563">Affecter 11 à</text><text fill="#000000" font-family="sans-serif" font-size="16" lengthAdjust="spacingAndGlyphs" textLength="139" x="48.5" y="309.6483">component_count</text><ellipse cx="118" cy="355.3363" fill="#FFFFFF" rx="11" ry="11" style="stroke: #000000; stroke-width: 1.0;"/><ellipse cx="118" cy="355.3363" fill="#000000" rx="6" ry="6" style="stroke: #7F7F7F; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.5;" x1="118" x2="118" y1="51.792" y2="71.792"/><polygon fill="#A80036" points="114,61.792,118,71.792,122,61.792,118,65.792" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.5;" x1="118" x2="118" y1="135.3761" y2="155.3761"/><polygon fill="#A80036" points="114,145.3761,118,155.3761,122,145.3761,118,149.3761" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.5;" x1="118" x2="118" y1="240.7523" y2="260.7523"/><polygon fill="#A80036" points="114,250.7523,118,260.7523,122,250.7523,118,254.7523" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.5;" x1="118" x2="118" y1="324.3363" y2="344.3363"/><polygon fill="#A80036" points="114,334.3363,118,344.3363,122,334.3363,118,338.3363" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[55440a05e2699f9f54f605c360d6bb85]
+@startuml
+skinparam defaultFontSize 16
+skinparam shadowing false
+title Copier une valeur
+start
+:Initialiser\ncomponent_count à 12;
+:Initialiser snapshot_count\navec la valeur de\ncomponent_count;
+:Affecter 11 à\ncomponent_count;
+stop
+@enduml
+
+PlantUML version 1.2020.02(Sun Mar 01 11:22:07 CET 2020)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Java Version: 21.0.12.1+1-1-24.04.4-Ubuntu
+Operating System: Linux
+Default Encoding: UTF-8
+Language: en
+Country: null
+--></g></svg>

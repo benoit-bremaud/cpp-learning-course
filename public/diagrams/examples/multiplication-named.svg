@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="395px" preserveAspectRatio="none" style="width:348px;height:395px;" version="1.1" viewBox="0 0 348 395" width="348px" zoomAndPan="magnify"><defs/><g><text fill="#000000" font-family="sans-serif" font-size="16" lengthAdjust="spacingAndGlyphs" textLength="321" x="12.5" y="27.104">act — Multiplier kits et composants par kit</text><ellipse cx="173.5" cy="41.792" fill="#000000" rx="10" ry="10" style="stroke: none; stroke-width: 1.0;"/><rect fill="#FEFECE" height="41.792" rx="12.5" ry="12.5" style="stroke: #A80036; stroke-width: 1.5;" width="190" x="78.5" y="71.792"/><text fill="#000000" font-family="sans-serif" font-size="16" lengthAdjust="spacingAndGlyphs" textLength="170" x="88.5" y="98.8961">Initialiser kit_count à 3</text><rect fill="#FEFECE" height="41.792" rx="12.5" ry="12.5" style="stroke: #A80036; stroke-width: 1.5;" width="275" x="36" y="133.5841"/><text fill="#000000" font-family="sans-serif" font-size="16" lengthAdjust="spacingAndGlyphs" textLength="255" x="46" y="160.6881">Initialiser components_per_kit à 4</text><rect fill="#FEFECE" height="63.5841" rx="12.5" ry="12.5" style="stroke: #A80036; stroke-width: 1.5;" width="327" x="10" y="195.3761"/><text fill="#000000" font-family="sans-serif" font-size="16" lengthAdjust="spacingAndGlyphs" textLength="307" x="20" y="222.4802">Calculer kit_count * components_per_kit</text><text fill="#000000" font-family="sans-serif" font-size="16" lengthAdjust="spacingAndGlyphs" textLength="92" x="20" y="244.2722">Résultat : 12</text><rect fill="#FEFECE" height="63.5841" rx="12.5" ry="12.5" style="stroke: #A80036; stroke-width: 1.5;" width="233" x="57" y="278.9602"/><text fill="#000000" font-family="sans-serif" font-size="16" lengthAdjust="spacingAndGlyphs" textLength="213" x="67" y="306.0643">Initialiser component_count</text><text fill="#000000" font-family="sans-serif" font-size="16" lengthAdjust="spacingAndGlyphs" textLength="144" x="67" y="327.8563">avec le résultat : 12</text><ellipse cx="173.5" cy="373.5443" fill="#FFFFFF" rx="11" ry="11" style="stroke: #000000; stroke-width: 1.0;"/><ellipse cx="173.5" cy="373.5443" fill="#000000" rx="6" ry="6" style="stroke: #7F7F7F; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.5;" x1="173.5" x2="173.5" y1="51.792" y2="71.792"/><polygon fill="#A80036" points="169.5,61.792,173.5,71.792,177.5,61.792,173.5,65.792" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.5;" x1="173.5" x2="173.5" y1="113.5841" y2="133.5841"/><polygon fill="#A80036" points="169.5,123.5841,173.5,133.5841,177.5,123.5841,173.5,127.5841" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.5;" x1="173.5" x2="173.5" y1="175.3761" y2="195.3761"/><polygon fill="#A80036" points="169.5,185.3761,173.5,195.3761,177.5,185.3761,173.5,189.3761" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.5;" x1="173.5" x2="173.5" y1="258.9602" y2="278.9602"/><polygon fill="#A80036" points="169.5,268.9602,173.5,278.9602,177.5,268.9602,173.5,272.9602" style="stroke: #A80036; stroke-width: 1.0;"/><line style="stroke: #A80036; stroke-width: 1.5;" x1="173.5" x2="173.5" y1="342.5443" y2="362.5443"/><polygon fill="#A80036" points="169.5,352.5443,173.5,362.5443,177.5,352.5443,173.5,356.5443" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[e5aa456d74a2b38894a7ff6f41ad84c5]
+@startuml
+skinparam defaultFontSize 16
+skinparam shadowing false
+title act — Multiplier kits et composants par kit
+start
+:Initialiser kit_count à 3;
+:Initialiser components_per_kit à 4;
+:Calculer kit_count * components_per_kit\nRésultat : 12;
+:Initialiser component_count\navec le résultat : 12;
+stop
+@enduml
+
+PlantUML version 1.2020.02(Sun Mar 01 11:22:07 CET 2020)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Java Version: 21.0.12.1+1-1-24.04.4-Ubuntu
+Operating System: Linux
+Default Encoding: UTF-8
+Language: en
+Country: null
+--></g></svg>
