@@ -20,6 +20,6 @@ Aucune date, aucun délai et aucune obligation de terminer une famille entière 
 
 ## Ce qui est disponible
 
-Cette première version contient le parcours, la méthode, une vue d’ensemble de la construction et dix fiches introductives, dont [un premier programme complet](./notions/programme-minimal/) et [des affichages successifs](./notions/premiers-affichages/). Le catalogue détaillé de 121 modules reste une proposition pédagogique à relire ensemble. Les exercices et leurs études UML seront ajoutés progressivement après validation ; un premier [exemple de référence exécutable, le voyant](./exemple-voyant/), est maintenant publié avec son étude UML et ses tests.
+Cette première version contient le parcours, la méthode, une vue d’ensemble de la construction et onze fiches introductives, dont [un premier programme complet](./notions/programme-minimal/) et [des affichages successifs](./notions/premiers-affichages/). Le catalogue détaillé de 121 modules reste une proposition pédagogique à relire ensemble. Les exercices et leurs études UML seront ajoutés progressivement après validation ; un premier [exemple de référence exécutable, le voyant](./exemple-voyant/), est maintenant publié avec son étude UML et ses tests.
 
 Le site sert à lire. Les exemples exécutables et les exercices auront leur place dans le dépôt de pratique, à cloner et ouvrir dans ton IDE.

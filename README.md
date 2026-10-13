@@ -19,7 +19,7 @@ Open the printed local address at `/`. Search is indexed during production build
 
 ## Scope and decisions
 
-Three introductory theory pages, the proposed progression, the UML method, and local practice instructions are available. The threshold-indicator worked reference is published in the independent practice repository and linked from a guided course page. The 121-module planning catalog is published in the practice repository; its detailed pedagogical content still requires joint review.
+Eleven introductory theory pages, the proposed progression, the UML method, and local practice instructions are available. The threshold-indicator worked reference is published in the independent practice repository and linked from a guided course page. The 121-module planning catalog is published in the practice repository; its detailed pedagogical content still requires joint review.
 
 Teaching content and UI are French by explicit owner approval. Engineering documents and code are English. The owner approved a default export only in `astro.config.mjs`, as required by standard Astro configuration; other authored code uses named exports.
 
@@ -31,7 +31,7 @@ Markdown content and Starlight produce static HTML and a local Pagefind search i
 
 ## Authoring course examples
 
-Read the [site-wide example charter](docs/example-charter.md) before adding or changing examples in any section. Its accepted requirements and review checklist are authoritative; Markdown with metadata is the accepted storage format; its schema and shared explorer are implemented on the two pilot pages.
+Read the [site-wide example charter](docs/example-charter.md) before adding or changing examples in any section. Its accepted requirements and review checklist are authoritative; Markdown with metadata is the accepted storage format; its schema and shared explorer are implemented on CPP-01, the guided indicator page and the first-expressions lesson.
 
 ### Local example verification
 
@@ -46,6 +46,7 @@ python3 tests/first-subtractions.py
 python3 tests/first-multiplications.py
 python3 tests/grouped-calculations.py
 python3 tests/first-divisions.py
+python3 tests/counter-update.py
 python3 tests/constant-limit.py
 python3 tests/program-output.py
 python3 tests/explorer-invalid-content.py

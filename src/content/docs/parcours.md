@@ -47,7 +47,7 @@ Le [voyant guidé](../exemple-voyant/) est une **découverte facultative** relia
 
 **Acquis attendu :** distinguer remplacer une valeur, calculer un nouveau total et poser une question dont la réponse est vraie ou fausse.
 
-**Disponible :** [les premières expressions et l’addition](../notions/premieres-expressions/), avec le cas d’un plateau vide, puis [la soustraction et le stock restant](../notions/premieres-soustractions/) et [la multiplication de groupes identiques](../notions/premieres-multiplications/), puis [le regroupement des calculs avec les parenthèses](../notions/parentheses-calculs/) et [la division entière pour compter les kits complets](../notions/premieres-divisions/). **À développer :** la mise à jour à partir d’une ancienne valeur, puis les booléens et comparaisons. Aucun compteur autonome n’est supposé acquis à partir des seules affectations de CPP-01.
+**Disponible :** [les premières expressions et l’addition](../notions/premieres-expressions/), avec le cas d’un plateau vide, puis [la soustraction et le stock restant](../notions/premieres-soustractions/) et [la multiplication de groupes identiques](../notions/premieres-multiplications/), puis [le regroupement des calculs avec les parenthèses](../notions/parentheses-calculs/) et [la division entière pour compter les kits complets](../notions/premieres-divisions/). La [mise à jour d’un compteur à partir de sa valeur courante](../notions/mise-a-jour-compteur/) complète cette étape. **À développer :** les booléens et comparaisons. Aucun compteur autonome n’est supposé acquis à partir des seules affectations de CPP-01.
 
 ## 4 — Prendre une décision
 

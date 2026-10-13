@@ -225,7 +225,7 @@ Dans nos quatre extraits, le diviseur est explicitement initialisé à 4. Un pro
 
 **À retenir :** la division entre entiers convient ici parce que le besoin porte sur des kits complets. Elle ne convient pas automatiquement à un besoin de résultat fractionnaire.
 
-**Suite prévue :** mettre à jour une variable à partir de son ancienne valeur, puis introduire les booléens et les comparaisons dans le [parcours progressif](../../parcours/). Le calcul du reste et les nombres à virgule seront étudiés dans leurs modules dédiés. La pratique restera dans les dépôts à cloner dans ton IDE.
+**Suite :** [mettre à jour un compteur à partir de sa valeur courante](../mise-a-jour-compteur/), puis introduire les booléens et les comparaisons dans le [parcours progressif](../../parcours/). Le calcul du reste et les nombres à virgule seront étudiés dans leurs modules dédiés. La pratique restera dans les dépôts à cloner dans ton IDE.
 
 ## Référence
 

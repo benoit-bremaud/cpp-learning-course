@@ -1,6 +1,6 @@
 # Update a counter from its current value
 
-Status: option A explicitly approved by the owner on 2026-10-13; implementation follows this conception.
+Status: option A explicitly approved by the owner on 2026-10-13; implemented locally with validation recorded in docs/validation.md.
 
 ## Need and acceptance criteria
 
