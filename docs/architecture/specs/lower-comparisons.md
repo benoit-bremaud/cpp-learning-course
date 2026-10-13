@@ -1,6 +1,6 @@
 # Below a limit versus at most the limit
 
-Status: conception proposal; owner implementation approval pending.
+Status: refined option A approved by the owner on 2026-10-13; implemented and verified locally; evidence is recorded in docs/validation.md.
 
 ## Need and acceptance criteria
 
@@ -104,7 +104,7 @@ A compact final table will align >, >=, <, <= at 2/3/4 with a fixed maximum 3. L
 
 ## Revised teaching sequence after deeper review
 
-Proposal only: the owner requested deeper analysis, not implementation. Preserve all five verified snippets and four models, but use the order below / equal / above / capacity / reversed. Put the positive transfer before the deliberate error, then explicitly return to the original measurement context for the diagnostic example.
+The deeper review was completed and the refined sequence was explicitly approved. Preserve all five verified snippets and four models, but use the order below / equal / above / capacity / reversed. Put the positive transfer before the deliberate error, then explicitly return to the original measurement context for the diagnostic example.
 
 The first example fully explains syntax, conceptual evaluation/storage and the UML nodes. Subsequent examples still retain their own conception, card and trace for independent reading, but prose emphasizes what changed rather than repeating definitions. For equality and the box, invite a brief prediction in ordinary text before revealing the expected result; no quiz widget, score, hidden state or new interaction. Keep expected values before the diagram and code. This is a reading prompt, not the deferred assessment feature.
 
@@ -147,3 +147,5 @@ https://eel.is/c++draft/expr.rel, consulted 2026-10-13: built-in relational oper
 ## Proposal verification
 
 The five specification excerpts compile in C++17 with -Wall -Wextra -Werror. Assertions verify every initialized-value checkpoint, bool storage types, alternative measurement counts 0/2/3/4/20, reversed-operand behavior, equivalent swapped > expressions and transfer counts 7/8/9. Execution is silent. All four authoritative PlantUML sources render successfully; the full-box activity was visually inspected. This verifies the proposal, not an implemented lesson or browser acceptance.
+
+Companion explorer sheets remain an authoring gap; no empty explorer control is added.

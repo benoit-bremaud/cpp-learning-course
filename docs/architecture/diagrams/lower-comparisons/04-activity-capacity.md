@@ -4,7 +4,7 @@ Source: [Lower comparisons proposal](../../specs/lower-comparisons.md).
 
 ## Context
 
-Proposed conception. Two questions of the same supplied count: strictly below the maximum and at most the maximum. The box is full; compliance with capacity does not imply space for another item.
+Owner-approved conception. Two questions of the same supplied count: strictly below the maximum and at most the maximum. The box is full; compliance with capacity does not imply space for another item.
 
 ## Diagram
 

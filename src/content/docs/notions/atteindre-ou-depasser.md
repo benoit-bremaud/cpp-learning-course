@@ -282,7 +282,7 @@ Dans chaque cellule, l’ordre reste « dépassée », puis « atteinte ou dépa
 
 **À retenir :** `>` répond à « dépasse ? » ; `>=` répond à « atteint ou dépasse ? ». Aucun n’est meilleur dans l’absolu : le besoin fixe la bonne question.
 
-**Suite prévue :** compléter les autres comparaisons, puis utiliser leurs résultats pour choisir une action avec les conditions. Le [parcours progressif](../../parcours/) situe ces étapes ; la pratique reste dans les dépôts à cloner dans ton IDE.
+**Suite :** [en dessous ou au maximum](../en-dessous-ou-au-maximum/) présente `<` et `<=`, puis les applique à une boîte pleine. Le [parcours progressif](../../parcours/) situe ces étapes ; la pratique reste dans les dépôts à cloner dans ton IDE.
 
 ## Référence
 
