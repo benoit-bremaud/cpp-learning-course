@@ -1,6 +1,6 @@
 # Reaching a limit versus exceeding it
 
-Status: proposed conception; implementation awaits owner validation. Prepared on 2026-10-13.
+Status: option A explicitly approved by the owner on 2026-10-13; implemented and verified locally; validation evidence is recorded in docs/validation.md.
 
 ## Need and contract
 

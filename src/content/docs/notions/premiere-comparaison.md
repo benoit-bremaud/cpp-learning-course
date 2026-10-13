@@ -252,7 +252,7 @@ Cela prolonge la leçon sur les copies booléennes : **une valeur conservée n�
 
 **À retenir :** une comparaison répond à une question sur les valeurs au moment où elle est évaluée. `>` exclut l’égalité. Conserver la réponse ne crée ni mise à jour automatique ni contrôle empêchant le dépassement.
 
-**Suite prévue :** distinguer « dépasser » de « atteindre ou dépasser », puis compléter les comparaisons avant les conditions. Le [parcours progressif](../../parcours/) situe ces étapes. La pratique reste dans les dépôts à cloner dans ton IDE.
+**Suite :** [distinguer « dépasser » de « atteindre ou dépasser »](../atteindre-ou-depasser/), puis compléter les comparaisons avant les conditions. Le [parcours progressif](../../parcours/) situe ces étapes. La pratique reste dans les dépôts à cloner dans ton IDE.
 
 ## Référence
 

@@ -4,7 +4,7 @@ Source: [Inclusive comparison proposal](../../specs/inclusive-comparison.md).
 
 ## Context
 
-Proposed conception, awaiting owner validation. Ask two distinct questions of the same supplied count: strict exceedance and reaching or exceeding the limit. The count is 4, the limit is three.
+Owner-approved conception. Ask two distinct questions of the same supplied count: strict exceedance and reaching or exceeding the limit. The count is 4, the limit is three.
 
 ## Diagram
 

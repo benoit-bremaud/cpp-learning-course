@@ -19,7 +19,7 @@ Open the printed local address at `/`. Search is indexed during production build
 
 ## Scope and decisions
 
-Thirteen introductory theory pages, the proposed progression, the UML method, and local practice instructions are available. The threshold-indicator worked reference is published in the independent practice repository and linked from a guided course page. The 121-module planning catalog is published in the practice repository; its detailed pedagogical content still requires joint review.
+Fourteen introductory theory pages, the proposed progression, the UML method, and local practice instructions are available. The threshold-indicator worked reference is published in the independent practice repository and linked from a guided course page. The 121-module planning catalog is published in the practice repository; its detailed pedagogical content still requires joint review.
 
 Teaching content and UI are French by explicit owner approval. Engineering documents and code are English. The owner approved a default export only in `astro.config.mjs`, as required by standard Astro configuration; other authored code uses named exports.
 
@@ -49,6 +49,7 @@ python3 tests/first-divisions.py
 python3 tests/counter-update.py
 python3 tests/boolean-values.py
 python3 tests/first-comparison.py
+python3 tests/inclusive-comparison.py
 python3 tests/constant-limit.py
 python3 tests/program-output.py
 python3 tests/explorer-invalid-content.py
