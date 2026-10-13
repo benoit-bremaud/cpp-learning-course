@@ -1,6 +1,6 @@
 # First boolean values
 
-Status: option A explicitly approved by the owner on 2026-10-13; implementation follows this conception.
+Status: option A explicitly approved by the owner on 2026-10-13; implemented locally; verification is recorded in docs/validation.md.
 
 ## Need and scope
 

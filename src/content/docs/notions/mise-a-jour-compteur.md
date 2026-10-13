@@ -269,7 +269,7 @@ Essaie de répondre sans regarder les tableaux :
 
 **À retenir :** une mise à jour utilise la valeur courante pour en calculer une nouvelle, puis la conserve dans la même variable. Le symbole `=` exprime ici une affectation, pas une égalité à résoudre.
 
-**Suite prévue :** les booléens et les comparaisons, puis les conditions, dans le [parcours progressif](../../parcours/). Les écritures abrégées et les boucles viendront avec leurs explications dédiées. La pratique reste dans les dépôts à cloner dans ton IDE ; les bilans interactifs et les fiches téléchargeables restent prévus pour plus tard.
+**Suite :** [découvrir les booléens](../premiers-booleens/), puis les comparaisons et les conditions, dans le [parcours progressif](../../parcours/). Les écritures abrégées et les boucles viendront avec leurs explications dédiées. La pratique reste dans les dépôts à cloner dans ton IDE ; les bilans interactifs et les fiches téléchargeables restent prévus pour plus tard.
 
 ## Référence
 
