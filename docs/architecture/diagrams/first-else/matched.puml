@@ -1,0 +1,18 @@
+@startuml
+skinparam defaultFontSize 16
+skinparam shadowing false
+title act — Deux chemins et une suite commune — matched
+start
+:Initialiser measurement_target à 3;
+:Initialiser measurement_count à 3;
+:Évaluer measurement_count == measurement_target;
+:Initialiser target_matched avec la réponse;
+if (Choisir le chemin) then ([target_matched])
+  :Écrire Target matched\net un saut de ligne;
+else ([not target_matched])
+  :Écrire Target not matched\net un saut de ligne;
+endif
+:Écrire Check finished\net un saut de ligne;
+:Renvoyer 0;
+stop
+@enduml
