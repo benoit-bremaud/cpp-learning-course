@@ -285,7 +285,7 @@ Pour les mêmes entiers inchangés, les calculs corrects avec `==` et `!=` donne
 
 **À retenir :** `==` demande « la même valeur ? », `!=` demande « une autre valeur ? ». Une différence n’indique ni direction ni distance. Les résultats décrivent les valeurs comparées, sans modifier celles-ci ni déclencher une action.
 
-**Suite :** [la première condition](../premiere-condition/) utilise un booléen pour exécuter ou sauter un bloc avec `if`. L’alternative avec `else` viendra dans un module distinct. Le [parcours](../../parcours/) situe cette prochaine étape ; les exercices exécutables restent dans les dépôts à cloner.
+**Suite :** [la première condition](../premiere-condition/) utilise un booléen pour exécuter ou sauter un bloc avec `if`. L’[alternative avec `else`](../premiere-alternative/) est présentée dans un module distinct. Le [parcours](../../parcours/) situe cette prochaine étape ; les exercices exécutables restent dans les dépôts à cloner.
 
 ## Références
 

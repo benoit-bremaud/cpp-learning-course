@@ -321,7 +321,7 @@ Avec trois, le défaut passe inaperçu : les deux écritures du bloc s’exécut
 
 **À retenir :** `if` contrôle son bloc. Une condition fausse saute ce bloc ; elle ne saute pas la suite du programme. Les accolades indiquent les instructions contrôlées.
 
-**Suite prévue :** ajouter une action alternative avec `else`, dans un module distinct. Le [parcours](../../parcours/) conserve ce découpage ; la pratique s’effectue dans les dépôts à cloner, pas dans le navigateur.
+**Suite :** [deux chemins avec `else`](../premiere-alternative/) ajoute une action au chemin faux, dans un module distinct. Le [parcours](../../parcours/) conserve ce découpage ; la pratique s’effectue dans les dépôts à cloner, pas dans le navigateur.
 
 ## Références
 

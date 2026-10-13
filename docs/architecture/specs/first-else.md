@@ -1,6 +1,6 @@
 # Explicit alternative: if and else
 
-Status: proposed, awaiting owner approval before implementation.
+Status: option A approved by the owner; implemented and verified locally; evidence is recorded in docs/validation.md.
 
 ## Need and acceptance criteria
 
