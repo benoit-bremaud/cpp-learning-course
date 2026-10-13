@@ -1,0 +1,8 @@
+@startuml
+skinparam defaultFontSize 16
+skinparam shadowing false
+title act — Aucune panne signalée
+start
+:Initialiser le booléen\nfault_present à false;
+stop
+@enduml

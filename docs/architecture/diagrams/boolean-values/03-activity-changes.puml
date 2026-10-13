@@ -1,0 +1,10 @@
+@startuml
+skinparam defaultFontSize 16
+skinparam shadowing false
+title act — Modifier une information booléenne
+start
+:Initialiser le booléen\nfault_present à false;
+:Affecter true à fault_present;
+:Affecter false à fault_present;
+stop
+@enduml

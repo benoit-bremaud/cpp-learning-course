@@ -1,0 +1,10 @@
+@startuml
+skinparam defaultFontSize 16
+skinparam shadowing false
+title act — Conserver une copie indépendante
+start
+:Initialiser le booléen\nfault_present à false;
+:Lire fault_present (false)\net initialiser le booléen\nfault_snapshot avec cette valeur;
+:Affecter true à fault_present;
+stop
+@enduml
