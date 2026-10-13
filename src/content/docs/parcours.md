@@ -53,11 +53,11 @@ Le [voyant guidé](../exemple-voyant/) est une **découverte facultative** relia
 
 **Prérequis :** booléens, comparaisons et blocs.
 
-**Ordre :** `if` et `else` → cas d’égalité à un seuil → contrôle d’une entrée ou d’une limite.
+**Ordre :** exécuter ou sauter un bloc avec `if` → choisir une alternative avec `else`, dans un module distinct → cas d’égalité à un seuil → contrôle d’une entrée ou d’une limite.
 
 **Acquis attendu :** expliquer le chemin suivi et distinguer une hypothèse sur les entrées d’un contrôle réellement effectué par le code.
 
-**À développer comme modules autonomes.** Les exemples du voyant et du réservoir en offrent déjà une lecture guidée. C’est ici que sera développée la comparaison entre une limite constante et une limite effectivement contrôlée ; CPP-09 conserve pour l’instant l’avertissement simple.
+**Disponible :** [la première condition avec `if`](../notions/premiere-condition/), avec les chemins vrai et faux et la suite commune. **À développer :** `else` et les applications de contrôle. Les exemples du voyant et du réservoir en offrent déjà une lecture guidée. C’est ici que sera développée la comparaison entre une limite constante et une limite effectivement contrôlée ; CPP-09 conserve pour l’instant l’avertissement simple.
 
 ## 5 — Organiser un traitement
 

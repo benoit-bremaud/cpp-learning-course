@@ -1,6 +1,6 @@
 # First conditional execution: if and common continuation
 
-Status: proposal after owner-requested deeper analysis; implementation approval pending.
+Status: refined option A approved by the owner on 2026-10-13; implemented and verified locally; evidence is recorded in docs/validation.md.
 
 ## Need and recommended scope
 
@@ -123,7 +123,7 @@ Use four complete code examples rather than impose the previous five-example cou
 
 Trace condition value, chosen path, executed/skipped write, common write, and normal return. Variable values remain unchanged. Explain the skipped instruction explicitly; do not list it as executed. Actual stdout and exit status are separate: return 0 is also possible for the wrong program, so successful execution does not prove the requirement is met. Both non-selected and selected paths remain visible in each UML model: a scenario input does not remove the program's alternative path.
 
-UML introduces a decision node and merge node, not a fork/join. A false path performs no controlled write and rejoins the true path before the common write. A merge does not wait for both paths; there is only one selected path in this single-token activity. Guard predicates are [target_matched] / [not target_matched], or identifier equivalents. Explain not as UML guard notation (the value is false), not new C++ syntax. Guards are mutually exclusive and exhaustive for bool. The input to the decision is already stored; the == expression is not reevaluated by if(flag). Rendering uses native PlantUML activity decisions, with an explicit merge after the empty false branch. Diagram scope begins in main; include is a declaration dependency, not a runtime action.
+UML introduces a decision node and merge node, not a fork/join. A false path performs no controlled write and rejoins the true path before the common write. A merge does not wait for both paths; there is only one selected path in this single-token activity. Guard predicates are [target_matched] / [not target_matched], or identifier equivalents. Explain not as a UML guard predicate (the value is false); do not suggest adding it to these programs. C++ also has not as an alternative token for !, which is deferred with logical operators, not denied. Reference: https://eel.is/c++draft/lex.digraph. This editorial correction changes no diagram or program behavior. Guards are mutually exclusive and exhaustive for bool. The input to the decision is already stored; the == expression is not reevaluated by if(flag). Rendering uses native PlantUML activity decisions, with an explicit merge after the empty false branch. Diagram scope begins in main; include is a declaration dependency, not a runtime action.
 
 The error card reuses intended unmatched UML, with an explicit discrepancy mapping. Reuse the current discreet card UI, output blocks and full-size SVG links. No new UI controls or practice publication. Companion explorer sheets remain an authoring gap.
 
