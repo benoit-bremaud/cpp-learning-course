@@ -1,0 +1,15 @@
+# Activity — first if — identifier
+
+Source: [First if proposal](../../specs/first-if.md).
+
+## Context
+
+Proposed conception: inspect a stored bool, execute or skip a message, then continue with the common write and return. Both paths remain modeled for the concrete supplied initializer.
+
+## Diagram
+
+![Conditional message and common continuation](03-activity-identifier.svg)
+
+## Notes
+
+Guard not is UML predicate notation, not C++ syntax. Guards are complementary, so exactly one path is selected. The empty false path merges before the common write; no parallel execution or synchronization. The comparison is evaluated once before reading its stored result.

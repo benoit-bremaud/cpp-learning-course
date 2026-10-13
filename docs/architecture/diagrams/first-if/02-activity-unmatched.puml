@@ -1,0 +1,17 @@
+@startuml
+skinparam defaultFontSize 16
+skinparam shadowing false
+title act — Condition et suite commune — unmatched
+start
+:Initialiser measurement_target à 3;
+:Initialiser measurement_count à 2;
+:Évaluer measurement_count == measurement_target;
+:Initialiser target_matched avec la réponse;
+if (Choisir le chemin) then ([target_matched])
+  :Écrire Target matched\net un saut de ligne;
+else ([not target_matched])
+endif
+:Écrire Check finished\net un saut de ligne;
+:Renvoyer 0;
+stop
+@enduml
