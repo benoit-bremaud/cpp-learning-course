@@ -1,0 +1,13 @@
+@startuml
+skinparam defaultFontSize 16
+skinparam shadowing false
+title act — En dessous ou au maximum — 4 mesures
+start
+:Initialiser la constante\nmeasurement_limit à 3;
+:Initialiser measurement_count à 4;
+:Évaluer measurement_count < measurement_limit\nRésultat : false;
+:Initialiser below_limit à false;
+:Évaluer measurement_count <= measurement_limit\nRésultat : false;
+:Initialiser within_limit à false;
+stop
+@enduml

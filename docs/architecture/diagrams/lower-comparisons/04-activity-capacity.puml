@@ -1,0 +1,13 @@
+@startuml
+skinparam defaultFontSize 16
+skinparam shadowing false
+title act — Une boîte pleine respecte sa capacité
+start
+:Initialiser la constante\nbox_capacity à 8;
+:Initialiser item_count à 8;
+:Évaluer item_count < box_capacity\nRésultat : false;
+:Initialiser has_space à false;
+:Évaluer item_count <= box_capacity\nRésultat : true;
+:Initialiser within_capacity à true;
+stop
+@enduml
