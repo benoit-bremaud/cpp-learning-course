@@ -1,0 +1,15 @@
+@startuml
+skinparam defaultFontSize 16
+skinparam shadowing false
+title act — Recalculer après une modification
+start
+:Initialiser la constante\nmeasurement_limit à 3;
+:Initialiser measurement_count à 2;
+:Évaluer measurement_count > measurement_limit\nRésultat : false;
+:Initialiser le booléen\nlimit_exceeded à false;
+:Affecter 4 à measurement_count;
+note right: limit_exceeded reste false
+:Évaluer measurement_count > measurement_limit\nRésultat : true;
+:Affecter true à limit_exceeded;
+stop
+@enduml
