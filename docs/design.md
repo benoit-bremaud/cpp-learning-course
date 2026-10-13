@@ -72,3 +72,8 @@ The first-if module contains four complete programs and three activity models. T
 For each approved teaching increment, update its specification status, authoritative UML and public snapshots together; synchronize navigation, prerequisite/next links and availability. Update this design map when the sequence or site behavior changes, and record actual verification in validation.md. A successful build or compile check is evidence of technical consistency, not learner mastery.
 
 Code-gap quizzes, scoring, personal strengths/gaps summaries and downloadable recap sheets remain deferred under the [charter](example-charter.md). Practice still belongs in separately cloned repositories. The next planned control applications, additional companion examples, publication and portfolio integration are not implemented by the latest if/else lessons.
+
+
+## Next conception awaiting approval
+
+[Guarded increment](architecture/specs/guarded-increment.md) proposes one conditional count update, including refusal at equality, no repair of an already excessive count, and the stored pre-operation bool. It is a reviewed proposal with candidate programs and activity models, not an implemented lesson or a new owner-approved requirement.

@@ -1,0 +1,21 @@
+@startuml
+skinparam defaultFontSize 16
+skinparam shadowing false
+title act — Autoriser un seul ajout — full
+start
+:Initialiser measurement_limit à 3;
+:Initialiser measurement_count à 3;
+:Évaluer measurement_count < measurement_limit;
+:Initialiser can_add avec la réponse;
+if (Choisir le chemin) then ([can_add])
+  :Calculer measurement_count + 1;
+  :Affecter le résultat à measurement_count;
+  :Écrire Count increased\net un saut de ligne;
+else ([not can_add])
+  :Écrire Addition refused\net un saut de ligne;
+endif
+:Écrire measurement_count;
+:Écrire un saut de ligne;
+:Renvoyer 0;
+stop
+@enduml

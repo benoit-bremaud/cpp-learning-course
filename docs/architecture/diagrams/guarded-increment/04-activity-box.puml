@@ -1,0 +1,21 @@
+@startuml
+skinparam defaultFontSize 16
+skinparam shadowing false
+title act — Autoriser un seul ajout — box
+start
+:Initialiser box_capacity à 8;
+:Initialiser item_count à 7;
+:Évaluer item_count < box_capacity;
+:Initialiser can_add avec la réponse;
+if (Choisir le chemin) then ([can_add])
+  :Calculer item_count + 1;
+  :Affecter le résultat à item_count;
+  :Écrire Count increased\net un saut de ligne;
+else ([not can_add])
+  :Écrire Addition refused\net un saut de ligne;
+endif
+:Écrire item_count;
+:Écrire un saut de ligne;
+:Renvoyer 0;
+stop
+@enduml
