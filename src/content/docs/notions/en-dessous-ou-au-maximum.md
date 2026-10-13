@@ -286,7 +286,7 @@ Pour nos entiers, voici les résultats avec la même limite de trois. Chaque col
 
 **À retenir :** « moins de » exclut l’égalité, « au maximum » l’accepte. Choisis la question avant l’opérateur, puis vérifie les cas sous la limite, à égalité et au-dessus.
 
-**Suite prévue :** comparer l’égalité et la différence, puis utiliser une réponse pour choisir une action avec les conditions. Le [parcours](../../parcours/) garde ces étapes séparées ; les exercices exécutables restent dans les dépôts à cloner.
+**Suite :** [égal ou différent](../egal-ou-different/) présente `==` et `!=` avant les conditions. Le [parcours](../../parcours/) garde ces étapes séparées ; les exercices exécutables restent dans les dépôts à cloner.
 
 ## Référence
 

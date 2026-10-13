@@ -4,7 +4,7 @@ Source: [Exact equality proposal](../../specs/equality-comparisons.md).
 
 ## Context
 
-Proposed conception: exact equality and difference on two supplied integers. Expected pair: false/true. No acquisition, decision path or automatic action.
+Owner-approved conception: exact equality and difference on two supplied integers. Expected pair: false/true. No acquisition, decision path or automatic action.
 
 ## Diagram
 

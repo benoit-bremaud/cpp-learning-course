@@ -1,6 +1,6 @@
 # Exact equality and difference
 
-Status: conception proposal; implementation approval pending.
+Status: option A approved by the owner on 2026-10-13; implemented and verified locally; evidence is recorded in docs/validation.md.
 
 ## Need and acceptance criteria
 
