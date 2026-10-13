@@ -1,0 +1,11 @@
+@startuml
+skinparam defaultFontSize 16
+skinparam shadowing false
+title act — Retirer une quantité du stock
+start
+:Initialiser component_count à 8;
+:Initialiser used_count à 2;
+:Calculer component_count - used_count\nRésultat : 6;
+:Affecter 6 à component_count;
+stop
+@enduml

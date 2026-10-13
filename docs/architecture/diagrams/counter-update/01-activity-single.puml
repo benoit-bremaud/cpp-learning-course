@@ -1,0 +1,10 @@
+@startuml
+skinparam defaultFontSize 16
+skinparam shadowing false
+title act — Ajouter une mesure
+start
+:Initialiser measurement_count à 0;
+:Calculer measurement_count + 1\nRésultat : 1;
+:Affecter 1 à measurement_count;
+stop
+@enduml

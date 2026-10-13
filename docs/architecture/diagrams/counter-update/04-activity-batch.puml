@@ -1,0 +1,11 @@
+@startuml
+skinparam defaultFontSize 16
+skinparam shadowing false
+title act — Ajouter un lot au stock
+start
+:Initialiser component_count à 5;
+:Initialiser added_count à 3;
+:Calculer component_count + added_count\nRésultat : 8;
+:Affecter 8 à component_count;
+stop
+@enduml
