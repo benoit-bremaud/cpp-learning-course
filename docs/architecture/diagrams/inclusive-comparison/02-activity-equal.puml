@@ -1,0 +1,13 @@
+@startuml
+skinparam defaultFontSize 16
+skinparam shadowing false
+title act — Deux questions pour 3 mesures
+start
+:Initialiser la constante\nmeasurement_limit à 3;
+:Initialiser measurement_count à 3;
+:Évaluer measurement_count > measurement_limit\nRésultat : false;
+:Initialiser limit_exceeded à false;
+:Évaluer measurement_count >= measurement_limit\nRésultat : true;
+:Initialiser limit_reached à true;
+stop
+@enduml
