@@ -77,3 +77,5 @@ Code-gap quizzes, scoring, personal strengths/gaps summaries and downloadable re
 ## Next conception awaiting approval
 
 [Guarded increment](architecture/specs/guarded-increment.md) proposes one conditional count update, including refusal at equality, no repair of an already excessive count, and the stored pre-operation bool. It is a reviewed proposal with candidate programs and activity models, not an implemented lesson or a new owner-approved requirement.
+
+The guarded-increment proposal has been refined after deeper review: explicitly teach integer output at first use, recall stored-bool semantics, and place the already-excessive input after normal operation and the equality error. The single direct-condition alternative is now assessed independently of repeated attempts. Both remain pending owner selection; the existing site is unchanged.

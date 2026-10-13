@@ -1,6 +1,6 @@
 # Guard one increment with an upper limit
 
-Status: proposed; owner review required before lesson implementation.
+Status: refined after owner-requested deeper analysis; owner review still required before lesson implementation.
 
 ## Need and contract
 
@@ -206,3 +206,36 @@ Publish four byte-identical SVG snapshots; update sidebar, previous/next links, 
 ## Design verification
 
 Five proposed programs tested over five supplied values each: 25 C++17 compilations/executions with -Wall -Wextra -Werror. Instrumented assertions verify final count, preserved limit and stored pre-operation bool; exact stdout, empty stderr and normal exit pass. This validates candidate behavior, not learner mastery or final page integration. Browser verification is deferred until approved implementation.
+
+
+## Deeper review: refined recommendation
+
+This review supersedes the initial comparison table, not the candidate program behavior. No lesson implementation is approved by this review.
+
+### Findings that change the teaching proposal
+
+1. Numeric stream output is an implicit prerequisite in the candidates: programme-minimal and premiers-affichages teach text literals, not integer-variable output. Add a short explicit reading bridge before the first program: cout receives the current integer value without quotes; the following newline is a separate write. Explain using the existing candidate lines and their UML actions, not a new unreviewed program. Retain the exact final-value output because messages alone do not demonstrate the update.
+2. Stored bool freshness is already taught by premiere-comparaison's recalculation case and premiers-booleens. Add a direct refresher link and an explicit pre-operation label in state tables. Do not pretend can_add describes available space after the operation. A direct condition is a legitimate simpler alternative, not unsafe or intrinsically premature.
+3. The original alternative C bundled direct conditions with repeated attempts, unfairly conflating two teaching choices. Compare a single direct condition independently. It yields the same result as the named bool here because no state changes between calculation and use. Its advantage is one fewer stored value; its cost is changing the established presentation while introducing conditional mutation.
+4. Revise the teaching order to room, full, box transfer, inclusive error, then already-above as an explicit scope-limit section. This consolidates normal operation before the anomalous initial state. All five existing programs and four models are retained; no new example behavior is introduced.
+5. Use a precise title such as “Control one increment with a limit”, rather than implying a globally valid final state for any starting input. The contract preserves an existing valid upper bound; it does not sanitize arbitrary inputs. Do not make limit-wide safety or hardware-capacity claims.
+
+### Refined alternatives and sensitivity
+
+Weights now explicitly isolate missing prerequisites and misconception risk: continuity 30%, contract clarity 30%, reading load 25%, transfer 15%. Scores /5 remain subjective.
+
+| Option | Continuity | Clarity | Reading | Transfer | Weighted |
+| --- | --- | --- | --- | --- | --- |
+| A: named bool, output bridge, reordered five cases | 5 | 5 | 4 | 5 | 4.75 |
+| B: same scope, single direct condition, output bridge | 4 | 5 | 5 | 5 | 4.70 |
+| C: separate output micro-lesson before conditional mutation | 5 | 5 | 3 | 4 | 4.40 |
+| D: message-only threshold consolidation | 5 | 3 | 5 | 3 | 4.10 |
+| E: direct conditions plus repeated attempts | 3 | 4 | 2 | 5 | 3.35 |
+
+A and B are effectively tied given subjective scoring. A is recommended specifically for continuity with the owner's approved named-bool sequence, not numerical certainty. Moving 10 percentage points from continuity to reading load reverses their order. Choose B if eliminating the stored snapshot is more useful than preserving the previous presentation. C is appropriate if numeric output itself is difficult; D if if/else remains difficult. No evidence currently establishes either learner difficulty. E remains deferred because repeated attempts require a new decision each time.
+
+### Additional evidence
+
+The C++ working draft condition grammar permits an expression directly: https://eel.is/c++draft/stmt.pre. Assignment modifies the designated object: https://eel.is/c++draft/expr.assign. LearnCpp's introduction to if statements shows direct conditions early (https://www.learncpp.com/cpp-tutorial/introduction-to-if-statements/); this establishes a viable curriculum alternative, not measured superiority for this learner.
+
+An independent temporary C++17 verification compared named and direct forms for all 0..20 supplied counts at limits 3 and 8: 42 cases passed. It checked equal final counts, preservation of initially valid upper bounds, preservation of already excessive counts and the stored pre-operation bool. This harness is engineering verification, not an additional learner-facing loop example. Language semantics confidence is high; relative learning effectiveness is unmeasured.
