@@ -1,6 +1,10 @@
 # Example explorer — accepted conception
 
-Status: explicitly accepted by the owner before implementation. Implemented locally on two pilot pages; no push or deployment.
+Status: explicitly accepted by the owner before implementation. Implemented locally on the two original pilot pages and subsequently extended to the first-expressions page; deployment remains deferred. The original pilot contract below is preserved.
+
+## Current extension
+
+The [first-expressions conception](first-expressions.md) extends the shared explorer to `src/content/docs/notions/premieres-expressions.mdx`, using the authored `src/content/examples/expressions/empty-tray.md` sheet. The original four pilot sheets remain. This extension does not imply companion sheets exist for every subsequent lesson.
 
 ## Need and scope
 
