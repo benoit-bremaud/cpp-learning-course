@@ -1,0 +1,13 @@
+@startuml
+skinparam defaultFontSize 16
+skinparam shadowing false
+title act — Vérifier un identifiant entier
+start
+:Initialiser la constante\nexpected_identifier à 7;
+:Initialiser observed_identifier à 9;
+:Évaluer observed_identifier == expected_identifier\nRésultat : false;
+:Initialiser identifier_matched à false;
+:Évaluer observed_identifier != expected_identifier\nRésultat : true;
+:Initialiser identifier_different à true;
+stop
+@enduml

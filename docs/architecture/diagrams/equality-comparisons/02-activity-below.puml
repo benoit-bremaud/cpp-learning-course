@@ -1,0 +1,13 @@
+@startuml
+skinparam defaultFontSize 16
+skinparam shadowing false
+title act — Comparer exactement 2 mesures à une cible de 3
+start
+:Initialiser la constante\nmeasurement_target à 3;
+:Initialiser measurement_count à 2;
+:Évaluer measurement_count == measurement_target\nRésultat : false;
+:Initialiser target_matched à false;
+:Évaluer measurement_count != measurement_target\nRésultat : true;
+:Initialiser target_different à true;
+stop
+@enduml
