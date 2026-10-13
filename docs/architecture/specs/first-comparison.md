@@ -1,6 +1,6 @@
 # First comparison: has a fixed limit been exceeded?
 
-Status: proposed conception; implementation awaits explicit owner validation. Prepared on 2026-10-13.
+Status: option A explicitly approved by the owner on 2026-10-13; implemented locally; verification is recorded in docs/validation.md.
 
 ## Need and prerequisites
 

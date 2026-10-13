@@ -64,7 +64,7 @@ try:
         # Compact cards work in both loaders and inside the existing modal.
         for width in [1440, 390, 320]:
             page = browser.new_page(viewport={"width": width, "height": 900})
-            for route, count in [("/notions/cpp-01/", 6), ("/notions/premieres-expressions/", 5), ("/notions/premieres-soustractions/", 4), ("/notions/premieres-multiplications/", 5), ("/notions/parentheses-calculs/", 5), ("/notions/premieres-divisions/", 4), ("/notions/mise-a-jour-compteur/", 6), ("/notions/premiers-booleens/", 6), ("/notions/cpp-09/", 3), ("/exemple-voyant/", 4), ("/notions/programme-minimal/", 2), ("/notions/premiers-affichages/", 3)]:
+            for route, count in [("/notions/cpp-01/", 6), ("/notions/premieres-expressions/", 5), ("/notions/premieres-soustractions/", 4), ("/notions/premieres-multiplications/", 5), ("/notions/parentheses-calculs/", 5), ("/notions/premieres-divisions/", 4), ("/notions/mise-a-jour-compteur/", 6), ("/notions/premiers-booleens/", 6), ("/notions/premiere-comparaison/", 5), ("/notions/cpp-09/", 3), ("/exemple-voyant/", 4), ("/notions/programme-minimal/", 2), ("/notions/premiers-affichages/", 3)]:
                 page.goto(base + route)
                 assert page.locator(".uml-trigger").count() == count
                 assert page.locator("details.uml-panel > summary:visible").count() == 0
@@ -212,9 +212,9 @@ try:
         panel = page.locator("details.uml-panel").first
         panel.locator("summary").click()
         assert panel.locator("table").is_visible()
-        for route in ['/notions/mise-a-jour-compteur/', '/notions/premiers-booleens/']:
+        for route, count in [('/notions/mise-a-jour-compteur/', 6), ('/notions/premiers-booleens/', 6), ('/notions/premiere-comparaison/', 5)]:
             page.goto(base + route)
-            assert page.locator('details.uml-panel').count() == 6
+            assert page.locator('details.uml-panel').count() == count
             for panel in page.locator('details.uml-panel').all():
                 panel.locator('summary').click()
                 expect(panel.locator('table')).to_be_visible()
@@ -236,6 +236,20 @@ try:
         expect(card).to_contain_text('Attendu : false ; obtenu : true.')
         expect(card).to_have_css('opacity', '1')
         page.screenshot(path='/tmp/boolean-values-mobile.png')
+        page.goto(base + '/notions/premiere-comparaison/')
+        trigger = page.locator('[data-uml="comparison-reversed"] .uml-trigger')
+        expect(trigger).to_have_text('UML · écart')
+        trigger.click()
+        card = page.locator('.uml-card:popover-open')
+        expect(card).to_contain_text('Attendu : true ; obtenu : false.')
+        expect(card).to_have_css('opacity', '1')
+        page.screenshot(path='/tmp/first-comparison-mobile.png')
+        card.locator('.uml-close').click()
+        page.locator('[data-uml="comparison-refresh"] .uml-trigger').click()
+        card = page.locator('.uml-card:popover-open')
+        expect(card).to_have_css('opacity', '1')
+        card.evaluate('el => el.scrollTop = el.scrollHeight')
+        page.screenshot(path='/tmp/first-comparison-refresh-mobile.png')
         browser.close()
     print('PASS: desktop/mobile/narrow reading, tabs, focus, closing, scroll, fixtures and no-JS fallback')
 finally:

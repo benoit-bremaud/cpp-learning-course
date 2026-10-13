@@ -167,3 +167,14 @@ Editorial rereading checked true versus favorable outcome, false versus unknown,
 Verification: all six actual excerpts compile in C++17 with warnings as errors. The new harness checks bool types, every initialized-value checkpoint, preserved copies, explicit refresh, the wrong-value contrast, empty output and byte-identical public/generated SVGs. Astro check reports zero errors/warnings/hints. Build produces 19 pages and all six Node tests pass; existing nonblocking MDX directive and optional i18n/404 warnings remain.
 
 Chrome regression passes at 1440/390/320px, including all six new cards, closing/focus behavior and no-JS disclosures. Mobile discrepancy-card rendering was visually inspected. The running development server initially returned 500 because its content catalog lacked the new slug after hot reload; restarting it restored HTTP 200 on /notions/premiers-booleens/ without source changes. Local consistency is verified; learner mastery has not been measured. No deployment or practice repository changes.
+
+
+## First strict comparison
+
+Implemented approved option A: five independent snippets covering count 2/3/4 against the fixed fictional limit 3, reversed operands, and explicit recomputation after a count update. Four authoritative activities back five cards; the deliberately reversed snippet explicitly compares actual false to expected true. Updated the sidebar, prior boolean lesson, roadmap and availability count.
+
+Editorial review checked the distinction between reaching/exceeding, comparison result type versus storage type, unchanged operands, observation versus enforcement, and a stored answer versus a live formula. The refresh trace includes the intermediate stale false at count four, not just the final true result. The reversed-operand table demonstrates that equality alone masks the bug. Diagrams model sequential evaluation/storage without fictional branches, temporaries or hardware actions.
+
+Verification: the new harness extracts all five actual lesson snippets, compiles C++17 with warnings as errors, checks each initialized-value checkpoint, bool types, unchanged inputs, alternate counts 0/2/3/4/5, reversed-operand masking and empty output. Public SVGs match their authoritative rendered snapshots. Astro check reports zero errors/warnings/hints; the build produces 20 pages and six Node tests pass. Existing nonblocking MDX directive and optional i18n/404 warnings remain.
+
+Chrome regression passes at 1440/390/320px, including all five new cards, keyboard/closing behavior, the discrepancy label and no-JS reading. Mobile discrepancy and scrolled refresh cards were visually inspected; the longer diagram retains its full-size SVG link for close reading. The local development server was restarted after content updates and /notions/premiere-comparaison/ returns HTTP 200. No shared UI, deployment or practice-repository change. Technical consistency is verified; learner mastery remains unmeasured.

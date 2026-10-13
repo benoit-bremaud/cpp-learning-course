@@ -4,7 +4,7 @@ Source: [First comparison proposal](../../specs/first-comparison.md).
 
 ## Context
 
-Proposed conception, awaiting owner validation: calculate whether a supplied measurement count strictly exceeds a fixed fictional limit. No enforcement or hardware acquisition takes place.
+Owner-approved conception: calculate whether a supplied measurement count strictly exceeds a fixed fictional limit. No enforcement or hardware acquisition takes place.
 
 ## Diagram
 

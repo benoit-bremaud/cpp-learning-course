@@ -264,7 +264,7 @@ La correction consiste à reprendre l’initialisation à `false` du premier exe
 
 **À retenir :** choisis une affirmation claire pour comprendre une valeur booléenne. Déclarer ou affecter cette valeur ne vérifie pas la réalité ; copier sa valeur ne crée pas un lien automatique.
 
-**Suite prévue :** produire un résultat booléen en comparant des valeurs, puis utiliser ce résultat dans une condition. Ces notions restent distinctes dans le [parcours progressif](../../parcours/). Les conversions numériques et les opérations logiques seront expliquées dans leurs modules ; la pratique reste dans les dépôts à cloner dans ton IDE.
+**Suite :** [produire un résultat booléen avec une première comparaison](../premiere-comparaison/), puis étudier les autres comparaisons avant les conditions. Ces notions restent distinctes dans le [parcours progressif](../../parcours/). Les conversions numériques et les opérations logiques seront expliquées dans leurs modules ; la pratique reste dans les dépôts à cloner dans ton IDE.
 
 ## Références
 
