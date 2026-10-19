@@ -43,7 +43,7 @@ export function initializeUmlCards(): void {
     };
     // Keep the first paint hidden until the final viewport position is known.
     card.addEventListener('beforetoggle', event => {
-      if ((event as ToggleEvent).newState === 'open') delete card.dataset.positioned;
+      if (event.newState === 'open') delete card.dataset.positioned;
     });
     card.addEventListener('toggle', () => {
       if (card.matches(':popover-open')) {

@@ -255,3 +255,12 @@ Findings inspected in existing, untouched shared UI code; deferred to a focused 
 - css:S4666, src/styles/custom.css:67, MAJOR: repeated .sl-markdown-content .uml-card selector. Should Have: consolidate declarations while retaining fade and top-layer behavior.
 
 Severity labels are SonarQube classifications, not demonstrated runtime defects. No automatic fixes, pipeline changes or external publication performed.
+
+
+## Shared UI SonarQube remediation — 2026-10-19
+
+Owner-approved MCDA option A addresses all four baseline findings: private disclosure eligibility helper reduces callback nesting (S2004); at(-1) replaces manual last-index access (S7755); inferred beforetoggle typing replaces the redundant assertion (S4325); duplicate card CSS declarations are consolidated (S4666). Reviewed diff preserves the original closed-details summary exemption, focus candidate ordering, empty-list handling and animation values. No changes to authored lessons or deployment.
+
+Astro check: zero errors/warnings/hints. Fresh build and all six Node tests pass. Full Chrome regression passes at 1440/390/320px, including keyboard focus containment/restoration, nested UML dismissal, no-JS fallback, stable fade position, exit opacity and reduced-motion behavior. Existing nonblocking build warnings remain.
+
+Repeated local SonarQube scan completes successfully with the same project and scope. API confirms zero unresolved issues, zero code smells, bugs, vulnerabilities and security hotspots, and zero duplication. Quality Gate status is OK; unlike the initial baseline, conditions are returned, but ignoredConditions is true. New coverage reports 0% despite an OK condition, so this is not evidence of meeting an 80% coverage target. No coverage report is imported. The four findings are resolved; broader analysis/coverage limitations from the baseline remain. Credentials were read from the existing machine-local store and were not committed.

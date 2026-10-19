@@ -56,6 +56,10 @@
   border: 1px solid var(--sl-color-gray-4); border-radius: .5rem;
   color: var(--sl-color-text); background: var(--sl-color-bg); text-align: left;
   box-shadow: 0 .5rem 2rem var(--sl-color-gray-5);
+  /* Keep native dismissal while retaining the top layer for the opacity exit. */
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 160ms ease-out, display 160ms allow-discrete, overlay 160ms allow-discrete;
 }
 .uml-card > .uml-close { display: block; margin-left: auto; }
 
@@ -63,12 +67,6 @@
 .sl-markdown-content details.uml-panel[data-card-ready] > summary { display: none; }
 
 
-/* Keep native dismissal while retaining the top layer for the opacity exit. */
-.sl-markdown-content .uml-card {
-  visibility: hidden;
-  opacity: 0;
-  transition: opacity 160ms ease-out, display 160ms allow-discrete, overlay 160ms allow-discrete;
-}
 .sl-markdown-content .uml-card[data-positioned] { visibility: visible; }
 .sl-markdown-content .uml-card[data-positioned]:popover-open {
   opacity: 1;

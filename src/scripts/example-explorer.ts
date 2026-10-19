@@ -1,3 +1,11 @@
+/** Exclude controls inside closed disclosures, retaining their summary itself. */
+function isAvailableInDisclosures(element: HTMLElement, closedDetails: NodeListOf<Element>): boolean {
+  for (const details of closedDetails) {
+    if (details.contains(element) && element !== details.querySelector('summary')) return false;
+  }
+  return true;
+}
+
 /** Enhance statically rendered sheets without duplicating their content or IDs. */
 export function initializeExplorers(): void {
   document.querySelectorAll<HTMLElement>('[data-explorer]').forEach(root => {
@@ -58,12 +66,12 @@ export function initializeExplorers(): void {
     // Keep sequential keyboard navigation in the modal, including at its edges.
     dialog.addEventListener('keydown', event => {
       if (event.key !== 'Tab') return;
+      const closedDetails = dialog.querySelectorAll('details:not([open])');
       const controls = [...dialog.querySelectorAll<HTMLElement>('button, a[href], select, input, textarea, summary, [tabindex]')]
-        .filter(element => ![...dialog.querySelectorAll('details:not([open])')].some(details =>
-          details.contains(element) && element !== details.querySelector('summary')))
+        .filter(element => isAvailableInDisclosures(element, closedDetails))
         .filter(element => element.tabIndex >= 0 && element.getClientRects().length > 0 && !element.matches(':disabled'));
       const first = controls[0];
-      const last = controls[controls.length - 1];
+      const last = controls.at(-1);
       if (!first || !last) return;
       if (event.shiftKey && (document.activeElement === first || document.activeElement === reading)) {
         event.preventDefault();

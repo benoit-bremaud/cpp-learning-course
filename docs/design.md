@@ -77,3 +77,10 @@ Code-gap quizzes, scoring, personal strengths/gaps summaries and downloadable re
 ## Latest implemented control application
 
 [Guarded increment](architecture/specs/guarded-increment.md) implements refined option A approved on 2026-10-19: a numeric-output bridge, a named pre-operation bool, one conditional count update and five cases ordered room/full/box/inclusive error/already excessive. Four authoritative models support the five cards. Refusal at equality preserves an initially valid upper bound; rejection does not repair an already excessive input. Repeated attempts and direct-condition variants remain outside this module. Verification is recorded in [validation evidence](validation.md).
+
+
+## Shared UI maintenance — 2026-10-19
+
+Owner approved MCDA option A: address all four local SonarQube findings with behavior-preserving changes. The explorer now evaluates closed-disclosure eligibility in a private helper, querying closed disclosures once per Tab event; the exact summary exemption and visibility/disabled/tab-index filters remain unchanged. Last-element access uses at(-1). UML beforetoggle uses the inferred event type, and card layout/fade declarations share one CSS rule. No new abstraction layer, UI contract or diagram is needed because the accepted interaction is unchanged. Existing browser acceptance checks remain the behavioral reference.
+
+Decision method for future substantive choices: MCDA with explicit alternatives, non-compensable requirements, distinct criteria, justified weights/scores and sensitivity analysis. Scores express judgments, not measured learner outcomes; close rankings require a contextual tie-break rather than claims of numerical certainty.
