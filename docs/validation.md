@@ -233,3 +233,25 @@ Editorial review distinguishes false equality from below-target meaning, bool in
 Verification: tests/first-else.py compiles five actual published C++17 programs over 15 input configurations, with separate instrumented copies (30 compilation/execution checks), using -Wall -Wextra -Werror. Exact stdout, empty stderr, status 0, initialized and preserved state, bool types, approved source equality, displayed output contracts and public SVG provenance pass. Astro check reports zero errors/warnings/hints; npm test builds 25 pages and passes six Node tests. Existing nonblocking MDX directive and optional i18n/404 build warnings remain.
 
 Chrome regression passes at 1440/390/320px, covering all five new cards, keyboard/focus/closing and no-JavaScript disclosures. Mobile discrepancy and above-target screenshots were inspected: the expected/actual distinction is explicit and both branches meet before the common write. Diagram labels are compact on mobile; the full-size SVG link remains available. No page-wide overflow was found on the new page at the inspected 390px viewport. The restarted local server returns HTTP 200 for /notions/premiere-alternative/. No shared UI, CI, deployment or practice repository changes. Technical checks do not measure learner mastery.
+
+
+## Guarded increment — 2026-10-19
+
+Implemented refined option A in the approved room/full/box/inclusive-error/already-above order, with a numeric-output bridge, stored pre-operation bool explanation, five complete programs and four authoritative activity snapshots. Reviewed contract: preserve an initially valid upper bound for one addition; refuse but do not repair excessive initial values. The negative-input assumption is explicit. Source matches the approved candidates exactly; shared UI remains unchanged.
+
+Verification: 25 input configurations, each compiled and run both plain and with state assertions (50 C++17 executions, -Wall -Wextra -Werror). Exact output/status, before/after count, fixed limit, preserved bool, displayed output blocks and SVG provenance pass. Astro check: zero errors/warnings/hints. npm test: 26 pages, six Node tests pass. Existing nonblocking MDX and optional i18n/404 build warnings remain. Browser regression passes at 1440/390/320px, including all five new cards and no-JS disclosures, keyboard/focus/dismissal. Mobile room/error screenshots inspected: diagram labels are small in the compact card, with full-size links available; discrepancy text is explicit. Local route /notions/ajout-sous-limite/ returns HTTP 200. Companion explorer sheets remain an authoring gap. No deployment or practice-repository publication.
+
+## Owner-requested local SonarQube baseline — 2026-10-19
+
+Used existing scanner and global token from the machine-local credential store; no credentials persisted in the repository. Local Community Build 26.5.0.122743, project cpp-learning-course, dashboard http://localhost:9000/dashboard?id=cpp-learning-course. This is a working-copy baseline including the uncommitted lesson changes, not an analysis of remote main or PR decoration. Sources: src and astro.config.mjs; tests: tests; SVG excluded; SCM publication disabled. Scanner work/output lives under /tmp, not in this repository.
+
+Analysis completed successfully. Reported metrics: 262 non-comment code lines, zero bugs/vulnerabilities/security hotspots, four code smells, zero duplication. Coverage is 0% with no coverage report imported; passing local tests do not establish a coverage percentage. Quality Gate API reports OK with an empty conditions array: this first baseline is not evidence that meaningful gate thresholds passed. Dependency analysis was skipped. Embedded C++ in Markdown and pedagogical correctness are covered by the separate compiler/editorial checks, not claimed as SonarQube coverage.
+
+Findings inspected in existing, untouched shared UI code; deferred to a focused maintenance change to avoid expanding the approved lesson implementation:
+
+- typescript:S2004, src/scripts/example-explorer.ts:62, CRITICAL code smell: deeply nested focus-filter callbacks. Should Have: flatten this logic while preserving hidden-details keyboard behavior; browser tests required.
+- typescript:S7755, src/scripts/example-explorer.ts:66, MINOR: prefer array.at(-1). Nice to Have: modernize together with focus-filter maintenance.
+- typescript:S4325, src/scripts/uml-cards.ts:46, MINOR: redundant ToggleEvent assertion. Nice to Have: remove after checking inferred event typing.
+- css:S4666, src/styles/custom.css:67, MAJOR: repeated .sl-markdown-content .uml-card selector. Should Have: consolidate declarations while retaining fade and top-layer behavior.
+
+Severity labels are SonarQube classifications, not demonstrated runtime defects. No automatic fixes, pipeline changes or external publication performed.

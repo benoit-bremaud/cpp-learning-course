@@ -393,7 +393,7 @@ Tester seulement trois ne montre donc pas l’erreur. Deux révèle un écart de
 
 **À retenir :** lors de ce passage, `if` et `else` sélectionnent un seul de leurs deux blocs. Le programme continue ensuite après l’ensemble. Pour comprendre le chemin faux, relis la question exacte dont le booléen contient la réponse.
 
-Le [parcours](../../parcours/) situe les prochaines applications aux limites et au contrôle des valeurs. La pratique reste dans les dépôts à cloner et dans ton IDE.
+**Suite :** [contrôler un ajout avec une limite](../ajout-sous-limite/) utilise une condition pour autoriser ou refuser une modification du compteur. La pratique reste dans les dépôts à cloner et dans ton IDE.
 
 ## Références
 

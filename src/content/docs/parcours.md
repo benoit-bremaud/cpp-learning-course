@@ -57,7 +57,7 @@ Le [voyant guidé](../exemple-voyant/) est une **découverte facultative** relia
 
 **Acquis attendu :** expliquer le chemin suivi et distinguer une hypothèse sur les entrées d’un contrôle réellement effectué par le code.
 
-**Disponible :** [la première condition avec `if`](../notions/premiere-condition/), avec les chemins vrai et faux et la suite commune. La leçon [deux chemins avec `else`](../notions/premiere-alternative/) ajoute une action alternative et distingue une absence d’égalité d’une valeur inférieure. **À développer :** les applications de contrôle. Les exemples du voyant et du réservoir en offrent déjà une lecture guidée. C’est ici que sera développée la comparaison entre une limite constante et une limite effectivement contrôlée ; CPP-09 conserve pour l’instant l’avertissement simple.
+**Disponible :** [la première condition avec `if`](../notions/premiere-condition/), avec les chemins vrai et faux et la suite commune. La leçon [deux chemins avec `else`](../notions/premiere-alternative/) ajoute une action alternative et distingue une absence d’égalité d’une valeur inférieure. La leçon [contrôler un ajout avec une limite](../notions/ajout-sous-limite/) applique ensuite une condition à une modification, avec refus à égalité et distinction entre refus et réparation. **À développer :** les autres applications de contrôle. Les exemples du voyant et du réservoir en offrent déjà une lecture guidée. Le contrôle d’un ajout distingue maintenant la limite constante de la condition qui protège cette opération ; CPP-09 conserve son avertissement introductif.
 
 ## 5 — Organiser un traitement
 

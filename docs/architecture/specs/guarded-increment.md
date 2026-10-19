@@ -1,6 +1,6 @@
 # Guard one increment with an upper limit
 
-Status: refined after owner-requested deeper analysis; owner review still required before lesson implementation.
+Status: refined option A approved by the owner on 2026-10-19; implemented and verified locally; evidence is recorded in docs/validation.md.
 
 ## Need and contract
 
@@ -210,7 +210,7 @@ Five proposed programs tested over five supplied values each: 25 C++17 compilati
 
 ## Deeper review: refined recommendation
 
-This review supersedes the initial comparison table, not the candidate program behavior. No lesson implementation is approved by this review.
+This review supersedes the initial comparison table, not the candidate program behavior. The owner subsequently approved refined option A on 2026-10-19.
 
 ### Findings that change the teaching proposal
 

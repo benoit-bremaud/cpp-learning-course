@@ -54,7 +54,7 @@ The example explorer dialog and UML popover have different dismissal contracts: 
 
 ## Implemented teaching sequence and traceability
 
-The introductory sequence currently reaches explicit alternatives with else. Each row links to the existing approved conception; it does not grant approval for new snippets or future modules.
+The introductory sequence currently reaches one guarded increment after explicit alternatives with else. Each row links to the existing approved conception; it does not grant approval for new snippets or future modules.
 
 | Teaching stage | Specifications |
 | --- | --- |
@@ -65,17 +65,15 @@ The introductory sequence currently reaches explicit alternatives with else. Eac
 | Comparisons | [Strict comparison](architecture/specs/first-comparison.md), [inclusive comparison](architecture/specs/inclusive-comparison.md), [lower comparisons](architecture/specs/lower-comparisons.md), [equality and difference](architecture/specs/equality-comparisons.md) |
 | Conditional execution | [First if](architecture/specs/first-if.md): execute or skip a block, then continue. [First else](architecture/specs/first-else.md): choose one branch, then continue; a false equality includes both lower and higher values. |
 
-The first-if module contains four complete programs and three activity models. The first-else module contains five complete programs and four models; its incorrect message reuses the intended above-target model with an explicit discrepancy explanation. Both retain named booleans to isolate execution control from new condition syntax. Direct comparisons inside conditions, nested alternatives and applications that enforce limits require their next proportionate conception review.
+The first-if module contains four complete programs and three activity models. The first-else module contains five complete programs and four models; its incorrect message reuses the intended above-target model with an explicit discrepancy explanation. Both retain named booleans to isolate execution control from new condition syntax. Direct comparisons inside conditions and nested alternatives remain subject to their own conception review. The approved guarded-increment application is described below.
 
 ## Maintenance and deferred work
 
 For each approved teaching increment, update its specification status, authoritative UML and public snapshots together; synchronize navigation, prerequisite/next links and availability. Update this design map when the sequence or site behavior changes, and record actual verification in validation.md. A successful build or compile check is evidence of technical consistency, not learner mastery.
 
-Code-gap quizzes, scoring, personal strengths/gaps summaries and downloadable recap sheets remain deferred under the [charter](example-charter.md). Practice still belongs in separately cloned repositories. The next planned control applications, additional companion examples, publication and portfolio integration are not implemented by the latest if/else lessons.
+Code-gap quizzes, scoring, personal strengths/gaps summaries and downloadable recap sheets remain deferred under the [charter](example-charter.md). Practice still belongs in separately cloned repositories. Further control applications, additional companion examples, publication and portfolio integration remain pending.
 
 
-## Next conception awaiting approval
+## Latest implemented control application
 
-[Guarded increment](architecture/specs/guarded-increment.md) proposes one conditional count update, including refusal at equality, no repair of an already excessive count, and the stored pre-operation bool. It is a reviewed proposal with candidate programs and activity models, not an implemented lesson or a new owner-approved requirement.
-
-The guarded-increment proposal has been refined after deeper review: explicitly teach integer output at first use, recall stored-bool semantics, and place the already-excessive input after normal operation and the equality error. The single direct-condition alternative is now assessed independently of repeated attempts. Both remain pending owner selection; the existing site is unchanged.
+[Guarded increment](architecture/specs/guarded-increment.md) implements refined option A approved on 2026-10-19: a numeric-output bridge, a named pre-operation bool, one conditional count update and five cases ordered room/full/box/inclusive error/already excessive. Four authoritative models support the five cards. Refusal at equality preserves an initially valid upper bound; rejection does not repair an already excessive input. Repeated attempts and direct-condition variants remain outside this module. Verification is recorded in [validation evidence](validation.md).
