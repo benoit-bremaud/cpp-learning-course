@@ -1,0 +1,16 @@
+@startuml
+skinparam defaultFontSize 16
+skinparam shadowing false
+title act — Remplir une boîte jusqu'à sa capacité
+start
+:Initialiser box_capacity à 8;
+:Initialiser item_count à 5;
+while (item_count < box_capacity ?) is ([true])
+  :Calculer item_count + 1;
+  :Affecter le résultat à item_count;
+  :Écrire item_count\net un saut de ligne;
+endwhile ([false])
+:Écrire Loop finished\net un saut de ligne;
+:Renvoyer 0;
+stop
+@enduml

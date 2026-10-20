@@ -1,0 +1,18 @@
+@startuml
+skinparam defaultFontSize 16
+skinparam shadowing false
+title act — Erreur — aucune progression vers la limite
+start
+:Initialiser measurement_limit à 3;
+:Initialiser measurement_count à 1;
+while (measurement_count < measurement_limit ?) is ([true])
+  :Écrire measurement_count\net un saut de ligne;
+  note right
+    measurement_count reste à 1.
+    La prochaine décision reste vraie.
+  end note
+endwhile ([false])
+:Écrire Loop finished\net un saut de ligne;
+:Renvoyer 0;
+stop
+@enduml

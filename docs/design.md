@@ -78,6 +78,10 @@ Code-gap quizzes, scoring, personal strengths/gaps summaries and downloadable re
 
 [Guarded increment](architecture/specs/guarded-increment.md) implements refined option A approved on 2026-10-19: a numeric-output bridge, a named pre-operation bool, one conditional count update and five cases ordered room/full/box/inclusive error/already excessive. Four authoritative models support the five cards. Refusal at equality preserves an initially valid upper bound; rejection does not repair an already excessive input. Repeated attempts and direct-condition variants remain outside this module. Verification is recorded in [validation evidence](validation.md).
 
+## Next conception awaiting implementation approval
+
+[Repeated decision](architecture/specs/repeated-decision.md) records owner-approved MCDA option A for teaching a bounded `while` after the guarded single increment. Seven planned cases distinguish multiple, one and zero iterations, transfer the rule to a box, and expose missing progress and an inclusive-bound error. Activity diagrams are the only justified UML view. The direct condition is intentional because fresh evaluation is the new concept; no design pattern or helper abstraction is warranted. This conception does not authorize lesson implementation until the owner reviews the completed diagrams and specification.
+
 
 ## Shared UI maintenance — 2026-10-19
 

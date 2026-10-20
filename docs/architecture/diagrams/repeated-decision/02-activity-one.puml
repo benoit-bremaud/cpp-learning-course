@@ -1,0 +1,16 @@
+@startuml
+skinparam defaultFontSize 16
+skinparam shadowing false
+title act — Répéter jusqu'à la limite — un passage
+start
+:Initialiser measurement_limit à 3;
+:Initialiser measurement_count à 2;
+while (measurement_count < measurement_limit ?) is ([true])
+  :Calculer measurement_count + 1;
+  :Affecter le résultat à measurement_count;
+  :Écrire measurement_count\net un saut de ligne;
+endwhile ([false])
+:Écrire Loop finished\net un saut de ligne;
+:Renvoyer 0;
+stop
+@enduml
