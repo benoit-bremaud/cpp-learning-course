@@ -54,7 +54,7 @@ The example explorer dialog and UML popover have different dismissal contracts: 
 
 ## Implemented teaching sequence and traceability
 
-The introductory sequence currently reaches one guarded increment after explicit alternatives with else. Each row links to the existing approved conception; it does not grant approval for new snippets or future modules.
+The introductory sequence currently reaches a bounded repeated decision after one guarded increment and explicit alternatives with else. Each row links to the existing approved conception; it does not grant approval for new snippets or future modules.
 
 | Teaching stage | Specifications |
 | --- | --- |
@@ -64,6 +64,7 @@ The introductory sequence currently reaches one guarded increment after explicit
 | State updates and answers | [Counter update](architecture/specs/counter-update.md), [boolean values](architecture/specs/boolean-values.md) |
 | Comparisons | [Strict comparison](architecture/specs/first-comparison.md), [inclusive comparison](architecture/specs/inclusive-comparison.md), [lower comparisons](architecture/specs/lower-comparisons.md), [equality and difference](architecture/specs/equality-comparisons.md) |
 | Conditional execution | [First if](architecture/specs/first-if.md): execute or skip a block, then continue. [First else](architecture/specs/first-else.md): choose one branch, then continue; a false equality includes both lower and higher values. |
+| Bounded repetition | [Repeated decision](architecture/specs/repeated-decision.md): re-evaluate a strict condition, progress toward a limit and diagnose missing progress or an inclusive-bound error. |
 
 The first-if module contains four complete programs and three activity models. The first-else module contains five complete programs and four models; its incorrect message reuses the intended above-target model with an explicit discrepancy explanation. Both retain named booleans to isolate execution control from new condition syntax. Direct comparisons inside conditions and nested alternatives remain subject to their own conception review. The approved guarded-increment application is described below.
 
@@ -78,9 +79,9 @@ Code-gap quizzes, scoring, personal strengths/gaps summaries and downloadable re
 
 [Guarded increment](architecture/specs/guarded-increment.md) implements refined option A approved on 2026-10-19: a numeric-output bridge, a named pre-operation bool, one conditional count update and five cases ordered room/full/box/inclusive error/already excessive. Four authoritative models support the five cards. Refusal at equality preserves an initially valid upper bound; rejection does not repair an already excessive input. Repeated attempts and direct-condition variants remain outside this module. Verification is recorded in [validation evidence](validation.md).
 
-## Next conception awaiting implementation approval
+## Latest repeated-control application
 
-[Repeated decision](architecture/specs/repeated-decision.md) records owner-approved MCDA option A for teaching a bounded `while` after the guarded single increment. Seven planned cases distinguish multiple, one and zero iterations, transfer the rule to a box, and expose missing progress and an inclusive-bound error. Activity diagrams are the only justified UML view. The direct condition is intentional because fresh evaluation is the new concept; no design pattern or helper abstraction is warranted. This conception does not authorize lesson implementation until the owner reviews the completed diagrams and specification.
+[Repeated decision](architecture/specs/repeated-decision.md) implements owner-approved MCDA option A for teaching a bounded `while` after the guarded single increment. Seven cases distinguish multiple, one and zero iterations, transfer the rule to a box, and expose missing progress and an inclusive-bound error. Activity diagrams are the only justified UML view. The direct condition is intentional because fresh evaluation is the new concept; no design pattern or helper abstraction is warranted.
 
 
 ## Shared UI maintenance — 2026-10-19

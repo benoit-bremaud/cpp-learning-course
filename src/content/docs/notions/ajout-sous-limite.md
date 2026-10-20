@@ -391,7 +391,7 @@ Si le compteur initial est compris entre zéro et la limite, cette opération co
 
 **À retenir :** vérifier avant de modifier, choisir la comparaison pour l’opération demandée et distinguer la réponse passée de l’état actuel. Un ajout refusé ne répare pas automatiquement une donnée.
 
-Le [parcours](../../parcours/) situe la suite des applications de contrôle. La pratique reste dans les projets dédiés à cloner, dans ton IDE.
+**Suite :** [répéter une décision jusqu’à la limite](../repeter-jusqua-limite/) réévalue la condition avant chaque ajout éventuel. Le [parcours](../../parcours/) situe les étapes suivantes. La pratique reste dans les projets dédiés à cloner, dans ton IDE.
 
 ## Références
 

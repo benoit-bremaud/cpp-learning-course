@@ -57,7 +57,7 @@ Le [voyant guidé](../exemple-voyant/) est une **découverte facultative** relia
 
 **Acquis attendu :** expliquer le chemin suivi et distinguer une hypothèse sur les entrées d’un contrôle réellement effectué par le code.
 
-**Disponible :** [la première condition avec `if`](../notions/premiere-condition/), avec les chemins vrai et faux et la suite commune. La leçon [deux chemins avec `else`](../notions/premiere-alternative/) ajoute une action alternative et distingue une absence d’égalité d’une valeur inférieure. La leçon [contrôler un ajout avec une limite](../notions/ajout-sous-limite/) applique ensuite une condition à une modification, avec refus à égalité et distinction entre refus et réparation. **À développer :** les autres applications de contrôle. Les exemples du voyant et du réservoir en offrent déjà une lecture guidée. Le contrôle d’un ajout distingue maintenant la limite constante de la condition qui protège cette opération ; CPP-09 conserve son avertissement introductif.
+**Disponible :** [la première condition avec `if`](../notions/premiere-condition/), avec les chemins vrai et faux et la suite commune. La leçon [deux chemins avec `else`](../notions/premiere-alternative/) ajoute une action alternative et distingue une absence d’égalité d’une valeur inférieure. La leçon [contrôler un ajout avec une limite](../notions/ajout-sous-limite/) applique ensuite une condition à une modification, avec refus à égalité et distinction entre refus et réparation. La [première boucle bornée](../notions/repeter-jusqua-limite/) reprend cette décision dans l’étape 6. **À développer :** les autres applications de contrôle. Les exemples du voyant et du réservoir en offrent déjà une lecture guidée. Le contrôle d’un ajout distingue maintenant la limite constante de la condition qui protège cette opération ; CPP-09 conserve son avertissement introductif.
 
 ## 5 — Organiser un traitement
 
@@ -71,13 +71,13 @@ Le [voyant guidé](../exemple-voyant/) est une **découverte facultative** relia
 
 ## 6 — Répéter et observer
 
-**Prérequis :** conditions, mise à jour d’une valeur et fonctions simples.
+**Prérequis pour la première boucle :** conditions et mise à jour d’une valeur. Les fonctions simples deviennent nécessaires pour les traitements réutilisables et les étapes suivantes.
 
 **Ordre :** répétition avec une boucle → trace des valeurs → débogage pas à pas → état conservé entre traitements et durée de vie nécessaire à cet usage.
 
 **Acquis attendu :** suivre plusieurs itérations et distinguer valeur actuelle, historique et état persistant. Un programme qui ne termine pas sa boucle doit pouvoir être expliqué.
 
-**À développer.**
+**Disponible :** [répéter une décision jusqu’à la limite](../notions/repeter-jusqua-limite/) introduit `while`, les chemins à zéro, un ou plusieurs passages, la progression nécessaire à la terminaison et deux erreurs de frontière. **À développer :** débogage pas à pas, fonctions répétées et état conservé entre traitements.
 
 ## 7 — Relier la logique au matériel
 

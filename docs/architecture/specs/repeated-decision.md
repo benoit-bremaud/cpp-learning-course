@@ -1,6 +1,6 @@
 # Repeat a decision until a limit is reached
 
-Status: option A approved by the owner on 2026-10-20. Authoritative conception only; lesson implementation awaits a separate owner validation.
+Status: option A and the completed conception approved by the owner on 2026-10-20; implemented locally, with verification evidence recorded in `docs/validation.md` after the final checks.
 
 ## Need and learning boundary
 

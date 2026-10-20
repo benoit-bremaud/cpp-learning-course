@@ -64,7 +64,7 @@ try:
         # Compact cards work in both loaders and inside the existing modal.
         for width in [1440, 390, 320]:
             page = browser.new_page(viewport={"width": width, "height": 900})
-            for route, count in [("/notions/cpp-01/", 6), ("/notions/premieres-expressions/", 5), ("/notions/premieres-soustractions/", 4), ("/notions/premieres-multiplications/", 5), ("/notions/parentheses-calculs/", 5), ("/notions/premieres-divisions/", 4), ("/notions/mise-a-jour-compteur/", 6), ("/notions/premiers-booleens/", 6), ("/notions/premiere-comparaison/", 5), ("/notions/atteindre-ou-depasser/", 5), ("/notions/en-dessous-ou-au-maximum/", 5), ("/notions/egal-ou-different/", 5), ("/notions/premiere-condition/", 4), ("/notions/premiere-alternative/", 5), ("/notions/ajout-sous-limite/", 5), ("/notions/cpp-09/", 3), ("/exemple-voyant/", 4), ("/notions/programme-minimal/", 2), ("/notions/premiers-affichages/", 3)]:
+            for route, count in [("/notions/cpp-01/", 6), ("/notions/premieres-expressions/", 5), ("/notions/premieres-soustractions/", 4), ("/notions/premieres-multiplications/", 5), ("/notions/parentheses-calculs/", 5), ("/notions/premieres-divisions/", 4), ("/notions/mise-a-jour-compteur/", 6), ("/notions/premiers-booleens/", 6), ("/notions/premiere-comparaison/", 5), ("/notions/atteindre-ou-depasser/", 5), ("/notions/en-dessous-ou-au-maximum/", 5), ("/notions/egal-ou-different/", 5), ("/notions/premiere-condition/", 4), ("/notions/premiere-alternative/", 5), ("/notions/ajout-sous-limite/", 5), ("/notions/repeter-jusqua-limite/", 7), ("/notions/cpp-09/", 3), ("/exemple-voyant/", 4), ("/notions/programme-minimal/", 2), ("/notions/premiers-affichages/", 3)]:
                 page.goto(base + route)
                 assert page.locator(".uml-trigger").count() == count
                 assert page.locator("details.uml-panel > summary:visible").count() == 0
@@ -212,7 +212,7 @@ try:
         panel = page.locator("details.uml-panel").first
         panel.locator("summary").click()
         assert panel.locator("table").is_visible()
-        for route, count in [('/notions/mise-a-jour-compteur/', 6), ('/notions/premiers-booleens/', 6), ('/notions/premiere-comparaison/', 5), ('/notions/atteindre-ou-depasser/', 5), ('/notions/en-dessous-ou-au-maximum/', 5), ('/notions/egal-ou-different/', 5), ('/notions/premiere-condition/', 4), ('/notions/premiere-alternative/', 5), ('/notions/ajout-sous-limite/', 5)]:
+        for route, count in [('/notions/mise-a-jour-compteur/', 6), ('/notions/premiers-booleens/', 6), ('/notions/premiere-comparaison/', 5), ('/notions/atteindre-ou-depasser/', 5), ('/notions/en-dessous-ou-au-maximum/', 5), ('/notions/egal-ou-different/', 5), ('/notions/premiere-condition/', 4), ('/notions/premiere-alternative/', 5), ('/notions/ajout-sous-limite/', 5), ('/notions/repeter-jusqua-limite/', 7)]:
             page.goto(base + route)
             assert page.locator('details.uml-panel').count() == count
             for panel in page.locator('details.uml-panel').all():
@@ -343,6 +343,23 @@ try:
             if key == 'room':
                 card.evaluate('el => el.scrollTop = el.scrollHeight')
             page.screenshot(path=f'/tmp/guarded-{key}-mobile.png')
+            card.locator('.uml-close').click()
+        page.goto(base + '/notions/repeter-jusqua-limite/')
+        assert page.evaluate('document.documentElement.scrollWidth <= innerWidth + 1')
+        for key in ['missing-update', 'inclusive-error', 'multiple']:
+            trigger = page.locator(f'[data-uml="repeated-{key}"] .uml-trigger')
+            trigger.click()
+            card = page.locator('.uml-card:popover-open')
+            if key == 'missing-update':
+                expect(trigger).to_have_text('UML · écart')
+                expect(card).to_contain_text('Attendu : 1 → 2 → 3 puis sortie ; obtenu : 1 → 1 → 1… sans sortie.')
+            if key == 'inclusive-error':
+                expect(trigger).to_have_text('UML · écart')
+                expect(card).to_contain_text('Attendu : sortie à 3 ; obtenu : un passage supplémentaire jusqu’à 4.')
+            expect(card).to_have_css('opacity', '1')
+            if key == 'multiple':
+                card.evaluate('el => el.scrollTop = el.scrollHeight')
+            page.screenshot(path=f'/tmp/repeated-{key}-mobile.png')
             card.locator('.uml-close').click()
         browser.close()
     print('PASS: desktop/mobile/narrow reading, tabs, focus, closing, scroll, fixtures and no-JS fallback')

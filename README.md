@@ -19,7 +19,7 @@ Open the printed local address at `/`. Search is indexed during production build
 
 ## Scope and decisions
 
-Nineteen introductory theory pages, the proposed progression, the UML method, and local practice instructions are available. The threshold-indicator worked reference is published in the independent practice repository and linked from a guided course page. The 121-module planning catalog is published in the practice repository; its detailed pedagogical content still requires joint review.
+Twenty introductory theory pages, the proposed progression, the UML method, and local practice instructions are available. The sequence now reaches a first bounded `while` loop after guarded conditional updates. The threshold-indicator worked reference is published in the independent practice repository and linked from a guided course page. The 121-module planning catalog is published in the practice repository; its detailed pedagogical content still requires joint review.
 
 Teaching content and UI are French by explicit owner approval. Engineering documents and code are English. The owner approved a default export only in `astro.config.mjs`, as required by standard Astro configuration; other authored code uses named exports.
 
@@ -55,6 +55,8 @@ python3 tests/equality-comparisons.py
 python3 tests/first-if.py
 python3 tests/first-else.py
 python3 tests/guarded-increment.py
+python3 tests/repeated-decision.py
+python3 tests/repeated-decision-browser.py
 python3 tests/constant-limit.py
 python3 tests/program-output.py
 python3 tests/explorer-invalid-content.py
