@@ -20,11 +20,21 @@
 .sl-markdown-content p { max-width: 72ch; }
 .sl-markdown-content h2 { margin-top: 2.4rem; }
 .sl-markdown-content img { background: var(--course-paper); border-radius: .25rem; }
-.sl-markdown-content p:has(> img[src^='/diagrams/']) { max-width: none; }
+/* Keep the paper full width without enlarging the SVG's authored typography. */
+.sl-markdown-content p:has(> img[src^='/diagrams/']) {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: none;
+  padding: 1rem;
+  background: var(--course-paper);
+  border-radius: .25rem;
+}
 .sl-markdown-content img[src^='/diagrams/'] {
   display: block;
-  width: 100%;
+  width: auto;
+  max-width: 100%;
   height: auto;
+  margin-inline: auto;
 }
 
 /* Native disclosure keeps code and conception together, including inside dialogs. */

@@ -35,6 +35,10 @@ try:
             page.on('response', lambda response: errors.append(f'HTTP {response.status}: {response.url}') if response.status >= 400 else None)
             for route in ['/notions/cpp-01/', '/exemple-voyant/']:
                 page.goto(base + route)
+                # Regression: the paper spans the content, but the SVG must never be upscaled.
+                for diagram in page.locator('img[src^="/diagrams/"]:visible').all():
+                    assert diagram.evaluate('el => el.getBoundingClientRect().width <= el.naturalWidth + 1')
+                    assert diagram.evaluate('el => Math.abs(el.parentElement.getBoundingClientRect().width - el.parentElement.parentElement.getBoundingClientRect().width) < 2')
                 opener = page.locator('[data-open]')
                 opener.scroll_into_view_if_needed()
                 position = page.evaluate('scrollY')
@@ -70,7 +74,7 @@ try:
                         expect(card.locator('table')).to_be_visible()
                         expect(card).to_have_css('opacity', '1')
                         page.screenshot(path=str(artifacts / f'{engine}-{width}-card-{category}.png'))
-                        assert card.locator('img').evaluate('el => el.complete && el.naturalWidth > 0')
+                        assert card.locator('img').evaluate('el => el.complete && el.naturalWidth > 0 && el.getBoundingClientRect().width <= el.naturalWidth + 1')
                         assert card.evaluate('el => {const r=el.getBoundingClientRect(); return r.left >= 0 && r.right <= innerWidth+1 && r.bottom <= innerHeight+1 && el.scrollWidth <= el.clientWidth+1;}')
                         card.locator('.uml-close').focus()
                         page.keyboard.press('Escape')

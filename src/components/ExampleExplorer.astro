@@ -38,7 +38,7 @@ const uid = `examples-${randomUUID()}`;
       <div class="explorer-tabs" role="tablist" aria-label="Type d’exemples">
         {categories.map((category, index) => <button type="button" role="tab" id={`${uid}-tab-${category.id}`} aria-controls={`${uid}-panel-${category.id}`} aria-selected={index === 0 ? 'true' : 'false'} tabindex={index === 0 ? 0 : -1} data-category={category.id}>{category.label}</button>)}
       </div>
-      <div data-reading class="explorer-reading" tabindex="-1" aria-label="Lecture de l’exemple"></div>
+      <div data-reading class="explorer-reading" role="region" tabindex="-1" aria-label="Lecture de l’exemple"></div>
     </div>
   </dialog>
   <div data-fallback>

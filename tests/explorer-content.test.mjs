@@ -11,6 +11,7 @@ for (const [route, examples] of [
     for (const example of examples) assert.ok(html.includes(`data-example="${example}"`));
     assert.equal([...html.matchAll(/data-example="/g)].length, 2);
     assert.match(html, /data-fallback/);
+    assert.match(html, /data-reading[^>]*role="region"[^>]*aria-label="Lecture de l’exemple"/);
     assert.match(html, /data-pagefind-ignore/);
     assert.match(html, /data-open hidden/);
     const ids = [...html.matchAll(/\sid="([^"]+)"/g)].map(match => match[1]);

@@ -63,11 +63,50 @@ const axe = await readFile('node_modules/axe-core/axe.min.js', 'utf8');
 const accessibility = [];
 const collectedCoverage = [];
 async function checkAccessibility(label) {
-  await page.waitForFunction(() => [...document.querySelectorAll('.uml-card:popover-open')].every(el => getComputedStyle(el).opacity === '1'));
+  // Scan the settled top layer, including cards retained briefly for their exit fade.
+  await page.waitForFunction(() => [...document.querySelectorAll('.uml-card')].every(el =>
+    el.matches(':popover-open') ? getComputedStyle(el).opacity === '1' : getComputedStyle(el).display === 'none'));
   await page.addScriptTag({ content: axe });
   const result = await page.evaluate(async () => window.axe.run(document, { runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21aa', 'wcag22aa'] } }));
-  accessibility.push({ label, violations: result.violations, incomplete: result.incomplete.map(item => ({ id: item.id, impact: item.impact })) });
+  // axe's DOM stacking analysis can misorder a native top-layer popover and code beneath it.
+  // Resolve only that exact incomplete case, retaining the original diagnostics and checking
+  // the browser's real hit order plus the opaque computed colors with axe's contrast formula.
+  const contrastChecks = [];
+  const unresolved = [];
+  for (const item of result.incomplete.filter(item => ['serious', 'critical'].includes(item.impact))) {
+    if (item.id !== 'color-contrast' || item.nodes.some(node =>
+      !node.any.length || node.any.some(check => check.data?.messageKey !== 'bgOverlap'))) {
+      unresolved.push(item.id); continue;
+    }
+    for (const node of item.nodes) {
+      const measurement = await page.evaluate(selector => {
+        const el = document.querySelector(selector);
+        const card = el?.closest('.uml-card:popover-open');
+        if (!card || getComputedStyle(card).opacity !== '1') return null;
+        const foreground = new window.axe.commons.color.Color();
+        foreground.parseString(getComputedStyle(el).color);
+        let background;
+        for (let ancestor = el; ancestor; ancestor = ancestor.parentElement) {
+          const style = getComputedStyle(ancestor);
+          if (style.opacity !== '1' || style.backgroundImage !== 'none') return null;
+          const color = new window.axe.commons.color.Color();
+          color.parseString(style.backgroundColor);
+          if (color.alpha === 1) { background = color; break; }
+          if (color.alpha !== 0 || ancestor === card) return null;
+        }
+        if (!background) return null;
+        const rect = el.getBoundingClientRect();
+        const hit = document.elementFromPoint(rect.x + rect.width / 2, rect.y + rect.height / 2);
+        if (!hit || !el.contains(hit)) return null;
+        return { selector, ratio: window.axe.commons.color.getContrast(background, foreground), foreground: getComputedStyle(el).color, opaqueBackgroundVerified: true, topLayerHitVerified: true };
+      }, node.target[0]);
+      if (!measurement || measurement.ratio < 4.5) unresolved.push(node.target);
+      else contrastChecks.push(measurement);
+    }
+  }
+  accessibility.push({ label, violations: result.violations, incomplete: result.incomplete, contrastChecks });
   assert.deepEqual(result.violations.map(item => ({ id: item.id, nodes: item.nodes.map(node => node.target) })), [], label);
+  assert.deepEqual(unresolved, [], `${label}: unresolved serious accessibility checks`);
 }
 let completed = false;
 try {

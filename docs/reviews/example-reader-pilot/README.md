@@ -25,7 +25,7 @@ No new runtime package, database, content request, persistence, browser compiler
 - `python3 tests/example-code.py`: all ten actual C++ excerpts checked, including intermediate values, independent copy, valid-domain reservoir boundaries, strict/inclusive boundaries, rejected const assignment and a boundary mutation that must fail.
 - `python3 tests/explorer-invalid-content.py`: build rejects duplicate IDs, unknown category, missing prerequisite page, missing sheet, duplicate host reference and empty pilot category. Source mutations occur in a temporary copy.
 - `npm run test:browser`: source-mapped V8 line coverage of the two authored browser modules is 170/170 (100%); the runner enforces an 80% floor. This measures line execution, not branch completeness, teaching quality or Astro rendering coverage. Build-time collection configuration is exercised by integration probes and excluded from the browser coverage denominator.
-- Nine axe-core scans of course pages, dialogs and cards report no WCAG A/AA violations. Scans wait for the accepted fade to settle. Incomplete automated checks remain visible in `coverage/accessibility.json`; this does not establish complete accessibility conformance or replace assistive-technology testing.
+- Nine axe-core scans of course pages, dialogs and cards report no WCAG A/AA violations. Scans wait for the accepted fade to settle. Full incomplete-result diagnostics remain visible in `coverage/accessibility.json`. Review found and fixed an unnamed-role ARIA labeling issue by making the focusable reading container a named region. axe still reports a native-popover overlap uncertainty for two text nodes; the test resolves only this exact case by checking browser hit order, an opaque settled background and a contrast ratio of at least 4.5:1 using axe’s color calculation. Other serious/critical incomplete results fail the suite. This does not establish complete accessibility conformance or replace assistive-technology testing.
 - Public TypeScript documentation presence: 3/3 exports, 100%, counted using the TypeScript AST. Contract quality/freshness also inspected manually.
 - All ten local PlantUML sources render via `plantuml -tsvg -pipe`; seven copied snapshots are byte-identical to their authoritative local SVGs. The published strict indicator snapshot is unchanged.
 - Gitleaks: no leaks in all 35 reachable commits or in a temporary copy of the non-ignored working snapshot. No tracked `.env*` files. Manual source/diff inspection found no credentials or credential-bearing links.
@@ -47,7 +47,7 @@ WebKit 27.2 passes using the matching Ubuntu 26.04 Playwright build, Python Play
 | Narrow dark presentation | [320px card](narrow-dark-card.png) |
 | Text reflow | [200% text](text-enlargement.png) |
 
-Generated HTML sizes: CPP-01 51,968 bytes; guided indicator 69,194 bytes, uncompressed. These are local pilot measurements, not a measured growth comparison or a performance budget for wider rollout. Companion text is excluded from Pagefind indexing. No runtime teaching-content fetch occurs.
+Generated HTML sizes: CPP-01 51,982 bytes; guided indicator 69,208 bytes, uncompressed. These are local pilot measurements, not a measured growth comparison or a performance budget for wider rollout. Companion text is excluded from Pagefind indexing. No runtime teaching-content fetch occurs.
 
 ## Structured critical review
 
@@ -92,8 +92,14 @@ Review one material point at a time, classifying it as keep, improve, reject, de
 
 1. Remaining dependency advisory: **approved — A, defer migration with recorded reachability**, tracked in #7; weights validated.
 2. Teaching pilot: **approved — A, keep the current teaching pilot (475/500)**, including the reservoir invalid-input explanation; editorial weights validated. Alternative B, shorten that passage, scored 460/500. Criteria: accepted contract 35%, self-contained explanation 30%, single-difficulty focus 25%, change/verification cost 10%. No teaching content was changed.
-3. Reader and cards: mobile reading, diagram readability, focus/closing and opacity timing using the local preview.
+3. Reader and cards: **approved — A, keep current reader and card timing (480/500)**; weights validated. Alternative B, immediate cards without delay/fades, scored 410/500. Criteria: approved presentation 40%, keyboard/motion support 30%, response latency 20%, change/verification cost 10%. The owner then requested natural-size diagrams inside full-width white paper: implemented with no SVG upscaling, centered diagrams and shrinking only when space is limited. CPP-01 measures 227px diagram width in 756px desktop paper and 358px mobile paper; SVG and prose labels both use 16px at the normal page size. Motion timing remains approved.
 4. Evidence and limits: automated accessibility/coverage scope, source provenance, warnings and tracking-board choice.
 5. Final scope and PR authorization only after approved improvements and fresh checks.
 
 No push, PR, deployment, Copilot request or merge has occurred. Final PR-head checks, individual review-comment handling and post-merge cleanup remain future gates.
+
+## Owner-directed diagram sizing refinement
+
+The former `width: 100%` stretched small SVGs and enlarged their text. The paper container now fills the content width independently from the centered image. Images use their intrinsic width and a 100% maximum, so they shrink only when necessary. SVG bytes and authoritative source diagrams are unchanged. Regression checks cover natural-size bounds in both the lesson and open cards.
+
+[Desktop diagram sizing](desktop-diagram-sizing.png) · [Mobile diagram sizing](mobile-diagram-sizing.png)
