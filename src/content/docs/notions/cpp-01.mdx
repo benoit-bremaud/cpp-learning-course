@@ -1,0 +1,93 @@
+---
+title: "CPP-01 — Initialiser une variable"
+description: "Distinguer déclaration, initialisation et affectation."
+examples: [component-stock, independent-copy]
+---
+
+import ExampleExplorer from '../../../components/ExampleExplorer.astro';
+
+**Objectif :** distinguer la valeur initiale d’une variable et une modification ultérieure. **Prérequis :** [TOOL-01](../tool-01/). **État :** exemple de lecture et fiches complémentaires disponibles ; exercice autonome à venir.
+
+## Donner une première valeur
+
+Imagine un compteur du nombre de mesures reçues. Au début, aucune mesure n’a été reçue : sa valeur initiale est zéro. Après réception d’une mesure, le programme modifie cette valeur.
+
+L’**initialisation** établit la valeur de départ. L’**affectation** remplace ensuite la valeur d’une variable qui existe déjà. Ces deux opérations correspondent à des moments différents.
+
+## Prévoir puis suivre les deux valeurs
+
+Le compteur `measurement_count` représente le nombre de mesures reçues, pas leur température. Nous attendons **0** à sa création, puis **1** après l’enregistrement d’un nouveau total connu. Cet exemple ne lit pas de capteur.
+
+![Initialiser measurement_count à zéro, puis lui affecter un et terminer.](/diagrams/examples/measurement-count.svg)
+
+<a href="/diagrams/examples/measurement-count.svg" target="_blank" rel="noopener noreferrer">Ouvrir le diagramme en grand — nouvel onglet</a>
+
+Le point noir marque le début ; les deux rectangles arrondis représentent les actions dans leur ordre de lecture. Le symbole final termine l’activité.
+
+Ces deux instructions seraient placées dans une fonction, un traitement nommé. Ce fragment ne constitue pas un programme complet ; nous lisons seulement la création d’une donnée et sa modification.
+
+```cpp
+int measurement_count = 0;
+measurement_count = 1;
+```
+
+<details class="uml-panel" data-uml="measurement-primary">
+<summary>Voir la conception UML</summary>
+
+**Quelle action établit la première valeur, et quelle action la remplace ?**
+
+![Deux actions successives : initialiser measurement_count à zéro, puis lui affecter un.](/diagrams/examples/measurement-count.svg)
+
+<a href="/diagrams/examples/measurement-count.svg" target="_blank" rel="noopener noreferrer">Ouvrir le diagramme en grand — nouvel onglet</a>
+
+| Action UML | Instruction C++ | Valeur obtenue |
+| --- | --- | --- |
+| Créer le compteur avec sa valeur initiale | `int measurement_count = 0;` | 0 |
+| Remplacer sa valeur | `measurement_count = 1;` | 1 |
+
+Les deux actions sont distinctes. La seconde remplace un total connu ; elle n’attend pas une mesure et ne calcule pas une addition.
+
+</details>
+
+`int` précise ici que la variable contient un entier. `measurement_count` est son nom. La première ligne déclare la variable et l’initialise à zéro ; la seconde utilise le nom existant pour lui affecter un. Le signe `=` donne une valeur, sans poser une question d’égalité. Le point-virgule termine chaque instruction.
+
+| Point d’observation | Valeur du compteur |
+| --- | --- |
+| Après l’initialisation | 0 |
+| Après l’affectation | 1 |
+
+La valeur change dans le programme ; aucune configuration matérielle n’est réalisée par ces instructions.
+
+## Distinguer les mots
+
+| Terme | Rôle |
+| --- | --- |
+| Déclaration | Introduire un nom et préciser ses propriétés, notamment son type. |
+| Initialisation | Établir la valeur initiale lors de la création de la variable. |
+| Affectation | Donner une nouvelle valeur à une variable déjà créée. |
+
+Une même instruction peut déclarer une variable, la créer et l’initialiser. La distinction entre déclaration et définition sera approfondie avec l’organisation du programme en plusieurs fichiers.
+
+## Ne pas supposer une valeur zéro
+
+Un entier local ordinaire, créé à l’intérieur d’une fonction sans valeur initiale explicite, ne reçoit pas automatiquement zéro. Une fonction est une partie nommée du programme qui effectue un traitement ; elle sera étudiée dans CPP-07.
+
+Pour notre compteur, choisis explicitement zéro comme valeur de départ. Une valeur observée par hasard lors d’un essai ne constitue pas une garantie du langage.
+
+## Lien avec l’embarqué
+
+Initialiser le compteur des mesures ne lance pas le capteur. Cela établit seulement l’état de départ du programme. La configuration du matériel est une action distincte, qui apparaîtra dans l’étude de l’exercice concerné.
+
+**À retenir :** une valeur initiale doit être choisie selon le sens de la donnée. Zéro convient au nombre de mesures reçues au démarrage ; il ne remplace pas automatiquement une mesure absente.
+
+## Explorer d’autres situations
+
+Le stock reprend la même notion avec une valeur initiale différente. La copie ajoute une difficulté : suivre deux entiers indépendants. Leur pratique autonome n’est pas encore publiée.
+
+<ExampleExplorer ids={frontmatter.examples} />
+
+## Plus tard
+
+Les formes d’initialisation, les conversions numériques et les différentes durées de stockage seront étudiées dans leurs modules dédiés. Elles ne sont pas des prérequis pour cette introduction.
+
+**Suite :** [exprimer une valeur constante](../cpp-09/). Les exemples exécutables seront disponibles dans le dépôt de pratique avec leur étude UML validée.

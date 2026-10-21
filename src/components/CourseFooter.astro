@@ -1,0 +1,11 @@
+---
+import Footer from '@astrojs/starlight/components/Footer.astro';
+---
+<Footer />
+<script>
+  import { initializeExplorers } from '../scripts/example-explorer';
+  import { initializeUmlCards } from '../scripts/uml-cards';
+  initializeExplorers();
+  initializeUmlCards();
+  document.addEventListener('astro:page-load', initializeUmlCards);
+</script>

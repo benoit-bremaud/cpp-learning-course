@@ -21,3 +21,7 @@ The static build depends on authored content. Browser enhancements depend on gen
 The explorer uses a use-case view for the reader's goal, a state view for dialog navigation and a component view for build-time dependencies. Four activity views describe the pilot algorithms. A class diagram is not justified because the feature introduces no domain object model; a sequence diagram would duplicate the state transitions without clarifying a cross-component protocol.
 
 Implementation evidence belongs to the implementation pull request. These documents define accepted intent and do not claim that the components are already shipped.
+
+## Local implementation review
+
+The example reader and compact-card pilot has local implementation and verification evidence in [the pilot review](../reviews/example-reader-pilot/README.md). Owner acceptance, publication and the final PR-head merge gate remain separate steps; this link does not mark the conception or course as deployed.
