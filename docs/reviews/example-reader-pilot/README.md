@@ -94,9 +94,9 @@ Review one material point at a time, classifying it as keep, improve, reject, de
 2. Teaching pilot: **approved — A, keep the current teaching pilot (475/500)**, including the reservoir invalid-input explanation; editorial weights validated. Alternative B, shorten that passage, scored 460/500. Criteria: accepted contract 35%, self-contained explanation 30%, single-difficulty focus 25%, change/verification cost 10%. No teaching content was changed.
 3. Reader and cards: **approved — A, keep current reader and card timing (480/500)**; weights validated. Alternative B, immediate cards without delay/fades, scored 410/500. Criteria: approved presentation 40%, keyboard/motion support 30%, response latency 20%, change/verification cost 10%. The owner then requested natural-size diagrams inside full-width white paper: implemented with no SVG upscaling, centered diagrams and shrinking only when space is limited. CPP-01 measures 227px diagram width in 756px desktop paper and 358px mobile paper; SVG and prose labels both use 16px at the normal page size. Motion timing remains approved. The owner explicitly accepted the revised natural-size diagram presentation on 2026-10-21 after inspecting the local preview.
 4. Evidence and limits: **approved — A, accept scoped evidence and limits (450/500)**; weights validated. Alternative B, additional assistive-technology acceptance work before PR, scored 410/500. Criteria: planned pilot verification 35%, accessibility evidence depth 25%, proportionality 30%, effort/setup readiness 10%. No full WCAG, native browser zoom, screen-reader or teaching-effectiveness claim is made. Tracking-board assignment remains unavailable because no GitHub Project is associated with this repository.
-5. Final scope and PR authorization only after approved improvements and fresh checks.
+5. Final scope and publication: **approved** by the owner after refreshed checks on `404a1df`; [PR #9](https://github.com/benoit-bremaud/cpp-learning-course/pull/9) opened with the agreed assignee/labels and without Copilot.
 
-No push, PR, deployment, Copilot request or merge has occurred. Final PR-head checks, individual review-comment handling and post-merge cleanup remain future gates.
+The statements above record the local review phase. The owner subsequently authorized the push and PR creation. No deployment or Copilot request was made. Final PR-head checks, individual review-comment handling and post-merge cleanup remain required gates.
 
 ## Owner-directed diagram sizing refinement
 
@@ -107,3 +107,11 @@ The former `width: 100%` stretched small SVGs and enlarged their text. The paper
 ## Deferred typography request
 
 The owner requested a future cleanup replacing em dashes (U+2014) with simple ASCII hyphens (U+002D) in authored text and UI labels. This is tracked in [issue #8](https://github.com/benoit-bremaud/cpp-learning-course/issues/8); no bulk typography change is included in this pilot. Preserve programming syntax and authoritative diagram provenance when implementing it.
+
+## PR review follow-up
+
+CodeQL comment [4338693894](https://github.com/benoit-bremaud/cpp-learning-course/pull/9#discussion_r4338693894) flagged incomplete multi-character sanitization in the coverage server's script-tag regex. Verified: the line was a regex-based HTML rewrite, unsuitable as a general sanitizer. The input was trusted, local production output rather than attacker-provided HTML; classification: Should Have for harness robustness, with the CodeQL check blocking merge.
+
+The owner approved option A (485/500): substitute the two known build script-entry responses, serving production HTML unchanged. Alternative C, a new HTML parser, scored 390/500; B, retaining the regex with a dismissal, scored 355/500. Criteria: resolve flagged construct 30%, preserve test boundary 30%, proportionality 25%, implementation/verification cost 15%.
+
+The server now discovers exactly one artifact for each known entrypoint and substitutes only their JavaScript response bodies with source-mapped equivalents. Regression assertions compare served HTML bytes with the production files and verify that both entrypoint responses were exercised. No HTML sanitization, parser dependency or CodeQL suppression is introduced.

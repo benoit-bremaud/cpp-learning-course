@@ -1,6 +1,6 @@
 /** Run real-DOM interaction and WCAG checks, mapping V8 coverage to authored TypeScript. */
 import assert from 'node:assert/strict';
-import { readFile, mkdir, writeFile } from 'node:fs/promises';
+import { readFile, readdir, mkdir, writeFile } from 'node:fs/promises';
 import { createServer } from 'node:http';
 import path from 'node:path';
 import { chromium } from 'playwright';
@@ -19,6 +19,26 @@ for (const name of ['example-explorer', 'uml-cards']) {
   });
   scripts.set(`/__coverage/${name}.js`, { filename, source: outputText });
 }
+// Match real build artifacts, replacing only their response bodies. The HTML stays byte-identical.
+const entrypoints = new Map();
+const builtScripts = await readdir('dist/_astro');
+const replacements = [
+  ['ExampleExplorer', `import { initializeExplorers } from '/__coverage/example-explorer.js';
+    initializeExplorers();
+    document.addEventListener('astro:page-load', initializeExplorers);`],
+  ['CourseFooter', `import { initializeExplorers } from '/__coverage/example-explorer.js';
+    import { initializeUmlCards } from '/__coverage/uml-cards.js';
+    window.enhance = () => { initializeExplorers(); initializeUmlCards(); };
+    window.enhance();
+    document.addEventListener('astro:page-load', initializeUmlCards);`],
+];
+for (const [component, source] of replacements) {
+  const matches = builtScripts.filter(name =>
+    name.startsWith(`${component}.astro_astro_type_script_index_0_lang.`) && name.endsWith('.js'));
+  assert.equal(matches.length, 1, `Expected one built ${component} entrypoint`);
+  entrypoints.set(`/_astro/${matches[0]}`, source);
+}
+const substitutedEntrypoints = new Set();
 const server = createServer(async (request, response) => {
   try {
     const url = new URL(request.url, 'http://localhost');
@@ -28,21 +48,17 @@ const server = createServer(async (request, response) => {
       response.end(instrumented.source);
       return;
     }
+    const replacement = entrypoints.get(url.pathname);
+    if (replacement) {
+      substitutedEntrypoints.add(url.pathname);
+      response.setHeader('Content-Type', 'text/javascript');
+      response.end(replacement);
+      return;
+    }
     let filename = path.resolve('dist', `.${decodeURIComponent(url.pathname)}`);
     assert.ok(filename.startsWith(path.resolve('dist') + path.sep));
     if (url.pathname.endsWith('/')) filename += '/index.html';
-    let content = await readFile(filename);
-    if (filename.endsWith('.html')) {
-      // Production HTML and styles stay real; only our two module entrypoints are replaced
-      // with the same TypeScript transpiled with source maps for line measurement.
-      content = content.toString().replace(/<script[^>]+src="[^"]*(?:CourseFooter|ExampleExplorer)[^"]*"[^>]*><\/script>/g, '');
-      content += `<script type="module">
-        import { initializeExplorers } from '/__coverage/example-explorer.js';
-        import { initializeUmlCards } from '/__coverage/uml-cards.js';
-        window.enhance = () => { initializeExplorers(); initializeUmlCards(); };
-        window.enhance();
-      </script>`;
-    }
+    const content = await readFile(filename);
     const mime = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css', '.svg': 'image/svg+xml', '.wasm': 'application/wasm' };
     response.setHeader('Content-Type', mime[path.extname(filename)] || 'application/octet-stream');
     response.end(content);
@@ -111,6 +127,8 @@ async function checkAccessibility(label) {
 let completed = false;
 try {
   for (const route of ['/notions/cpp-01/', '/exemple-voyant/']) {
+    const servedHtml = Buffer.from(await (await fetch(base + route)).arrayBuffer());
+    assert.deepEqual(servedHtml, await readFile(path.join('dist', route, 'index.html')), 'Coverage server must preserve production HTML');
     await page.goto(base + route);
     await page.waitForSelector('[data-ready]');
     await checkAccessibility(`${route}: course`);
@@ -217,6 +235,7 @@ try {
     delete HTMLElement.prototype.showPopover;
     window.enhance(); HTMLElement.prototype.showPopover = showPopover;
   });
+  assert.equal(substitutedEntrypoints.size, 2, 'Both real entrypoint responses must be substituted');
   assert.deepEqual(failures, []);
   completed = true;
 } finally {
