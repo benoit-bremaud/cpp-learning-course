@@ -1,0 +1,9 @@
+@startuml
+title uc — Explore contextual examples
+left to right direction
+actor Reader
+rectangle "Course reader" {
+ usecase "Explore a complementary example\nand return to the course" as UC1
+}
+Reader --> UC1
+@enduml

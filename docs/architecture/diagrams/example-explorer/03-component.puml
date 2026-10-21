@@ -1,0 +1,18 @@
+@startuml
+title cmp — Static example reader dependencies
+component "Pilot host pages" as Pages
+component "ExampleExplorer" as Explorer
+component "Examples collection" as Content
+artifact "Markdown sheets" as Sheets
+component "Static build" as Build
+artifact "Course HTML and bundled interaction" as Output
+Pages ..> Explorer : uses
+Explorer ..> Content : reads selected IDs at build time
+Content ..> Sheets : validates and loads
+Build ..> Pages : renders
+Build --> Output : produces
+note bottom of Output
+No database or runtime content request.
+Practice repository is an external reference.
+end note
+@enduml

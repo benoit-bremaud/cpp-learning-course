@@ -31,3 +31,13 @@ The owner approved situation-led teaching: concrete need, one question, progress
 ## Published example integration
 
 The guided threshold page references practice revision `6f6da4c440153c0709e35b823a3ef5b85c6b6b68`. `public/diagrams/threshold-indicator.svg` is an unchanged snapshot of its generated SVG; the authoritative PlantUML stays exclusively in the practice repository. The code excerpt is verbatim from that revision. Update diagram, excerpt and pinned links together if the teaching reference changes. Practice is still exclusively local.
+
+## Accepted contextual-example architecture
+
+The [site-wide example charter](example-charter.md) defines the editorial contract for worked examples, complementary contexts and UML-to-code traceability. The first implementation increment is limited to the variables introduction and guided indicator pilots described in the [example explorer specification](architecture/specs/example-explorer.md).
+
+Example sheets use validated Markdown metadata and are rendered during the static build. Host pages select sheets by stable identifiers. The browser receives authored HTML and a progressive enhancement for navigation; it does not fetch teaching content at runtime. Without JavaScript, the same sheets remain readable inline. This keeps content independent from presentation and avoids a database, API, persistence layer or client application.
+
+Each fenced teaching C++ example is followed in source by an authored UML disclosure as specified in [inline UML panels](architecture/specs/inline-uml-panels.md). Supported browsers progressively enhance that disclosure into the compact, dismissible card defined in [compact UML cards](architecture/specs/uml-cards.md). Essential conception stays visible in the main lesson, and the disclosure remains the no-script fallback.
+
+No GoF pattern, class hierarchy or service layer is justified. Static content, one shared Astro component and small browser functions provide the required separation. Implementation, pilot content and verification remain separate reviewed work; this section records architecture and does not claim those features are shipped.
