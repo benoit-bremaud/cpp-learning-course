@@ -1,8 +1,8 @@
-# 06-activity-reservoir — Example explorer
+# Activity diagram — Detect a low reservoir level
 
 ## Context
 
-Accepted conception for a separately reviewed implementation. Source: [example explorer specification](../../specs/example-explorer.md). Requirements: [site-wide charter](../../../example-charter.md).
+This activity models a strict lower-bound decision for an already valid percentage. Source: [example explorer specification](../../specs/example-explorer.md) § P3. Requirements: [site-wide charter](../../../example-charter.md).
 
 ## Diagram
 
@@ -10,4 +10,6 @@ Accepted conception for a separately reviewed implementation. Source: [example e
 
 ## Notes
 
-The specification defines contracts, boundaries and verification. Implementation must follow the approved specification. Teaching activity sources are accepted design inputs; final practice source ownership follows the specification. No class or sequence view is added: the simple reading flow and scalar examples do not require those views.
+- Levels 0 and 19 return `true`; 20, 21 and 100 return `false`.
+- Equality belongs to the false branch because the requirement is strictly below 20.
+- Measurement acquisition and invalid-input handling remain outside this function.

@@ -1,8 +1,8 @@
-# 05-activity-copy — Example explorer
+# Activity diagram — Copy an integer value
 
 ## Context
 
-Accepted conception for a separately reviewed implementation. Source: [example explorer specification](../../specs/example-explorer.md). Requirements: [site-wide charter](../../../example-charter.md).
+This activity shows that two ordinary integer variables become independent after value copying. Source: [example explorer specification](../../specs/example-explorer.md) § P2. Requirements: [site-wide charter](../../../example-charter.md).
 
 ## Diagram
 
@@ -10,4 +10,6 @@ Accepted conception for a separately reviewed implementation. Source: [example e
 
 ## Notes
 
-The specification defines contracts, boundaries and verification. Implementation must follow the approved specification. Teaching activity sources are accepted design inputs; final practice source ownership follows the specification. No class or sequence view is added: the simple reading flow and scalar examples do not require those views.
+- `snapshot_count` receives the current value 12, not a live connection to `component_count`.
+- The final values are 11 for `component_count` and 12 for `snapshot_count`.
+- References, pointers and shared state remain outside this example.

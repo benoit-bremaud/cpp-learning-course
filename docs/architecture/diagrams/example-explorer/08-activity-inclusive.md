@@ -1,8 +1,8 @@
-# 08-activity-inclusive — Example explorer
+# Activity diagram — Apply an inclusive temperature threshold
 
 ## Context
 
-Accepted conception for a separately reviewed implementation. Source: [example explorer specification](../../specs/example-explorer.md). Requirements: [site-wide charter](../../../example-charter.md).
+This activity models the separate rule that the indicator activates at or above 30 °C. Source: [example explorer specification](../../specs/example-explorer.md) § P4. Requirements: [site-wide charter](../../../example-charter.md).
 
 ## Diagram
 
@@ -10,4 +10,6 @@ Accepted conception for a separately reviewed implementation. Source: [example e
 
 ## Notes
 
-The specification defines contracts, boundaries and verification. Implementation must follow the approved specification. Teaching activity sources are accepted design inputs; final practice source ownership follows the specification. No class or sequence view is added: the simple reading flow and scalar examples do not require those views.
+- Temperature 29 returns `false`; 30 and 31 return `true`.
+- Equality is included because the requirement differs from the strict reference.
+- Tests must follow the stated rule instead of preferring one comparison operator.

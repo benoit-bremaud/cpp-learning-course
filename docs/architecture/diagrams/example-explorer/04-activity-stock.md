@@ -1,8 +1,8 @@
-# 04-activity-stock — Example explorer
+# Activity diagram — Replace a component count
 
 ## Context
 
-Accepted conception for a separately reviewed implementation. Source: [example explorer specification](../../specs/example-explorer.md). Requirements: [site-wide charter](../../../example-charter.md).
+This activity isolates assignment as replacement of an integer value. Source: [example explorer specification](../../specs/example-explorer.md) § P1. Requirements: [site-wide charter](../../../example-charter.md).
 
 ## Diagram
 
@@ -10,4 +10,6 @@ Accepted conception for a separately reviewed implementation. Source: [example e
 
 ## Notes
 
-The specification defines contracts, boundaries and verification. Implementation must follow the approved specification. Teaching activity sources are accepted design inputs; final practice source ownership follows the specification. No class or sequence view is added: the simple reading flow and scalar examples do not require those views.
+- `component_count` is observable as 12 after initialization and 11 after assignment.
+- The second action does not imply subtraction or a sensor reading.
+- Arithmetic, input and hardware behavior remain outside this example.

@@ -1,8 +1,8 @@
-# 01-use-case — Example explorer
+# Use-case diagram — Example explorer
 
 ## Context
 
-Accepted conception for a separately reviewed implementation. Source: [example explorer specification](../../specs/example-explorer.md). Requirements: [site-wide charter](../../../example-charter.md).
+This view identifies the reader's observable goal without describing UI components. Source: [example explorer specification](../../specs/example-explorer.md). Requirements: [site-wide charter](../../../example-charter.md).
 
 ## Diagram
 
@@ -10,4 +10,6 @@ Accepted conception for a separately reviewed implementation. Source: [example e
 
 ## Notes
 
-The specification defines contracts, boundaries and verification. Implementation must follow the approved specification. Teaching activity sources are accepted design inputs; final practice source ownership follows the specification. No class or sequence view is added: the simple reading flow and scalar examples do not require those views.
+- The reader initiates the goal and returns to the same course position.
+- Tabs, selectors and dialogs are realization details defined in the specification, not separate user goals.
+- Implementation remains a separately reviewed change.

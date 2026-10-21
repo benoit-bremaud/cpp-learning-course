@@ -1,8 +1,8 @@
-# 07-activity-strict — Example explorer
+# Activity diagram — Apply a strict temperature threshold
 
 ## Context
 
-Accepted conception for a separately reviewed implementation. Source: [example explorer specification](../../specs/example-explorer.md). Requirements: [site-wide charter](../../../example-charter.md).
+This activity preserves the published rule that the indicator activates only above 30 °C. Source: [example explorer specification](../../specs/example-explorer.md) § P4. Requirements: [site-wide charter](../../../example-charter.md).
 
 ## Diagram
 
@@ -10,4 +10,6 @@ Accepted conception for a separately reviewed implementation. Source: [example e
 
 ## Notes
 
-The specification defines contracts, boundaries and verification. Implementation must follow the approved specification. Teaching activity sources are accepted design inputs; final practice source ownership follows the specification. No class or sequence view is added: the simple reading flow and scalar examples do not require those views.
+- Temperatures 29 and 30 return `false`; 31 returns `true`.
+- Equality is excluded intentionally by the strict requirement.
+- This activity remains distinct from the inclusive alternative.

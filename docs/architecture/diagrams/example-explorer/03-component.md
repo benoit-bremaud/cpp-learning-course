@@ -1,8 +1,8 @@
-# 03-component — Example explorer
+# Component diagram — Static example explorer
 
 ## Context
 
-Accepted conception for a separately reviewed implementation. Source: [example explorer specification](../../specs/example-explorer.md). Requirements: [site-wide charter](../../../example-charter.md).
+This view makes build-time ownership and dependency direction explicit. Source: [example explorer specification](../../specs/example-explorer.md). Requirements: [site-wide charter](../../../example-charter.md).
 
 ## Diagram
 
@@ -10,4 +10,6 @@ Accepted conception for a separately reviewed implementation. Source: [example e
 
 ## Notes
 
-The specification defines contracts, boundaries and verification. Implementation must follow the approved specification. Teaching activity sources are accepted design inputs; final practice source ownership follows the specification. No class or sequence view is added: the simple reading flow and scalar examples do not require those views.
+- Markdown sheets own teaching content; the collection validates metadata.
+- Host pages select content and the shared component renders it during the static build.
+- Generated pages make no runtime teaching-content request and require no database.
