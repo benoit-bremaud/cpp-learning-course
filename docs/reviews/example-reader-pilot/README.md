@@ -91,7 +91,7 @@ The 125-point lead uses explicit judgments, not measured probabilities. Increasi
 Review one material point at a time, classifying it as keep, improve, reject, defer or investigate:
 
 1. Remaining dependency advisory: **approved — A, defer migration with recorded reachability**, tracked in #7; weights validated.
-2. Teaching pilot: objective/prerequisite clarity, primary example sufficiency, four sheet contributions and strict/inclusive distinction.
+2. Teaching pilot: **approved — A, keep the current teaching pilot (475/500)**, including the reservoir invalid-input explanation; editorial weights validated. Alternative B, shorten that passage, scored 460/500. Criteria: accepted contract 35%, self-contained explanation 30%, single-difficulty focus 25%, change/verification cost 10%. No teaching content was changed.
 3. Reader and cards: mobile reading, diagram readability, focus/closing and opacity timing using the local preview.
 4. Evidence and limits: automated accessibility/coverage scope, source provenance, warnings and tracking-board choice.
 5. Final scope and PR authorization only after approved improvements and fresh checks.
