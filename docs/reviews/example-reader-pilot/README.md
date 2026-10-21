@@ -60,7 +60,7 @@ Generated HTML sizes: CPP-01 51,968 bytes; guided indicator 69,194 bytes, uncomp
 - Review tool limit: CodeRabbit CLI is absent; no CodeRabbit review ran. Structured self-review, compiler checks, SonarQube, C++ tests and browser verification are the local review evidence. Copilot was not requested.
 - Tracking limit: the course repository has no associated GitHub Project. No unrelated board or new project was selected automatically.
 
-## Pending decision: remaining dependency advisory
+## Approved decision: remaining dependency advisory
 
 `npm audit` reports ten moderate dependency entries caused by one underlying `postcss-selector-parser` advisory through `postcss-nested` 6.2.0 and Expressive Code/Starlight. It reports no high or critical entries after compatible lockfile updates. These moderate entries existed before the new testing tools.
 
@@ -72,7 +72,7 @@ Options:
 - B: investigate and validate a scoped major PostCSS dependency override in this brick.
 - C: follow npm's forced Starlight downgrade to 0.21.5, requiring a separate compatibility review.
 
-MCDA judgments (0–5; weights total 100; maximum 500), proposed for owner validation:
+MCDA judgments (0–5; weights total 100; maximum 500), validated by the owner on 2026-10-21:
 
 | Criterion | Weight | A | B | C |
 | --- | --- | --- | --- | --- |
@@ -84,13 +84,13 @@ MCDA judgments (0–5; weights total 100; maximum 500), proposed for owner valid
 
 A vs B: both address the actual exposure decision; A preserves the verified dependency contracts, while B removes the audit entry at the cost of a new cross-major compatibility obligation. B is the fallback if untrusted selector processing is introduced or the owner requires a zero-advisory audit. Activating B requires a dependency design change and rerunning the full suite; it is not a guaranteed drop-in replacement. A vs C: the downgrade changes substantially more than the affected parser.
 
-The 125-point lead uses explicit judgments, not measured probabilities. Increasing the exposure criterion from 25 to 50 and proportionally reducing the others still leaves A ahead (450 vs 400). If audit-count elimination becomes a separate requirement, it must be added as a criterion and the matrix recomputed. Owner validation remains pending; no security exception is silently accepted.
+The 125-point lead uses explicit judgments, not measured probabilities. Increasing the exposure criterion from 25 to 50 and proportionally reducing the others still leaves A ahead (450 vs 400). If audit-count elimination becomes a separate requirement, it must be added as a criterion and the matrix recomputed. The owner validated the weights and selected A on 2026-10-21. The deferred migration is tracked in [issue #7](https://github.com/benoit-bremaud/cpp-learning-course/issues/7). No override or audit suppression was introduced.
 
 ## Owner questionnaire and next gate
 
 Review one material point at a time, classifying it as keep, improve, reject, defer or investigate:
 
-1. Remaining dependency advisory: validate the proposed weights and A/B/C decision, or request deeper analysis.
+1. Remaining dependency advisory: **approved — A, defer migration with recorded reachability**, tracked in #7; weights validated.
 2. Teaching pilot: objective/prerequisite clarity, primary example sufficiency, four sheet contributions and strict/inclusive distinction.
 3. Reader and cards: mobile reading, diagram readability, focus/closing and opacity timing using the local preview.
 4. Evidence and limits: automated accessibility/coverage scope, source provenance, warnings and tracking-board choice.
