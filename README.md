@@ -15,7 +15,7 @@ npm run preview
 
 `npm test` builds fresh production output before running the reader checks. A failed build stops the command before tests run. Use `npm run build` when only a build is needed.
 
-Open the printed local address under `/cpp-learning-course/`. Search is indexed during production builds.
+Open the printed local address. Search is indexed during production builds.
 
 ## Scope and decisions
 
@@ -23,7 +23,7 @@ Three introductory theory pages, the proposed progression, the UML method, and l
 
 Teaching content and UI are French by explicit owner approval. Engineering documents and code are English. The owner approved a default export only in `astro.config.mjs`, as required by standard Astro configuration; other authored code uses named exports.
 
-No deployment or CI workflow is configured. The owner performs pushes. The configured project base anticipates GitHub Pages; it is not a claim of a deployed website.
+Validation and security workflows run on pull requests and `main`. They do not deploy the site. GitHub Pages is explicitly excluded. `cpp.benoitbremaud.fr` is the accepted future Cloudflare target, but the course remains local until a separate deployment change is reviewed and approved.
 
 ## Architecture
 

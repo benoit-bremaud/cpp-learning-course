@@ -3,8 +3,8 @@ import starlight from '@astrojs/starlight';
 
 // The owner approved a default export exclusively for this framework configuration.
 export default defineConfig({
-  site: 'https://benoit-bremaud.github.io',
-  base: '/cpp-learning-course',
+  site: 'https://cpp.benoitbremaud.fr',
+  base: '/',
   integrations: [starlight({
     title: 'C++ embarqué',
     description: 'Comprendre, concevoir en UML, puis programmer sur microcontrôleur.',

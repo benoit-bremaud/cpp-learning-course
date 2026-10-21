@@ -4,7 +4,7 @@ import { readFile, readdir, stat } from 'node:fs/promises';
 import path from 'node:path';
 
 const root = path.resolve('dist');
-const base = '/cpp-learning-course/';
+const base = '/';
 async function pages(dir) {
   const entries = await readdir(dir, { withFileTypes: true });
   const groups = await Promise.all(entries.map(async (entry) => {
@@ -46,4 +46,10 @@ test('production search index exists and practice availability is explicit', asy
   assert.match(example, /6f6da4c440153c0709e35b823a3ef5b85c6b6b68/);
   await stat(path.join(root, 'diagrams/threshold-indicator.svg'));
   assert.match(practice, /https:\/\/github.com\/benoit-bremaud\/cpp-learning/);
+});
+
+test('production metadata targets the accepted Cloudflare domain without a Pages base', async () => {
+  const home = await readFile(path.join(root, 'index.html'), 'utf8');
+  assert.match(home, /<link rel="canonical" href="https:\/\/cpp\.benoitbremaud\.fr\/"\s*\/?>/);
+  assert.doesNotMatch(home, /benoit-bremaud\.github\.io|\/cpp-learning-course\//);
 });
