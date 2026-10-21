@@ -21,7 +21,7 @@ Nous utilisons des températures entières. La fonction détermine ce que le voy
 
 ## Lire l’étude UML
 
-![Activité UML : recevoir la température, comparer au seuil de 30, renvoyer vrai ou faux.](/cpp-learning-course/diagrams/threshold-indicator.svg)
+![Activité UML : recevoir la température, comparer au seuil de 30, renvoyer vrai ou faux.](/diagrams/threshold-indicator.svg)
 
 Le point noir indique le début. Chaque rectangle arrondi représente une action. Le losange pose une question ; les indications `true` et `false` identifient les deux réponses possibles. Chaque chemin se termine au symbole de fin.
 
