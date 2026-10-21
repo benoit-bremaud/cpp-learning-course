@@ -1,0 +1,10 @@
+@startuml
+skinparam defaultFontSize 16
+skinparam shadowing false
+title act — Copier une valeur
+start
+:Initialiser\ncomponent_count à 12;
+:Initialiser snapshot_count\navec la valeur de\ncomponent_count;
+:Affecter 11 à\ncomponent_count;
+stop
+@enduml

@@ -1,0 +1,15 @@
+@startuml
+skinparam defaultFontSize 16
+skinparam shadowing false
+title act — Niveau bas
+start
+:Recevoir\nlevel_percent;
+:Initialiser\nthreshold_percent à 20;
+if (level_percent\n< threshold_percent ?) then (true)
+ :Renvoyer true;
+ stop
+else (false)
+ :Renvoyer false;
+ stop
+endif
+@enduml

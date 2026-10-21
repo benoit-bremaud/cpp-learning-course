@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="175px" preserveAspectRatio="none" style="width:426px;height:175px;" version="1.1" viewBox="0 0 426 175" width="426px" zoomAndPan="magnify"><defs><filter height="300%" id="f1ps0ejeba7sv8" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><text fill="#000000" font-family="sans-serif" font-size="18" lengthAdjust="spacingAndGlyphs" textLength="295" x="77" y="19.2419">uc — Explore contextual examples</text><!--MD5=[f851eaf66d6429c031c87b1026f4e2f6]
+cluster Course reader--><rect fill="#FFFFFF" filter="url(#f1ps0ejeba7sv8)" height="116" style="stroke: #000000; stroke-width: 1.5;" width="317" x="98" y="48.5158"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="97" x="208" y="65.4818">Course reader</text><ellipse cx="256.7312" cy="117.4621" fill="#FEFECE" filter="url(#f1ps0ejeba7sv8)" rx="142.7312" ry="30.9462" style="stroke: #A80036; stroke-width: 1.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="232" x="140.7312" y="117.4495">Explore a complementary example</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="165" x="174.2312" y="136.5174">and return to the course</text><!--MD5=[f36b681f1568c85a1e29d94d0cd105c7]
+entity Reader--><ellipse cx="30" cy="85.0158" fill="#FEFECE" filter="url(#f1ps0ejeba7sv8)" rx="8" ry="8" style="stroke: #A80036; stroke-width: 1.5;"/><path d="M30,93.0158 L30,120.0158 M17,101.0158 L43,101.0158 M30,120.0158 L17,135.0158 M30,120.0158 L43,135.0158 " fill="none" filter="url(#f1ps0ejeba7sv8)" style="stroke: #A80036; stroke-width: 1.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacingAndGlyphs" textLength="48" x="6" y="155.4818">Reader</text><!--MD5=[d056c3363978873455d6c3e2eea880a0]
+link Reader to UC1--><path d="M54.18,117.5158 C68.29,117.5158 87.63,117.5158 108.78,117.5158 " fill="none" id="Reader-&gt;UC1" style="stroke: #A80036; stroke-width: 1.0;"/><polygon fill="#A80036" points="113.9,117.5158,104.9,113.5158,108.9,117.5158,104.9,121.5158,113.9,117.5158" style="stroke: #A80036; stroke-width: 1.0;"/><!--MD5=[c2bc00185bef79e3ec907c0884701739]
+@startuml
+title uc — Explore contextual examples
+left to right direction
+actor Reader
+rectangle "Course reader" {
+ usecase "Explore a complementary example\nand return to the course" as UC1
+}
+Reader - -> UC1
+@enduml
+
+PlantUML version 1.2020.02(Sun Mar 01 11:22:07 CET 2020)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Java Version: 21.0.12.1+1-1-24.04.4-Ubuntu
+Operating System: Linux
+Default Encoding: UTF-8
+Language: en
+Country: null
+--></g></svg>
