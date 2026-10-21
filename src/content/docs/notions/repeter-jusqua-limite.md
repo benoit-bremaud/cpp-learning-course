@@ -64,8 +64,8 @@ int main() {
 | --- | --- |
 | Préparer | Limite à 3, compteur à 1. |
 | Décider | `measurement_count < measurement_limit` est évalué avant chaque passage. |
-| Progresser | L’affectation ajoute exactement 1 au compteur. |
-| Observer | La nouvelle valeur est écrite, puis un saut de ligne. |
+| Avancer | L’affectation ajoute exactement 1 au compteur. |
+| Afficher | La nouvelle valeur est écrite, puis un saut de ligne. |
 | Revenir | La flèche retourne vers la décision avec la valeur modifiée. |
 | Sortir | À 3, la condition est fausse ; `Loop finished` est écrit. |
 | Terminer | `return 0;` renvoie le statut 0 sans l’afficher. |
@@ -128,7 +128,7 @@ int main() {
 | --- | --- |
 | Préparer | Limite à 3, compteur à 2. |
 | Première décision | `2 < 3` donne `true`. |
-| Progresser | Le compteur passe de 2 à 3 et la valeur 3 est écrite. |
+| Avancer | Le compteur passe de 2 à 3 et la valeur 3 est écrite. |
 | Décision suivante | `3 < 3` donne `false`. |
 | Sortir et terminer | Le message commun est écrit, puis le statut 0 est renvoyé. |
 
@@ -296,8 +296,8 @@ int main() {
 | --- | --- |
 | Préparer | Capacité à 8, nombre d’éléments à 5. |
 | Décider | `item_count < box_capacity` est recalculé avant chaque passage. |
-| Progresser | `item_count` passe successivement à 6, 7 et 8. |
-| Observer | Chaque nouvelle valeur est écrite. |
+| Avancer | `item_count` passe successivement à 6, 7 et 8. |
+| Afficher | Chaque nouvelle valeur est écrite. |
 | Sortir | `8 < 8` est faux ; le message commun est écrit. |
 | Terminer | Le programme renvoie le statut 0. |
 
@@ -344,7 +344,7 @@ int main() {
 | Préparer | Limite à 3, compteur à 1. |
 | Décider | `1 < 3` donne `true`. |
 | Avancer | Écart : aucune affectation ne rapproche le compteur de la limite. |
-| Observer | La valeur 1 est écrite à chaque passage. |
+| Afficher | La valeur 1 est écrite à chaque passage. |
 | Revenir | La décision reçoit encore exactement les mêmes opérandes. |
 | Sortir | Impossible pour cette exécution : la condition ne devient jamais fausse. |
 

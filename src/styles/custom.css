@@ -20,6 +20,12 @@
 .sl-markdown-content p { max-width: 72ch; }
 .sl-markdown-content h2 { margin-top: 2.4rem; }
 .sl-markdown-content img { background: var(--course-paper); border-radius: .25rem; }
+.sl-markdown-content p:has(> img[src^='/diagrams/']) { max-width: none; }
+.sl-markdown-content img[src^='/diagrams/'] {
+  display: block;
+  width: 100%;
+  height: auto;
+}
 
 /* Native disclosure keeps code and conception together, including inside dialogs. */
 .sl-markdown-content details.uml-panel {

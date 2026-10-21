@@ -121,6 +121,19 @@ try:
         assert popup.url.endswith("/diagrams/examples/constant-limit.svg")
         popup.close()
         page.close()
+        # UML diagrams fill the same content width as the surrounding lesson or card.
+        page = browser.new_page(viewport={"width": 1440, "height": 1000})
+        page.goto(base + "/notions/repeter-jusqua-limite/")
+        inline_diagram = page.locator('main img[src^="/diagrams/"]').first
+        assert inline_diagram.evaluate(
+            "el => Math.abs(el.getBoundingClientRect().width - el.parentElement.getBoundingClientRect().width) < 1"
+        )
+        page.locator('[data-uml="repeated-multiple"] .uml-trigger').click()
+        card_diagram = page.locator('.uml-card:popover-open img[src^="/diagrams/"]')
+        assert card_diagram.evaluate(
+            "el => Math.abs(el.getBoundingClientRect().width - el.parentElement.getBoundingClientRect().width) < 1"
+        )
+        page.close()
         # Opening must fade at a stable position, including repeated openings.
         for width in [1440, 320]:
             page = browser.new_page(viewport={"width": width, "height": 900})
