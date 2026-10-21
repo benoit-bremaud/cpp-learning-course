@@ -9,6 +9,7 @@ export default defineConfig({
     title: 'C++ embarqué',
     description: 'Comprendre, concevoir en UML, puis programmer sur microcontrôleur.',
     locales: { root: { label: 'Français', lang: 'fr' } },
+    components: { Footer: './src/components/CourseFooter.astro' },
     customCss: ['./src/styles/custom.css'],
     sidebar: [
       { label: 'Bienvenue', slug: '' },

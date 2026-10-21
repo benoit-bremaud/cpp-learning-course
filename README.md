@@ -28,3 +28,19 @@ Validation and security workflows run on pull requests and `main`. They do not d
 ## Architecture
 
 Markdown content and Starlight produce static HTML and a local Pagefind search index. No backend, browser compiler, user account, or exercise execution is present. See `docs/design.md` for the accepted implementation boundaries.
+
+## Example reader validation
+
+The local pilot uses CPP-01 and the guided indicator, with four Markdown companion sheets. Runtime enhancements have no additional production dependency. The charter and accepted architecture remain authoritative; owner review and publication are separate gates.
+
+After `npm test`, run `npm run test:browser` with Google Chrome installed, or set `COURSE_BROWSER_EXECUTABLE` to a Chromium executable. This command checks WCAG rules with axe-core, exercises real DOM interactions, writes source-mapped TypeScript coverage to `coverage/`, and enforces an 80% line floor. Its server replaces only the two interaction entrypoints with source-mapped equivalents; the independent production smoke suite exercises the actual bundles.
+
+```sh
+python3 tests/example-code.py
+python3 tests/explorer-invalid-content.py
+python3 tests/explorer-browser.py
+```
+
+The C++ checks require g++ with C++17 support. The invalid-content suite uses an isolated source/dependency copy. The production browser suite requires Python Playwright (tested with 1.64.0); choose other engines using `COURSE_BROWSER_ENGINE` and `COURSE_BROWSER_EXECUTABLE`. It covers desktop/mobile reading, keyboard/focus, cards, reloading, text enlargement and fallbacks; screenshots go to `COURSE_QA_DIR` or a temporary directory. Install the matching browser and its host libraries before using Firefox or WebKit.
+
+See [pilot review evidence](docs/reviews/example-reader-pilot/README.md) for measured results, provenance, remaining limits and the owner questionnaire.

@@ -1,7 +1,10 @@
 ---
 title: "Exemple guidé — Le voyant à 30 °C"
 description: "Lire le besoin, suivre le diagramme UML et comprendre la fonction C++ avant la pratique locale."
+examples: [reservoir-level, inclusive-threshold]
 ---
+
+import ExampleExplorer from '../../components/ExampleExplorer.astro';
 
 **Objectif :** relier une règle, son diagramme UML et le code qui la réalise. **État :** exemple de référence complet, validé et publié. Il fonctionne sur ordinateur ; aucune carte n’est nécessaire.
 
@@ -22,6 +25,8 @@ Nous utilisons des températures entières. La fonction détermine ce que le voy
 ## Lire l’étude UML
 
 ![Activité UML : recevoir la température, comparer au seuil de 30, renvoyer vrai ou faux.](/diagrams/threshold-indicator.svg)
+
+<a href="/diagrams/threshold-indicator.svg" target="_blank" rel="noopener noreferrer">Ouvrir le diagramme en grand — nouvel onglet</a>
 
 Le point noir indique le début. Chaque rectangle arrondi représente une action. Le losange pose une question ; les indications `true` et `false` identifient les deux réponses possibles. Chaque chemin se termine au symbole de fin.
 
@@ -50,6 +55,26 @@ bool should_light_indicator(int temperature_celsius) noexcept {
     }
 }
 ```
+
+<details class="uml-panel" data-uml="guided-indicator">
+<summary>Voir la conception UML</summary>
+
+**Comment retrouver la règle du voyant dans ses deux chemins ?**
+
+![Diagramme de référence : Comment retrouver la règle du voyant dans ses deux chemins ?](/diagrams/threshold-indicator.svg)
+
+<a href="/diagrams/threshold-indicator.svg" target="_blank" rel="noopener noreferrer">Ouvrir le diagramme en grand — nouvel onglet</a>
+
+| Élément de conception | Correspondance C++ |
+| --- | --- |
+| Recevoir la température | `int temperature_celsius` |
+| Fixer le seuil | `const int threshold_celsius = 30;` |
+| Comparer strictement | `temperature_celsius > threshold_celsius` |
+| Terminer avec la décision | `return true; / return false;` |
+
+Pour 31 °C, le chemin true termine avec vrai. Pour 30 °C, le chemin false termine avec faux. Les deux branches restent explicites dans le code publié pour faciliter cette lecture.
+
+</details>
 
 Une **fonction** est un traitement nommé auquel on peut fournir une donnée et qui peut renvoyer un résultat. Ici, `should_light_indicator` signifie « le voyant devrait-il s’allumer ? ».
 
@@ -91,3 +116,10 @@ Les liens de cette page désignent la révision validée `6f6da4c440153c0709e35b
 ## À retenir
 
 Le besoin fixe la frontière à 30 °C, l’UML décrit les deux chemins, le code les réalise et les tests vérifient leurs résultats. Une compilation réussie ne remplace aucune de ces étapes.
+
+
+## Explorer d’autres situations
+
+Le réservoir transpose la décision dans un autre contexte. La fiche sur les seuils ajoute une difficulté : distinguer deux contrats à leur frontière.
+
+<ExampleExplorer ids={frontmatter.examples} />
