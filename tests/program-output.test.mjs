@@ -48,7 +48,8 @@ test('built first-program lesson preserves two primary models and exact card map
   const html = await readFile('dist/notions/programme-minimal/index.html', 'utf8');
   assert.equal([...html.matchAll(/<details class="uml-panel"/g)].length, 2);
   assert.equal([...html.matchAll(/<pre[\s>]/g)].length, 3, 'Two C++ programs and one text output');
-  assert.doesNotMatch(html, /data-explorer|premiers-affichages/);
+  assert.doesNotMatch(html, /data-explorer/);
+  assert.match(html, /href="[^"]*premiers-affichages\//);
   for (const key of ['ready', 'silent']) {
     const panel = html.match(new RegExp(`<details class="uml-panel" data-uml="program-${key}">([\\s\\S]*?)</details>`));
     assert.ok(panel, key);

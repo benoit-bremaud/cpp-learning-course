@@ -29,3 +29,7 @@ The example reader and compact-card pilot has local implementation and verificat
 ## First complete program
 
 The [approved first-program specification](specs/program-skeleton.md) defines exactly two hosted C++17 programs. The [Ready activity](diagrams/program-skeleton/ready.md) models output then successful return; the [Silent activity](diagrams/program-skeleton/silent.md) models successful return without output. Both reuse the existing reader and compact UML cards. Ordered output remains outside this brick.
+
+## Ordered output
+
+The [approved ordered-output specification](specs/ordered-output.md) adds three complete programs on one page. The [ordered](diagrams/ordered-output/01-activity-ordered.md), [reversed](diagrams/ordered-output/02-activity-reversed.md) and [joined](diagrams/ordered-output/03-activity-joined.md) activities distinguish statement order from message meaning and source layout from output newlines. They reuse the approved reader without runtime changes.

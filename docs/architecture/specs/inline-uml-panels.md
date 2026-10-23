@@ -53,3 +53,15 @@ The [approved first-program conception](program-skeleton.md) adds two mappings t
 | program-silent | program-skeleton/silent.svg | Return 0 with no write action; stdout is empty |
 
 Each source marker identifies one complete program, followed immediately by its uniquely keyed disclosure. Includes, signature, braces and activity initial/final nodes are not extra output statements. No companion sheets or explorer categories are added.
+
+## Ordered-output mapping extension
+
+The [approved ordered-output conception](ordered-output.md) adds three mappings, for fifteen teaching C++ fences in total. Each primary activity precedes its complete program; its uniquely keyed disclosure immediately follows the code. No companion sheets or explorer are added.
+
+| Excerpt | Reviewed diagram | Specific panel explanation |
+| --- | --- | --- |
+| program-ordered | ordered-output/01-activity-ordered.svg | Write Program started and a newline, then Program finished and a newline, then return 0 |
+| program-reversed | ordered-output/02-activity-reversed.svg | Same two literals in reversed statement order, then return 0 |
+| program-joined | ordered-output/03-activity-joined.svg | Write System plus a significant space, then ready and a newline, then return 0 |
+
+Each mapping has three action rows. Structural syntax and activity initial/final nodes are not extra statements.

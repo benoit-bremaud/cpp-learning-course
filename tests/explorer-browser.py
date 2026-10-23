@@ -25,6 +25,7 @@ base = f'http://127.0.0.1:{server.server_port}'
 engine = os.environ.get('COURSE_BROWSER_ENGINE', 'chromium')
 executable = os.environ.get('COURSE_BROWSER_EXECUTABLE', '/usr/bin/google-chrome')
 errors = []
+diagram_measurements = []
 try:
     with sync_playwright() as pw:
         browser = getattr(pw, engine).launch(executable_path=executable)
@@ -35,6 +36,7 @@ try:
             page.on('response', lambda response: errors.append(f'HTTP {response.status}: {response.url}') if response.status >= 400 else None)
             for route in ['/notions/cpp-01/', '/exemple-voyant/']:
                 page.goto(base + route)
+                page.locator('#starlight__search .pagefind-ui').wait_for(state='attached')
                 # Regression: the paper spans the content, but the SVG must never be upscaled.
                 for diagram in page.locator('img[src^="/diagrams/"]:visible').all():
                     assert diagram.evaluate('el => el.getBoundingClientRect().width <= el.naturalWidth + 1')
@@ -99,66 +101,83 @@ try:
                 page.locator('[data-close]').click()
                 # Reset must survive a real reload, without persistence.
                 page.reload()
+                page.locator('#starlight__search .pagefind-ui').wait_for(state='attached')
                 page.locator('[data-open]').click()
                 expect(page.get_by_role('tab').first).to_have_attribute('aria-selected', 'true')
                 page.locator('[data-close]').click()
                 assert page.evaluate('document.documentElement.scrollWidth <= innerWidth+1')
-            # The first complete program reuses cards without requiring an explorer.
-            page.goto(base + '/notions/programme-minimal/')
-            expect(page.locator('.uml-trigger')).to_have_count(2)
-            expect(page.locator('[data-explorer]')).to_have_count(0)
-            for diagram in page.locator('img[src^="/diagrams/"]:visible').all():
-                assert diagram.evaluate('''el => {
-                  const r = el.getBoundingClientRect(); const p = el.parentElement;
-                  const paper = p.getBoundingClientRect(); const content = p.parentElement.getBoundingClientRect();
-                  return el.complete && el.naturalWidth > 0 && r.width <= el.naturalWidth + 1
-                    && Math.abs(paper.width - content.width) < 2
-                    && Math.abs((r.left + r.right) / 2 - (paper.left + paper.right) / 2) < 2
-                    && getComputedStyle(p).backgroundColor === 'rgb(255, 255, 255)';
-                }''')
-            page.locator('img[src$="program-ready.svg"]').first.scroll_into_view_if_needed()
-            page.screenshot(path=str(artifacts / f'{engine}-{width}-first-program.png'))
-            for index, key in enumerate(['Enter', 'Space']):
-                trigger = page.locator('.uml-trigger').nth(index)
-                trigger.focus()
-                trigger.press(key)
-                card = page.locator('.uml-card:popover-open')
-                expect(card).to_have_count(1)
+            # Both complete-program lessons reuse cards without requiring an explorer.
+            for slug, rows in [('programme-minimal', [3, 2]), ('premiers-affichages', [4, 4, 4])]:
+                page.goto(base + f'/notions/{slug}/')
+                page.locator('#starlight__search .pagefind-ui').wait_for(state='attached')
+                expect(page.locator('.uml-trigger')).to_have_count(len(rows))
+                expect(page.locator('[data-explorer]')).to_have_count(0)
+                for diagram in page.locator('img[src^="/diagrams/"]:visible').all():
+                    assert diagram.evaluate('''el => {
+                      const r = el.getBoundingClientRect(); const p = el.parentElement;
+                      const paper = p.getBoundingClientRect(); const content = p.parentElement.getBoundingClientRect();
+                      return el.complete && el.naturalWidth > 0 && r.width <= el.naturalWidth + 1
+                        && Math.abs(paper.width - content.width) < 2
+                        && Math.abs((r.left + r.right) / 2 - (paper.left + paper.right) / 2) < 2
+                        && getComputedStyle(p).backgroundColor === 'rgb(255, 255, 255)';
+                    }''')
+                    if slug == 'premiers-affichages':
+                        diagram_measurements.append(diagram.evaluate('''el => ({
+                          viewport: innerWidth, source: el.getAttribute('src'), naturalWidth: el.naturalWidth,
+                          renderedWidth: el.getBoundingClientRect().width,
+                          paperWidth: el.parentElement.getBoundingClientRect().width,
+                          bodyFontSize: getComputedStyle(el.closest('.sl-markdown-content')).fontSize
+                        })'''))
+                page.locator('img[src^="/diagrams/"]:visible').first.scroll_into_view_if_needed()
+                page.screenshot(path=str(artifacts / f'{engine}-{width}-{slug}.png'))
+                for index, key in enumerate(['Enter', 'Space', 'Enter'][:len(rows)]):
+                    trigger = page.locator('.uml-trigger').nth(index)
+                    trigger.focus()
+                    trigger.press(key)
+                    card = page.locator('.uml-card:popover-open')
+                    expect(card).to_have_count(1)
+                    expect(card).to_have_css('opacity', '1')
+                    expect(card.locator('table')).to_be_visible()
+                    assert card.locator('tr').count() == rows[index]
+                    if slug == 'premiers-affichages':
+                        expected_key = ['ordered', 'reversed', 'joined'][index]
+                        expect(card.locator('img')).to_have_attribute('src', f'/diagrams/examples/program-{expected_key}.svg')
+                        expect(card).to_have_css('transition-delay', '0.08s, 0s, 0s')
+                        expect(card).to_have_css('transition-duration', '0.16s, 0.16s, 0.16s')
+                    assert card.evaluate('el => {const r=el.getBoundingClientRect(); return r.left >= 0 && r.right <= innerWidth+1 && r.bottom <= innerHeight+1 && el.scrollWidth <= el.clientWidth+1;}')
+                    page.screenshot(path=str(artifacts / f'{engine}-{width}-{slug}-card-{index}.png'))
+                    card.locator('.uml-close').press('Escape')
+                    expect(page.locator('.uml-card:popover-open')).to_have_count(0)
+                    assert trigger.evaluate('el => el === document.activeElement')
+                    trigger.click()
+                    page.locator('.uml-card:popover-open .uml-close').click()
+                    assert trigger.evaluate('el => el === document.activeElement')
+                    trigger.click()
+                    page.mouse.click(1, 1)
+                    expect(page.locator('.uml-card:popover-open')).to_have_count(0)
+                page.locator('.uml-trigger').first.focus()
+                page.keyboard.press('Enter')
+                page.locator('.uml-trigger').last.focus()
+                page.keyboard.press('Enter')
+                expect(page.locator('.uml-card:popover-open')).to_have_count(1)
+                page.keyboard.press('Escape')
+                page.emulate_media(reduced_motion='reduce', color_scheme='dark')
+                page.locator('html').evaluate("el => el.dataset.theme = 'dark'")
+                page.locator('.uml-trigger').first.click()
+                card = page.locator('.uml-card:popover-open[data-positioned]')
                 expect(card).to_have_css('opacity', '1')
-                expect(card.locator('table')).to_be_visible()
-                assert card.locator('tr').count() == (3 if index == 0 else 2)
-                assert card.evaluate('el => {const r=el.getBoundingClientRect(); return r.left >= 0 && r.right <= innerWidth+1 && r.bottom <= innerHeight+1 && el.scrollWidth <= el.clientWidth+1;}')
-                page.screenshot(path=str(artifacts / f'{engine}-{width}-first-program-card-{index}.png'))
-                card.locator('.uml-close').press('Escape')
+                expect(card).to_have_css('transition-duration', '0s')
+                page.screenshot(path=str(artifacts / f'{engine}-{width}-{slug}-dark.png'))
+                page.keyboard.press('Escape')
+                page.reload()
+                page.locator('#starlight__search .pagefind-ui').wait_for(state='attached')
+                expect(page.locator('.uml-trigger')).to_have_count(len(rows))
                 expect(page.locator('.uml-card:popover-open')).to_have_count(0)
-                assert trigger.evaluate('el => el === document.activeElement')
-                trigger.click()
-                page.locator('.uml-card:popover-open .uml-close').click()
-                assert trigger.evaluate('el => el === document.activeElement')
-                trigger.click()
-                page.mouse.click(1, 1)
-                expect(page.locator('.uml-card:popover-open')).to_have_count(0)
-            page.locator('.uml-trigger').first.focus()
-            page.keyboard.press('Enter')
-            page.locator('.uml-trigger').last.focus()
-            page.keyboard.press('Enter')
-            expect(page.locator('.uml-card:popover-open')).to_have_count(1)
-            page.keyboard.press('Escape')
-            page.emulate_media(reduced_motion='reduce', color_scheme='dark')
-            page.locator('html').evaluate("el => el.dataset.theme = 'dark'")
-            page.locator('.uml-trigger').first.click()
-            card = page.locator('.uml-card:popover-open[data-positioned]')
-            expect(card).to_have_css('opacity', '1')
-            expect(card).to_have_css('transition-duration', '0s')
-            page.screenshot(path=str(artifacts / f'{engine}-{width}-first-program-dark.png'))
-            page.keyboard.press('Escape')
-            page.reload()
-            expect(page.locator('.uml-trigger')).to_have_count(2)
-            expect(page.locator('.uml-card:popover-open')).to_have_count(0)
-            assert page.evaluate('document.documentElement.scrollWidth <= innerWidth+1')
-            page.emulate_media(reduced_motion='no-preference', color_scheme='light')
+                assert page.evaluate('document.documentElement.scrollWidth <= innerWidth+1')
+                page.emulate_media(reduced_motion='no-preference', color_scheme='light')
             # Plain Markdown uses the same enhancement as MDX and rendered sheets.
             page.goto(base + '/notions/cpp-09/')
+            page.locator('#starlight__search .pagefind-ui').wait_for(state='attached')
             for index in range(3):
                 trigger = page.locator('.uml-trigger').nth(index)
                 trigger.focus()
@@ -177,23 +196,58 @@ try:
         # Text enlargement is a reflow probe, distinct from native browser page zoom.
         page = browser.new_page(viewport={'width': 720, 'height': 900})
         page.goto(base + '/notions/cpp-01/')
+        page.locator('#starlight__search .pagefind-ui').wait_for(state='attached')
         page.locator('html').evaluate("el => el.style.fontSize = '200%'")
         page.locator('[data-open]').click()
         assert page.locator('[data-reading]').evaluate('el => el.scrollWidth <= el.clientWidth+1')
         expect(page.locator('[data-close]')).to_be_in_viewport()
         page.screenshot(path=str(artifacts / f'{engine}-text-200-percent.png'))
+        for slug in ['programme-minimal', 'premiers-affichages']:
+            page.goto(base + f'/notions/{slug}/')
+            page.locator('#starlight__search .pagefind-ui').wait_for(state='attached')
+            page.locator('html').evaluate("el => el.style.fontSize = '200%'")
+            page.locator('.uml-trigger').first.click()
+            card = page.locator('.uml-card:popover-open')
+            expect(card).to_have_css('opacity', '1')
+            assert card.evaluate('el => el.scrollWidth <= el.clientWidth+1')
+            expect(card.locator('.uml-close')).to_be_in_viewport()
+            page.screenshot(path=str(artifacts / f'{engine}-{slug}-text-200-percent.png'))
+        page.close()
+        # Await Pagefind initialization before navigating away: Firefox reports an aborted
+        # idle module import if a test leaves a freshly loaded route too quickly.
+        # Exercise the published path, the production search index and original SVG links.
+        page = browser.new_page()
+        page.on('pageerror', lambda error: errors.append(str(error)))
+        page.on('console', lambda message: errors.append(message.text) if message.type == 'error' else None)
+        page.on('response', lambda response: errors.append(f'HTTP {response.status}: {response.url}') if response.status >= 400 else None)
         page.goto(base + '/notions/programme-minimal/')
-        page.locator('html').evaluate("el => el.style.fontSize = '200%'")
-        page.locator('.uml-trigger').first.click()
-        card = page.locator('.uml-card:popover-open')
-        expect(card).to_have_css('opacity', '1')
-        assert card.evaluate('el => el.scrollWidth <= el.clientWidth+1')
-        expect(card.locator('.uml-close')).to_be_in_viewport()
-        page.screenshot(path=str(artifacts / f'{engine}-first-program-text-200-percent.png'))
+        page.locator('#starlight__search .pagefind-ui').wait_for(state='attached')
+        page.locator('.pagination-links a[rel="next"]').click()
+        expect(page).to_have_url(base + '/notions/premiers-affichages/')
+        page.locator('#starlight__search .pagefind-ui').wait_for(state='attached')
+        expect(page.locator('.pagination-links a[rel="prev"]')).to_have_attribute('href', '/notions/programme-minimal/')
+        page.locator('.pagination-links a[rel="next"]').click()
+        expect(page).to_have_url(base + '/notions/cpp-01/')
+        page.locator('#starlight__search .pagefind-ui').wait_for(state='attached')
+        page.get_by_role('button', name='Rechercher', exact=True).click()
+        search = page.get_by_role('dialog', name='Rechercher', exact=True)
+        search.get_by_placeholder('Rechercher', exact=True).fill('Suivre plusieurs affichages')
+        search.locator('a.pagefind-ui__result-link[href="/notions/premiers-affichages/"]').click()
+        expect(page).to_have_url(base + '/notions/premiers-affichages/')
+        page.locator('#starlight__search .pagefind-ui').wait_for(state='attached')
+        for key in ['ordered', 'reversed', 'joined']:
+            with page.expect_popup() as opened:
+                page.locator(f'a[href="/diagrams/examples/program-{key}.svg"]').first.click()
+            original = opened.value
+            original.wait_for_load_state()
+            assert original.url == base + f'/diagrams/examples/program-{key}.svg'
+            expect(original.locator('svg')).to_be_visible()
+            original.close()
         page.close()
         # A fixture extends the real generated DOM, keeping teaching additions unpublished.
         page = browser.new_page()
         page.goto(base + '/notions/cpp-01/')
+        page.locator('#starlight__search .pagefind-ui').wait_for(state='attached')
         page.evaluate('''() => {
           const original = document.querySelector('[data-explorer]');
           const fixture = original.cloneNode(true);
@@ -245,6 +299,7 @@ try:
             page = context.new_page()
             page.goto(base + '/notions/cpp-01/')
             if javascript:
+                page.locator('#starlight__search .pagefind-ui').wait_for(state='attached')
                 page.locator('[data-open]').click()
                 panel = page.locator('dialog details.uml-panel:visible').first
             else:
@@ -254,17 +309,22 @@ try:
             panel.locator('summary').click()
             expect(panel.locator('table')).to_be_visible()
             expect(panel.locator('img')).to_be_visible()
-            page.goto(base + '/notions/programme-minimal/')
-            expect(page.locator('.uml-trigger')).to_have_count(0)
-            for panel in page.locator('details.uml-panel').all():
-                panel.locator('summary').click()
-                expect(panel.locator('table')).to_be_visible()
-                expect(panel.locator('img')).to_be_visible()
-            expect(page.locator('details.uml-panel')).to_have_count(2)
+            for slug, count in [('programme-minimal', 2), ('premiers-affichages', 3)]:
+                page.goto(base + f'/notions/{slug}/')
+                if javascript:
+                    page.locator('#starlight__search .pagefind-ui').wait_for(state='attached')
+                expect(page.locator('.uml-trigger')).to_have_count(0)
+                for panel in page.locator('details.uml-panel').all():
+                    panel.locator('summary').click()
+                    expect(panel.locator('table')).to_be_visible()
+                    expect(panel.locator('img')).to_be_visible()
+                expect(page.locator('details.uml-panel')).to_have_count(count)
             context.close()
         browser.close()
     assert not errors, errors
-    (artifacts / f'{engine}-result.json').write_text(json.dumps({'engine': engine, 'errors': errors, 'status': 'passed'}, indent=2))
+    (artifacts / f'{engine}-result.json').write_text(json.dumps({
+        'engine': engine, 'errors': errors, 'status': 'passed', 'diagrams': diagram_measurements,
+    }, indent=2))
     print(f'PASS {engine}: dialog, cards, keyboard, focus, mobile, theme, fixtures, reload and fallbacks')
 finally:
     server.shutdown()
