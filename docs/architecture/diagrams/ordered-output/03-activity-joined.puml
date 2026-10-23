@@ -1,0 +1,10 @@
+@startuml
+skinparam defaultFontSize 16
+skinparam shadowing false
+title act - Deux écritures, une ligne
+start
+:Écrire System\nsuivi d’un espace;
+:Écrire ready\npuis un saut de ligne;
+:Renvoyer 0;
+stop
+@enduml
