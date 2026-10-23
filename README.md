@@ -13,13 +13,13 @@ npm test
 npm run preview
 ```
 
-`npm test` builds fresh production output before running the reader checks. A failed build stops the command before tests run. Use `npm run build` when only a build is needed.
+`npm test` builds fresh production output before running the reader checks and compiling the two complete lesson programs as C++17. These checks require Python 3 and g++. A failed build stops the command before tests run. Use `npm run build` when only a build is needed.
 
 Open the printed local address. Search is indexed during production builds.
 
 ## Scope and decisions
 
-Three introductory theory pages, the proposed progression, the UML method, and local practice instructions are available. The threshold-indicator worked reference is published in the independent practice repository and linked from a guided course page. The 121-module planning catalog is published in the practice repository; its detailed pedagogical content still requires joint review.
+Four introductory theory pages, the proposed progression, the UML method, and local practice instructions are available. The threshold-indicator worked reference is published in the independent practice repository and linked from a guided course page. The 121-module planning catalog is published in the practice repository; its detailed pedagogical content still requires joint review.
 
 Teaching content and UI are French by explicit owner approval. Engineering documents and code are English. The owner approved a default export only in `astro.config.mjs`, as required by standard Astro configuration; other authored code uses named exports.
 
@@ -36,6 +36,7 @@ The local pilot uses CPP-01 and the guided indicator, with four Markdown compani
 After `npm test`, run `npm run test:browser` with Google Chrome installed, or set `COURSE_BROWSER_EXECUTABLE` to a Chromium executable. This command checks WCAG rules with axe-core, exercises real DOM interactions, writes source-mapped TypeScript coverage to `coverage/`, and enforces an 80% line floor. Its server replaces only the two interaction entrypoints with source-mapped equivalents; the independent production smoke suite exercises the actual bundles.
 
 ```sh
+python3 tests/program-output.py
 python3 tests/example-code.py
 python3 tests/explorer-invalid-content.py
 python3 tests/explorer-browser.py

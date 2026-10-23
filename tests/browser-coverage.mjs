@@ -187,6 +187,30 @@ try {
     collectedCoverage.push(...await page.coverage.stopJSCoverage());
     await page.coverage.startJSCoverage({ resetOnNavigation: false });
   }
+  await page.goto(base + '/notions/programme-minimal/');
+  await page.waitForSelector('[data-card-ready]');
+  assert.equal(await page.locator('.uml-trigger').count(), 2);
+  assert.equal(await page.locator('[data-explorer]').count(), 0);
+  await checkAccessibility('first program: course');
+  for (const [index, key] of ['Enter', 'Space'].entries()) {
+    const trigger = page.locator('.uml-trigger').nth(index);
+    await trigger.focus();
+    await trigger.press(key);
+    await page.waitForSelector('.uml-card:popover-open[data-positioned]');
+    await checkAccessibility(`first program: card ${index}`);
+    await page.locator('.uml-card:popover-open .uml-close').press('Escape');
+    assert.equal(await trigger.evaluate(el => el === document.activeElement), true);
+  }
+  await page.setViewportSize({ width: 320, height: 640 });
+  await page.emulateMedia({ reducedMotion: 'reduce', colorScheme: 'dark' });
+  await page.locator('html').evaluate(el => el.dataset.theme = 'dark');
+  await page.locator('.uml-trigger').first().click();
+  await page.waitForSelector('.uml-card:popover-open[data-positioned]');
+  await checkAccessibility('first program: narrow dark reduced-motion card');
+  assert.equal(await page.locator('.uml-card:popover-open').evaluate(el => getComputedStyle(el).transitionDuration), '0s');
+  await page.keyboard.press('Escape');
+  await page.setViewportSize({ width: 1440, height: 1000 });
+  await page.emulateMedia({ reducedMotion: 'no-preference', colorScheme: 'light' });
   await page.goto(base + '/notions/cpp-09/');
   await page.waitForSelector('[data-card-ready]');
   for (const trigger of await page.locator('.uml-trigger').all()) {

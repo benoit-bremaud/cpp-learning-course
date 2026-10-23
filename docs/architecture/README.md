@@ -25,3 +25,7 @@ Implementation evidence belongs to the implementation pull request. These docume
 ## Local implementation review
 
 The example reader and compact-card pilot has local implementation and verification evidence in [the pilot review](../reviews/example-reader-pilot/README.md). Owner acceptance, publication and the final PR-head merge gate remain separate steps; this link does not mark the conception or course as deployed.
+
+## First complete program
+
+The [approved first-program specification](specs/program-skeleton.md) defines exactly two hosted C++17 programs. The [Ready activity](diagrams/program-skeleton/ready.md) models output then successful return; the [Silent activity](diagrams/program-skeleton/silent.md) models successful return without output. Both reuse the existing reader and compact UML cards. Ordered output remains outside this brick.
