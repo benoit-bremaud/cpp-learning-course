@@ -18,7 +18,7 @@ export default defineConfig({
       { label: 'Concevoir avant de coder', slug: 'methode-uml' },
       { label: 'Pratiquer dans son IDE', slug: 'pratique' },
       { label: 'Exemple guidé du voyant', slug: 'exemple-voyant' },
-      { label: 'Premières notions', items: [{ slug: 'notions/tool-01' }, { slug: 'notions/cpp-01' }, { slug: 'notions/cpp-09' }] },
+      { label: 'Premières notions', items: [{ slug: 'notions/tool-01' }, { slug: 'notions/programme-minimal' }, { slug: 'notions/cpp-01' }, { slug: 'notions/cpp-09' }] },
     ],
   })],
 });

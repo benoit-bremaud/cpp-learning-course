@@ -42,3 +42,14 @@ Requirements: per-excerpt access while retaining visible primary conception. Res
 ## Interaction view
 
 Reader activates summary → browser expands local panel → reader compares code and model → reader activates summary again → browser collapses panel. No cross-component sequence, class model or additional C++ activity is needed: native disclosure has two states and the existing reviewed activities already model the code.
+
+## First-program mapping extension
+
+The [approved first-program conception](program-skeleton.md) adds two mappings to the ten pilot excerpts above, for twelve teaching C++ fences in total. Both primary activities remain visible before code.
+
+| Excerpt | Reviewed diagram | Specific panel explanation |
+| --- | --- | --- |
+| program-ready | program-skeleton/ready.svg | Write Ready and a newline with std::cout, then return 0; output and status are separate |
+| program-silent | program-skeleton/silent.svg | Return 0 with no write action; stdout is empty |
+
+Each source marker identifies one complete program, followed immediately by its uniquely keyed disclosure. Includes, signature, braces and activity initial/final nodes are not extra output statements. No companion sheets or explorer categories are added.

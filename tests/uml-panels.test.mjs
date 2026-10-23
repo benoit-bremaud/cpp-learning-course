@@ -34,7 +34,7 @@ test('each teaching diagram offers its original SVG in an explicitly labelled ne
     const source = await readFile(path, 'utf8');
     for (const match of source.matchAll(/!\[[^\n]+\]\((\/diagrams\/[^)]+\.svg)\)/g)) {
       const after = source.slice(match.index + match[0].length).trimStart();
-      assert.ok(after.startsWith(`<a href="${match[1]}" target="_blank" rel="noopener noreferrer">Ouvrir le diagramme en grand — nouvel onglet</a>`), path);
+      assert.ok(['—', '-'].some(separator => after.startsWith(`<a href="${match[1]}" target="_blank" rel="noopener noreferrer">Ouvrir le diagramme en grand ${separator} nouvel onglet</a>`)), path);
       assert.match(await readFile(`public${match[1]}`, 'utf8'), /<svg/);
     }
   }

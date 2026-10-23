@@ -103,6 +103,60 @@ try:
                 expect(page.get_by_role('tab').first).to_have_attribute('aria-selected', 'true')
                 page.locator('[data-close]').click()
                 assert page.evaluate('document.documentElement.scrollWidth <= innerWidth+1')
+            # The first complete program reuses cards without requiring an explorer.
+            page.goto(base + '/notions/programme-minimal/')
+            expect(page.locator('.uml-trigger')).to_have_count(2)
+            expect(page.locator('[data-explorer]')).to_have_count(0)
+            for diagram in page.locator('img[src^="/diagrams/"]:visible').all():
+                assert diagram.evaluate('''el => {
+                  const r = el.getBoundingClientRect(); const p = el.parentElement;
+                  const paper = p.getBoundingClientRect(); const content = p.parentElement.getBoundingClientRect();
+                  return el.complete && el.naturalWidth > 0 && r.width <= el.naturalWidth + 1
+                    && Math.abs(paper.width - content.width) < 2
+                    && Math.abs((r.left + r.right) / 2 - (paper.left + paper.right) / 2) < 2
+                    && getComputedStyle(p).backgroundColor === 'rgb(255, 255, 255)';
+                }''')
+            page.locator('img[src$="program-ready.svg"]').first.scroll_into_view_if_needed()
+            page.screenshot(path=str(artifacts / f'{engine}-{width}-first-program.png'))
+            for index, key in enumerate(['Enter', 'Space']):
+                trigger = page.locator('.uml-trigger').nth(index)
+                trigger.focus()
+                trigger.press(key)
+                card = page.locator('.uml-card:popover-open')
+                expect(card).to_have_count(1)
+                expect(card).to_have_css('opacity', '1')
+                expect(card.locator('table')).to_be_visible()
+                assert card.locator('tr').count() == (3 if index == 0 else 2)
+                assert card.evaluate('el => {const r=el.getBoundingClientRect(); return r.left >= 0 && r.right <= innerWidth+1 && r.bottom <= innerHeight+1 && el.scrollWidth <= el.clientWidth+1;}')
+                page.screenshot(path=str(artifacts / f'{engine}-{width}-first-program-card-{index}.png'))
+                card.locator('.uml-close').press('Escape')
+                expect(page.locator('.uml-card:popover-open')).to_have_count(0)
+                assert trigger.evaluate('el => el === document.activeElement')
+                trigger.click()
+                page.locator('.uml-card:popover-open .uml-close').click()
+                assert trigger.evaluate('el => el === document.activeElement')
+                trigger.click()
+                page.mouse.click(1, 1)
+                expect(page.locator('.uml-card:popover-open')).to_have_count(0)
+            page.locator('.uml-trigger').first.focus()
+            page.keyboard.press('Enter')
+            page.locator('.uml-trigger').last.focus()
+            page.keyboard.press('Enter')
+            expect(page.locator('.uml-card:popover-open')).to_have_count(1)
+            page.keyboard.press('Escape')
+            page.emulate_media(reduced_motion='reduce', color_scheme='dark')
+            page.locator('html').evaluate("el => el.dataset.theme = 'dark'")
+            page.locator('.uml-trigger').first.click()
+            card = page.locator('.uml-card:popover-open[data-positioned]')
+            expect(card).to_have_css('opacity', '1')
+            expect(card).to_have_css('transition-duration', '0s')
+            page.screenshot(path=str(artifacts / f'{engine}-{width}-first-program-dark.png'))
+            page.keyboard.press('Escape')
+            page.reload()
+            expect(page.locator('.uml-trigger')).to_have_count(2)
+            expect(page.locator('.uml-card:popover-open')).to_have_count(0)
+            assert page.evaluate('document.documentElement.scrollWidth <= innerWidth+1')
+            page.emulate_media(reduced_motion='no-preference', color_scheme='light')
             # Plain Markdown uses the same enhancement as MDX and rendered sheets.
             page.goto(base + '/notions/cpp-09/')
             for index in range(3):
@@ -128,6 +182,14 @@ try:
         assert page.locator('[data-reading]').evaluate('el => el.scrollWidth <= el.clientWidth+1')
         expect(page.locator('[data-close]')).to_be_in_viewport()
         page.screenshot(path=str(artifacts / f'{engine}-text-200-percent.png'))
+        page.goto(base + '/notions/programme-minimal/')
+        page.locator('html').evaluate("el => el.style.fontSize = '200%'")
+        page.locator('.uml-trigger').first.click()
+        card = page.locator('.uml-card:popover-open')
+        expect(card).to_have_css('opacity', '1')
+        assert card.evaluate('el => el.scrollWidth <= el.clientWidth+1')
+        expect(card.locator('.uml-close')).to_be_in_viewport()
+        page.screenshot(path=str(artifacts / f'{engine}-first-program-text-200-percent.png'))
         page.close()
         # A fixture extends the real generated DOM, keeping teaching additions unpublished.
         page = browser.new_page()
@@ -192,6 +254,13 @@ try:
             panel.locator('summary').click()
             expect(panel.locator('table')).to_be_visible()
             expect(panel.locator('img')).to_be_visible()
+            page.goto(base + '/notions/programme-minimal/')
+            expect(page.locator('.uml-trigger')).to_have_count(0)
+            for panel in page.locator('details.uml-panel').all():
+                panel.locator('summary').click()
+                expect(panel.locator('table')).to_be_visible()
+                expect(panel.locator('img')).to_be_visible()
+            expect(page.locator('details.uml-panel')).to_have_count(2)
             context.close()
         browser.close()
     assert not errors, errors
