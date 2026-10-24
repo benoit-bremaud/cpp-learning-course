@@ -1,6 +1,6 @@
 # CPP-01 — Measurement count worked example
 
-Status: context, pedagogical direction and detailed conception approved by the owner. Implementation and publication remain separate reviewed work.
+Status: historical fragment conception, previously approved and published. The owner-approved [observable-variables extension](observable-variables.md) supersedes MC-03/04 and the no-output/fragment-only boundary for the current primary CPP-01 example. The original two-action model below remains a historical scoped view; the current complete program uses [the observed-values activity](../diagrams/measurement-count/02-activity-observed-values.md). Other requirements retain their stated intent.
 
 ## Need and acceptance criteria
 

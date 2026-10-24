@@ -6,29 +6,39 @@ examples: [component-stock, independent-copy]
 
 import ExampleExplorer from '../../../components/ExampleExplorer.astro';
 
-**Objectif :** distinguer la valeur initiale d’une variable et une modification ultérieure. **Prérequis :** [TOOL-01](../tool-01/) et [lire un premier programme](../programme-minimal/). **État :** exemple de lecture et fiches complémentaires disponibles ; exercice autonome à venir.
+**Objectif :** distinguer la valeur initiale d’une variable et une modification ultérieure, en observant les deux valeurs. **Prérequis :** [TOOL-01](../tool-01/) et [lire un premier programme](../programme-minimal/). **État :** un programme complet en C++17 et des fiches complémentaires sont disponibles à la lecture ; leurs projets autonomes à cloner ne sont pas encore publiés.
 
 ## Donner une première valeur
 
-Imagine un compteur du nombre de mesures reçues. Au début, aucune mesure n’a été reçue : sa valeur initiale est zéro. Après réception d’une mesure, le programme modifie cette valeur.
+Nous voulons représenter le nombre de mesures déjà reçues. Le premier total connu est **0**. Pour illustrer une mise à jour, nous fournissons ensuite un autre total connu : **1**. Le programme ne reçoit aucune mesure et ne lit aucun capteur.
 
 L’**initialisation** établit la valeur de départ. L’**affectation** remplace ensuite la valeur d’une variable qui existe déjà. Ces deux opérations correspondent à des moments différents.
 
-## Prévoir puis suivre les deux valeurs
+## Prévoir puis observer les deux valeurs
 
-Le compteur `measurement_count` représente le nombre de mesures reçues, pas leur température. Nous attendons **0** à sa création, puis **1** après l’enregistrement d’un nouveau total connu. Cet exemple ne lit pas de capteur.
+La variable `measurement_count` représente un nombre de mesures, pas leur température. Nous attendons **0** à sa création, puis **1** après l’affectation. Le programme doit écrire chaque valeur sur sa propre ligne, sans message sur la sortie d’erreur, puis terminer avec le statut de réussite `0`.
 
-![Initialiser measurement_count à zéro, puis lui affecter un et terminer.](/diagrams/examples/measurement-count.svg)
+![Initialiser le compteur à zéro, afficher sa valeur, lui affecter un, afficher sa valeur, puis renvoyer zéro.](/diagrams/examples/measurement-count.svg)
 
-<a href="/diagrams/examples/measurement-count.svg" target="_blank" rel="noopener noreferrer">Ouvrir le diagramme en grand — nouvel onglet</a>
+<a href="/diagrams/examples/measurement-count.svg" target="_blank" rel="noopener noreferrer">Ouvrir le diagramme en grand - nouvel onglet</a>
 
-Le point noir marque le début ; les deux rectangles arrondis représentent les actions dans leur ordre de lecture. Le symbole final termine l’activité.
+Le modèle se lit de haut en bas. Chaque action « écrire la valeur puis un saut de ligne » regroupe deux instructions : écrire la valeur courante, puis terminer la ligne. Les écritures ne modifient pas le compteur.
 
-Ces deux instructions seraient placées dans une fonction, un traitement nommé. Ce fragment ne constitue pas un programme complet ; nous lisons seulement la création d’une donnée et sa modification.
+Voici un programme complet pour ordinateur. Sa structure est celle de la première leçon ; la nouveauté est la variable dont nous lisons la valeur.
 
-```cpp
-int measurement_count = 0;
-measurement_count = 1;
+{/* example:program-measurement-observed */}
+```cpp wrap
+#include <iostream>
+
+int main() {
+    int measurement_count = 0;
+    std::cout << measurement_count;
+    std::cout << "\n";
+    measurement_count = 1;
+    std::cout << measurement_count;
+    std::cout << "\n";
+    return 0;
+}
 ```
 
 <details class="uml-panel" data-uml="measurement-primary">
@@ -36,58 +46,112 @@ measurement_count = 1;
 
 **Quelle action établit la première valeur, et quelle action la remplace ?**
 
-![Deux actions successives : initialiser measurement_count à zéro, puis lui affecter un.](/diagrams/examples/measurement-count.svg)
+![Deux observations de la même variable, avant et après son affectation.](/diagrams/examples/measurement-count.svg)
 
-<a href="/diagrams/examples/measurement-count.svg" target="_blank" rel="noopener noreferrer">Ouvrir le diagramme en grand — nouvel onglet</a>
+<a href="/diagrams/examples/measurement-count.svg" target="_blank" rel="noopener noreferrer">Ouvrir le diagramme en grand - nouvel onglet</a>
 
-| Action UML | Instruction C++ | Valeur obtenue |
-| --- | --- | --- |
-| Créer le compteur avec sa valeur initiale | `int measurement_count = 0;` | 0 |
-| Remplacer sa valeur | `measurement_count = 1;` | 1 |
+<table className="observable-values">
+<thead>
+<tr><th>Action UML</th><th>Instructions C++</th><th>Observation</th></tr>
+</thead>
+<tbody>
+<tr><td>Créer le compteur avec sa valeur initiale</td><td><code>int measurement_count = 0;</code></td><td>Le compteur vaut 0.</td></tr>
+<tr><td>Écrire sa valeur, puis un saut de ligne</td><td><code>std::cout &lt;&lt; measurement_count;</code> puis <code>std::cout &lt;&lt; &quot;\n&quot;;</code></td><td>Première ligne : 0.</td></tr>
+<tr><td>Remplacer sa valeur</td><td><code>measurement_count = 1;</code></td><td>Le compteur vaut 1.</td></tr>
+<tr><td>Écrire sa valeur, puis un saut de ligne</td><td><code>std::cout &lt;&lt; measurement_count;</code> puis <code>std::cout &lt;&lt; &quot;\n&quot;;</code></td><td>Seconde ligne : 1.</td></tr>
+<tr><td>Renvoyer le statut de réussite</td><td><code>return 0;</code></td><td>Aucune écriture supplémentaire.</td></tr>
+</tbody>
+</table>
 
-Les deux actions sont distinctes. La seconde remplace un total connu ; elle n’attend pas une mesure et ne calcule pas une addition.
+Les cinq actions du modèle couvrent les sept instructions du corps de `main`. L’affectation remplace un total connu ; elle n’attend pas une mesure et ne calcule pas une addition.
 
 </details>
 
-`int` précise ici que la variable contient un entier. `measurement_count` est son nom. La première ligne déclare la variable et l’initialise à zéro ; la seconde utilise le nom existant pour lui affecter un. Le signe `=` donne une valeur, sans poser une question d’égalité. Le point-virgule termine chaque instruction.
+**Sortie attendue :**
 
-| Point d’observation | Valeur du compteur |
-| --- | --- |
-| Après l’initialisation | 0 |
-| Après l’affectation | 1 |
+```text
+0
+1
+```
 
-La valeur change dans le programme ; aucune configuration matérielle n’est réalisée par ces instructions.
+## Lire le nom pour retrouver la valeur
+
+`int` précise ici que la variable contient un entier. `measurement_count` est le nom choisi pour désigner cette donnée. Dans la première instruction, nous déclarons cette variable et l’initialisons à zéro. Dans `measurement_count = 1;`, nous utilisons le nom existant pour remplacer sa valeur par un.
+
+Dans `std::cout << measurement_count;`, le nom n’est pas entre guillemets : le programme lit la valeur courante de la variable et l’écrit sous forme de chiffres. Au premier affichage, elle vaut `0` ; au second, elle vaut `1`.
+
+Compare ces deux expressions au moment où le compteur vaut encore zéro :
+
+<table className="observable-values">
+<thead>
+<tr><th>Instruction mentionnée</th><th>Texte qu’elle écrit</th></tr>
+</thead>
+<tbody>
+<tr><td><code>std::cout &lt;&lt; measurement_count;</code></td><td><code>0</code>, la valeur courante.</td></tr>
+<tr><td><code>std::cout &lt;&lt; &quot;measurement_count&quot;;</code></td><td><code>measurement_count</code>, le texte entre guillemets.</td></tr>
+</tbody>
+</table>
+
+Aucune de ces deux instructions ne demande seule un saut de ligne. Dans notre programme, l’instruction suivante, `std::cout << "\n";`, termine chaque ligne. Le retour à la ligne du fichier source ne suffit pas. Tu peux retrouver cette distinction dans [suivre plusieurs affichages](../premiers-affichages/).
+
+## Suivre ce qui change
+
+Dans la colonne « sortie accumulée », `\n` représente un saut de ligne ; ces deux caractères ne sont pas affichés tels quels.
+
+<table className="observable-values">
+<thead>
+<tr><th>Après l’instruction</th><th>Valeur du compteur</th><th>Sortie accumulée</th></tr>
+</thead>
+<tbody>
+<tr><td>Initialiser le compteur</td><td>0</td><td>Vide</td></tr>
+<tr><td>Écrire sa valeur une première fois</td><td>0</td><td><code>0</code></td></tr>
+<tr><td>Écrire le premier saut de ligne</td><td>0</td><td><code>0\n</code></td></tr>
+<tr><td>Lui affecter 1</td><td>1</td><td><code>0\n</code></td></tr>
+<tr><td>Écrire sa valeur une seconde fois</td><td>1</td><td><code>0\n1</code></td></tr>
+<tr><td>Écrire le second saut de ligne</td><td>1</td><td><code>0\n1\n</code></td></tr>
+<tr><td>Renvoyer le statut de réussite</td><td>1</td><td>Inchangée</td></tr>
+</tbody>
+</table>
+
+Les affichages lisent la donnée sans la modifier. Seule l’affectation remplace ici sa valeur après l’initialisation. `return 0;` termine `main` avec un statut de réussite ; il n’affiche pas un troisième nombre. Le premier `0` visible provient du compteur.
 
 ## Distinguer les mots
 
-| Terme | Rôle |
-| --- | --- |
-| Déclaration | Introduire un nom et préciser ses propriétés, notamment son type. |
-| Initialisation | Établir la valeur initiale lors de la création de la variable. |
-| Affectation | Donner une nouvelle valeur à une variable déjà créée. |
+<table className="observable-values">
+<thead>
+<tr><th>Terme</th><th>Rôle dans ce programme</th></tr>
+</thead>
+<tbody>
+<tr><td>Déclaration</td><td>Introduire le nom <code>measurement_count</code> et préciser son type <code>int</code>.</td></tr>
+<tr><td>Initialisation</td><td>Établir sa valeur de départ, <code>0</code>, lors de sa création.</td></tr>
+<tr><td>Affectation</td><td>Donner la valeur <code>1</code> à cette variable déjà créée.</td></tr>
+</tbody>
+</table>
 
-Une même instruction peut déclarer une variable, la créer et l’initialiser. La distinction entre déclaration et définition sera approfondie avec l’organisation du programme en plusieurs fichiers.
+Une même instruction peut déclarer une variable, la créer et l’initialiser. Le signe `=` participe ici à l’initialisation dans la première instruction et à l’affectation dans la suivante ; il ne pose pas une question d’égalité. La distinction générale entre déclaration et définition sera approfondie avec l’organisation du programme en plusieurs fichiers.
 
-## Ne pas supposer une valeur zéro
+## Choisir explicitement la valeur de départ
 
-Un entier local ordinaire, créé à l’intérieur d’une fonction sans valeur initiale explicite, ne reçoit pas automatiquement zéro. Une fonction est une partie nommée du programme qui effectue un traitement ; elle sera étudiée dans CPP-07.
+Un entier local ordinaire, créé à l’intérieur d’une fonction sans valeur initiale explicite, ne reçoit pas automatiquement zéro. Pour notre compteur, nous choisissons donc explicitement zéro comme valeur de départ. Nous n’allons pas lire une variable non initialisée pour essayer de deviner sa valeur.
 
-Pour notre compteur, choisis explicitement zéro comme valeur de départ. Une valeur observée par hasard lors d’un essai ne constitue pas une garantie du langage.
+Zéro convient au nombre de mesures déjà reçues au démarrage ; il ne remplace pas automatiquement une mesure absente. Une autre donnée peut nécessiter une autre valeur initiale.
 
 ## Lien avec l’embarqué
 
-Initialiser le compteur des mesures ne lance pas le capteur. Cela établit seulement l’état de départ du programme. La configuration du matériel est une action distincte, qui apparaîtra dans l’étude de l’exercice concerné.
+Initialiser le compteur ne lance pas le capteur. Lui affecter `1` enregistre le total fourni dans notre exemple : cela ne détecte pas une arrivée, ne vérifie pas une entrée et ne calcule pas le total précédent plus un. Ces sujets viendront dans d’autres leçons.
 
-**À retenir :** une valeur initiale doit être choisie selon le sens de la donnée. Zéro convient au nombre de mesures reçues au démarrage ; il ne remplace pas automatiquement une mesure absente.
+**À retenir :** initialiser établit la première valeur ; affecter remplace ensuite celle d’une variable existante. Afficher cette variable permet d’observer sa valeur au moment de l’écriture.
 
 ## Explorer d’autres situations
 
-Le stock reprend la même notion avec une valeur initiale différente. La copie ajoute une difficulté : suivre deux entiers indépendants. Leur pratique autonome n’est pas encore publiée.
+Le stock reprend la même notion avec une valeur initiale différente. La copie ajoute une difficulté : suivre deux entiers indépendants. Ces fiches restent des fragments de lecture, avec leurs traces de valeurs ; elles ne sont pas des programmes complets à compiler seuls. Leur pratique autonome n’est pas encore publiée.
 
 <ExampleExplorer ids={frontmatter.examples} />
 
 ## Plus tard
 
-Les formes d’initialisation, les conversions numériques et les différentes durées de stockage seront étudiées dans leurs modules dédiés. Elles ne sont pas des prérequis pour cette introduction.
+Les autres formes d’initialisation, les conversions numériques et les différentes durées de stockage seront étudiées dans leurs modules dédiés. Elles ne sont pas des prérequis pour cette introduction.
 
-**Suite :** [exprimer une valeur constante](../cpp-09/). Les exemples exécutables seront disponibles dans le dépôt de pratique avec leur étude UML validée.
+Tu peux essayer le programme complet ci-dessus dans ton IDE avec la configuration de TOOL-01. Cela ne signifie pas qu’un projet autonome dédié est déjà disponible dans le dépôt de pratique.
+
+**Suite :** [exprimer une valeur constante](../cpp-09/).

@@ -52,6 +52,16 @@
 .sl-markdown-content .uml-panel td { overflow-wrap: anywhere; }
 .sl-markdown-content .uml-panel td code { white-space: normal; }
 
+/* Keep the observed-value tables readable when their columns become narrow. */
+.sl-markdown-content table.observable-values {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+}
+.sl-markdown-content table.observable-values th,
+.sl-markdown-content table.observable-values td { overflow-wrap: anywhere; }
+.sl-markdown-content table.observable-values td code { white-space: normal; }
+
 /* Compact invokers enhance the authored disclosures; unsupported browsers keep them. */
 .sl-markdown-content details.uml-panel[data-card-ready] {
   border: 0; padding: 0; background: transparent; text-align: right;

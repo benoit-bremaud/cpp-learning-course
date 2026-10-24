@@ -137,6 +137,28 @@ try {
     await page.goto(base + route);
     await page.waitForSelector('[data-ready]');
     await checkAccessibility(`${route}: course`);
+    if (route === '/notions/cpp-01/') {
+      const trigger = page.locator('[data-uml="measurement-primary"] .uml-trigger');
+      await trigger.focus();
+      await trigger.press('Enter');
+      await checkAccessibility('CPP-01: observed-variable main card');
+      assert.equal(await page.locator('.uml-card:popover-open tr').count(), 6);
+      await page.keyboard.press('Escape');
+      assert.equal(await trigger.evaluate(el => el === document.activeElement), true);
+      await page.setViewportSize({ width: 320, height: 640 });
+      await page.emulateMedia({ reducedMotion: 'reduce', colorScheme: 'dark' });
+      await page.locator('html').evaluate(el => el.dataset.theme = 'dark');
+      await trigger.click();
+      await checkAccessibility('CPP-01: narrow dark observed-variable card');
+      for (const table of await page.locator('table.observable-values:visible').all()) {
+        assert.equal(await table.evaluate(el => el.scrollWidth <= el.clientWidth + 1), true);
+      }
+      assert.equal(await page.locator('.uml-card:popover-open').evaluate(el => getComputedStyle(el).transitionDuration), '0s');
+      await page.keyboard.press('Escape');
+      await page.setViewportSize({ width: 1440, height: 1000 });
+      await page.emulateMedia({ reducedMotion: 'no-preference', colorScheme: 'light' });
+      await page.locator('html').evaluate(el => el.dataset.theme = 'light');
+    }
     await page.locator('[data-open]').click();
     await checkAccessibility(`${route}: dialog`);
     for (const category of [0, 1]) {
