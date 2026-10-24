@@ -41,6 +41,32 @@ try:
                 for diagram in page.locator('img[src^="/diagrams/"]:visible').all():
                     assert diagram.evaluate('el => el.getBoundingClientRect().width <= el.naturalWidth + 1')
                     assert diagram.evaluate('el => Math.abs(el.parentElement.getBoundingClientRect().width - el.parentElement.parentElement.getBoundingClientRect().width) < 2')
+                if route == '/notions/cpp-01/':
+                    for table in page.locator('table.observable-values:visible').all():
+                        assert table.evaluate('el => el.scrollWidth <= el.clientWidth + 1')
+                    trigger = page.locator('[data-uml="measurement-primary"] .uml-trigger')
+                    trigger.focus()
+                    trigger.press('Enter')
+                    card = page.locator('.uml-card:popover-open')
+                    expect(card).to_have_css('opacity', '1')
+                    assert card.locator('tr').count() == 6
+                    assert card.locator('table').evaluate('el => el.scrollWidth <= el.clientWidth + 1')
+                    expect(card.locator('img')).to_have_attribute('src', '/diagrams/examples/measurement-count.svg')
+                    expect(card).to_have_css('transition-delay', '0.08s, 0s, 0s')
+                    expect(card).to_have_css('transition-duration', '0.16s, 0.16s, 0.16s')
+                    assert card.evaluate('el => {const r=el.getBoundingClientRect(); return r.left >= 0 && r.right <= innerWidth+1 && r.bottom <= innerHeight+1 && el.scrollWidth <= el.clientWidth+1;}')
+                    page.screenshot(path=str(artifacts / f'{engine}-{width}-observable-main-card.png'))
+                    page.keyboard.press('Escape')
+                    assert trigger.evaluate('el => el === document.activeElement')
+                    page.emulate_media(reduced_motion='reduce', color_scheme='dark')
+                    page.locator('html').evaluate("el => el.dataset.theme = 'dark'")
+                    trigger.click()
+                    expect(page.locator('.uml-card:popover-open')).to_have_css('transition-duration', '0s')
+                    expect(page.locator('.uml-card:popover-open[data-positioned]')).to_have_css('opacity', '1')
+                    page.screenshot(path=str(artifacts / f'{engine}-{width}-observable-main-dark.png'))
+                    page.keyboard.press('Escape')
+                    page.emulate_media(reduced_motion='no-preference', color_scheme='light')
+                    page.locator('html').evaluate("el => el.dataset.theme = 'light'")
                 opener = page.locator('[data-open]')
                 opener.scroll_into_view_if_needed()
                 position = page.evaluate('scrollY')
@@ -202,7 +228,7 @@ try:
         assert page.locator('[data-reading]').evaluate('el => el.scrollWidth <= el.clientWidth+1')
         expect(page.locator('[data-close]')).to_be_in_viewport()
         page.screenshot(path=str(artifacts / f'{engine}-text-200-percent.png'))
-        for slug in ['programme-minimal', 'premiers-affichages']:
+        for slug in ['cpp-01', 'programme-minimal', 'premiers-affichages']:
             page.goto(base + f'/notions/{slug}/')
             page.locator('#starlight__search .pagefind-ui').wait_for(state='attached')
             page.locator('html').evaluate("el => el.style.fontSize = '200%'")
@@ -211,6 +237,8 @@ try:
             expect(card).to_have_css('opacity', '1')
             assert card.evaluate('el => el.scrollWidth <= el.clientWidth+1')
             expect(card.locator('.uml-close')).to_be_in_viewport()
+            for table in card.locator('table.observable-values').all():
+                assert table.evaluate('el => el.scrollWidth <= el.clientWidth + 1')
             page.screenshot(path=str(artifacts / f'{engine}-{slug}-text-200-percent.png'))
         page.close()
         # Await Pagefind initialization before navigating away: Firefox reports an aborted
@@ -309,6 +337,14 @@ try:
             panel.locator('summary').click()
             expect(panel.locator('table')).to_be_visible()
             expect(panel.locator('img')).to_be_visible()
+            if javascript:
+                page.locator('[data-close]').click()
+            primary = page.locator('details[data-uml="measurement-primary"]')
+            if not primary.evaluate('el => el.open'):
+                primary.locator('summary').click()
+            expect(primary.locator('table')).to_be_visible()
+            assert primary.locator('tr').count() == 6
+            assert primary.locator('table').evaluate('el => el.scrollWidth <= el.clientWidth + 1')
             for slug, count in [('programme-minimal', 2), ('premiers-affichages', 3)]:
                 page.goto(base + f'/notions/{slug}/')
                 if javascript:

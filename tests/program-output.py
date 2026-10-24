@@ -26,13 +26,14 @@ def _validate_programs(lesson: Path, expected: dict[str, bytes], models: dict[st
         raise RuntimeError('g++ with C++17 support is required to validate the lesson')
     text = lesson.read_text()
     blocks = re.findall(r'^```cpp[^\n]*\n(.*?)^```', text, re.M | re.S)
-    marked = re.findall(r'<!-- example:program-([a-z-]+) -->\s*```cpp(?: wrap)?\n(.*?)^```', text, re.M | re.S)
+    marked = re.findall(r'(?:<!--|\{/\*) example:program-([a-z-]+) (?:-->|\*/\})\s*```cpp(?: wrap)?\n(.*?)^```', text, re.M | re.S)
     keys = [key for key, _code in marked]
     count = len(expected)
-    count_label = 'two' if count == 2 else 'three'
+    count_label = {1: 'one', 2: 'two', 3: 'three'}[count]
     assert len(blocks) == count and len(marked) == count, f'Expected exactly {count_label} labelled C++ fences'
     assert len(set(keys)) == count and set(keys) == set(expected), ('Expected unique ready and silent markers'
-        if count == 2 else 'Expected unique ordered, reversed and joined markers')
+        if count == 2 else ('Expected unique ordered, reversed and joined markers'
+                            if count == 3 else 'Expected unique measurement-observed marker'))
     assert blocks == [code for _key, code in marked], 'Every C++ fence must be labelled'
     with tempfile.TemporaryDirectory(prefix='cpp-program-output-') as directory:
         for key, code in marked:
@@ -49,7 +50,17 @@ def _validate_programs(lesson: Path, expected: dict[str, bytes], models: dict[st
             assert result.stdout == expected[key], f'{key}: unexpected stdout: {result.stdout!r}'
             assert result.stderr == b'', f'{key}: unexpected stderr: {result.stderr!r}'
             assert result.returncode == 0, f'{key}: unexpected exit status: {result.returncode}'
-            snapshot = Path(f'public/diagrams/examples/program-{key}.svg')
+            if key == 'measurement-observed':
+                # Output alone cannot prove that the learner reads the variable twice.
+                body = re.search(r'int main\(\)\s*\{(.*?)\}', code, re.S)
+                statements = re.sub(r'\s+', '', body[1]).split(';') if body else []
+                assert statements == [
+                    'intmeasurement_count=0', 'std::cout<<measurement_count',
+                    'std::cout<<"\\n"', 'measurement_count=1',
+                    'std::cout<<measurement_count', 'std::cout<<"\\n"', 'return0', '',
+                ], 'measurement-observed: expected seven variable-observation statements'
+            snapshot = Path('public/diagrams/examples/measurement-count.svg' if key == 'measurement-observed'
+                            else f'public/diagrams/examples/program-{key}.svg')
             authoritative = models[key]
             assert snapshot.read_bytes() == authoritative.read_bytes(), f'{key}: SVG provenance mismatch'
             print(f'PASS {key}: exact stdout {result.stdout!r}, empty stderr, exit 0, SVG provenance')
@@ -58,10 +69,16 @@ def _validate_programs(lesson: Path, expected: dict[str, bytes], models: dict[st
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('path', nargs='?', type=Path, help='Isolated lesson mutation fixture')
-    parser.add_argument('--lesson', choices=['first-program', 'ordered-output'], default='first-program')
+    parser.add_argument('--lesson', choices=['first-program', 'ordered-output', 'observable-variables'], default='first-program')
     args = parser.parse_args()
     if args.lesson == 'first-program':
         validate_lesson(args.path or Path('src/content/docs/notions/programme-minimal.md'))
+    elif args.lesson == 'observable-variables':
+        _validate_programs(args.path or Path('src/content/docs/notions/cpp-01.mdx'), {
+            'measurement-observed': b'0\n1\n',
+        }, {
+            'measurement-observed': Path('docs/architecture/diagrams/measurement-count/02-activity-observed-values.svg'),
+        })
     else:
         _validate_programs(args.path or Path('src/content/docs/notions/premiers-affichages.md'), {
             'ordered': b'Program started\nProgram finished\n',

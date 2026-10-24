@@ -33,3 +33,7 @@ The [approved first-program specification](specs/program-skeleton.md) defines ex
 ## Ordered output
 
 The [approved ordered-output specification](specs/ordered-output.md) adds three complete programs on one page. The [ordered](diagrams/ordered-output/01-activity-ordered.md), [reversed](diagrams/ordered-output/02-activity-reversed.md) and [joined](diagrams/ordered-output/03-activity-joined.md) activities distinguish statement order from message meaning and source layout from output newlines. They reuse the approved reader without runtime changes.
+
+## Observable variable values
+
+The [accepted CPP-01 extension](specs/observable-variables.md) replaces the primary fragment with one complete C++17 program. Its [five-action activity](diagrams/measurement-count/02-activity-observed-values.md) maps initialization, two observations around a literal assignment, and successful return to seven statements. The original two-action model remains historical. Companion fragments and the reader architecture are unchanged.

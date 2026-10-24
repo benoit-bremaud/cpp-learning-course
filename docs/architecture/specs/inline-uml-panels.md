@@ -18,7 +18,7 @@ Use native HTML details/summary embedded in Markdown and MDX, with shared styles
 
 | Excerpt | Reviewed diagram | Specific panel explanation |
 | --- | --- | --- |
-| CPP-01 measurement_count | measurement-count.svg | Creation with 0 then assignment to 1 |
+| CPP-01 measurement_count | measurement-count.svg, from measurement-count/02-activity-observed-values.svg | Initialize to 0, observe, assign 1, observe, return 0; five conceptual actions cover seven statements |
 | CPP-09 valid | constant-limit.svg | Fixed limit and independently mutable count |
 | CPP-09 forbidden assignment | constant-limit.svg | Reference the invariant; the invalid fragment cannot execute successfully; count actions are outside this fragment |
 | CPP-09 wrong initial value | constant-limit.svg | Requirement says 3, fragment initializes 30; only the first action is compared, later count actions are outside scope |
@@ -65,3 +65,7 @@ The [approved ordered-output conception](ordered-output.md) adds three mappings,
 | program-joined | ordered-output/03-activity-joined.svg | Write System plus a significant space, then ready and a newline, then return 0 |
 
 Each mapping has three action rows. Structural syntax and activity initial/final nodes are not extra statements.
+
+## Observable-variable mapping update
+
+The [accepted observable-variable extension](observable-variables.md) replaces the one CPP-01 fragment with one complete marked program, keeping `measurement-primary` and fifteen teaching fences in total. Each observation maps two separate statements: read/write the variable, then write a newline. The original two-action fragment model is historical. Stock and copy retain their existing mappings and scoped fragments.

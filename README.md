@@ -13,7 +13,7 @@ npm test
 npm run preview
 ```
 
-`npm test` builds fresh production output before running the reader checks and compiling the five complete programs across the first-program and ordered-output lessons as C++17. These checks require Python 3 and g++. A failed build stops the command before tests run. Use `npm run build` when only a build is needed.
+`npm test` builds fresh production output before running the reader checks and compiling the six complete programs across the first-program, ordered-output and observable-variable lessons as C++17. These checks require Python 3 and g++. A failed build stops the command before tests run. Use `npm run build` when only a build is needed.
 
 Open the printed local address. Search is indexed during production builds.
 
@@ -38,11 +38,12 @@ After `npm test`, run `npm run test:browser` with Google Chrome installed, or se
 ```sh
 python3 tests/program-output.py
 python3 tests/program-output.py --lesson ordered-output
+python3 tests/program-output.py --lesson observable-variables
 python3 tests/example-code.py
 python3 tests/explorer-invalid-content.py
 python3 tests/explorer-browser.py
 ```
 
-The C++ checks require g++ with C++17 support. The invalid-content suite uses an isolated source/dependency copy. The production browser suite requires Python Playwright (tested with 1.64.0); choose other engines using `COURSE_BROWSER_ENGINE` and `COURSE_BROWSER_EXECUTABLE`. It covers desktop/mobile reading, keyboard/focus, cards, reloading, text enlargement and fallbacks; screenshots go to `COURSE_QA_DIR` or a temporary directory. Install the matching browser and its host libraries before using Firefox or WebKit.
+The C++ checks require g++ with C++17 support. The complete-program harness validates six programs; `tests/example-code.py` retains the nine other authored fragments, their intermediate observations and negative controls. The invalid-content suite uses an isolated source/dependency copy. The production browser suite requires Python Playwright (tested with 1.64.0); choose other engines using `COURSE_BROWSER_ENGINE` and `COURSE_BROWSER_EXECUTABLE`. It covers desktop/mobile reading, keyboard/focus, cards, reloading, text enlargement and fallbacks; screenshots go to `COURSE_QA_DIR` or a temporary directory. Install the matching browser and its host libraries before using Firefox or WebKit.
 
 See [pilot review evidence](docs/reviews/example-reader-pilot/README.md) for measured results, provenance, remaining limits and the owner questionnaire.
