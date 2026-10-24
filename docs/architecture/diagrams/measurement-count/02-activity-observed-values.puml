@@ -1,0 +1,12 @@
+@startuml
+skinparam defaultFontSize 16
+skinparam shadowing false
+title act - Observer un entier
+start
+:Initialiser\nmeasurement_count à 0;
+:Écrire la valeur de\nmeasurement_count\npuis un saut de ligne;
+:Affecter 1 à\nmeasurement_count;
+:Écrire la valeur de\nmeasurement_count\npuis un saut de ligne;
+:Renvoyer 0;
+stop
+@enduml
