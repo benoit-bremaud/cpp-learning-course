@@ -5,7 +5,7 @@ description: "Des sujets courts et des prérequis explicites, du poste de travai
 
 Le parcours se découpe en petits modules centrés sur une seule notion. Les familles ci-dessous servent à se repérer ; elles ne sont pas des chapitres à terminer d’un bloc.
 
-**État : proposition à valider ensemble.** Les quatre premières étapes ci-dessous sont disponibles : TOOL-01, le premier programme complet, CPP-01 et CPP-09. La méthode UML reste accessible séparément. Les autres sujets sont prévus, pas encore des leçons complètes.
+**État : proposition à valider ensemble.** Les cinq premières étapes ci-dessous sont disponibles : TOOL-01, le premier programme complet, les affichages successifs, CPP-01 et CPP-09. La méthode UML reste accessible séparément. Les autres sujets sont prévus, pas encore des leçons complètes.
 
 ## Construire les premières bases
 
@@ -13,6 +13,7 @@ Le parcours se découpe en petits modules centrés sur une seule notion. Les fam
 | --- | --- | --- |
 | Outils | Compilation, édition de liens, diagnostics, débogage, tests | [TOOL-01 : compilation](../notions/tool-01/) |
 | Premier programme | `main`, bloc, instructions, sortie et statut de fin | [Lire un premier programme](../notions/programme-minimal/) |
+| Affichages successifs | Ordre des instructions, espaces et sauts de ligne | [Suivre plusieurs affichages](../notions/premiers-affichages/) |
 | C++ fondamental | Initialisation, types, conversions, conditions, fonctions, portée | [CPP-01 : initialisation](../notions/cpp-01/) |
 | Objets constants | Intention et limites de `const` | [CPP-09 : objets constants](../notions/cpp-09/) |
 | UML | Structure, interactions, activités et états | [Méthode de conception](../methode-uml/) |

@@ -132,4 +132,4 @@ Tu peux retrouver le bloc, l’instruction qui affiche et celle qui termine la f
 
 Ces programmes ne pilotent aucun matériel. `std::cout` n’est pas présenté comme un remplacement de l’interface série Arduino. Les essais se feront dans ton IDE depuis le dépôt dédié, lorsque ce projet sera disponible.
 
-**Suite disponible :** [initialiser une variable](../cpp-01/). Suivre plusieurs affichages fera l’objet d’une leçon distincte, encore prévue.
+**Suite disponible :** [suivre plusieurs affichages](../premiers-affichages/).
