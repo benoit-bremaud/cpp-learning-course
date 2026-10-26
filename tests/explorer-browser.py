@@ -29,7 +29,7 @@ diagram_measurements = []
 try:
     with sync_playwright() as pw:
         browser = getattr(pw, engine).launch(executable_path=executable)
-        for width, height in [(1440, 1000), (390, 844), (320, 640)]:
+        for width, height in [(1440, 1000), (768, 1024), (390, 844), (320, 640)]:
             page = browser.new_page(viewport={'width': width, 'height': height})
             page.on('pageerror', lambda error: errors.append(str(error)))
             page.on('console', lambda message: errors.append(message.text) if message.type == 'error' else None)
@@ -132,8 +132,8 @@ try:
                 expect(page.get_by_role('tab').first).to_have_attribute('aria-selected', 'true')
                 page.locator('[data-close]').click()
                 assert page.evaluate('document.documentElement.scrollWidth <= innerWidth+1')
-            # Both complete-program lessons reuse cards without requiring an explorer.
-            for slug, rows in [('programme-minimal', [3, 2]), ('premiers-affichages', [4, 4, 4])]:
+            # Complete-program lessons reuse cards without requiring an explorer.
+            for slug, rows in [('programme-minimal', [3, 2]), ('premiers-affichages', [4, 4, 4]), ('cpp-09', [7, 6, 7])]:
                 page.goto(base + f'/notions/{slug}/')
                 page.locator('#starlight__search .pagefind-ui').wait_for(state='attached')
                 expect(page.locator('.uml-trigger')).to_have_count(len(rows))
@@ -170,6 +170,15 @@ try:
                         expect(card.locator('img')).to_have_attribute('src', f'/diagrams/examples/program-{expected_key}.svg')
                         expect(card).to_have_css('transition-delay', '0.08s, 0s, 0s')
                         expect(card).to_have_css('transition-duration', '0.16s, 0.16s, 0.16s')
+                    if slug == 'cpp-09':
+                        expected_key = ['constant-valid', 'constant-rejected', 'constant-wrong'][index]
+                        assert trigger.evaluate('el => el.popoverTargetElement === el.parentElement.querySelector(".uml-card:popover-open")')
+                        assert page.locator(f'[data-uml="{expected_key}"] .uml-card:popover-open').count() == 1
+                        asset = 'constant-wrong-limit' if index == 2 else 'constant-limit'
+                        expect(card.locator('img')).to_have_attribute('src', f'/diagrams/examples/{asset}.svg')
+                        expect(card).to_have_css('transition-delay', '0.08s, 0s, 0s')
+                        expect(card).to_have_css('transition-duration', '0.16s, 0.16s, 0.16s')
+                        assert card.locator('table').evaluate('el => el.scrollWidth <= el.clientWidth + 1')
                     assert card.evaluate('el => {const r=el.getBoundingClientRect(); return r.left >= 0 && r.right <= innerWidth+1 && r.bottom <= innerHeight+1 && el.scrollWidth <= el.clientWidth+1;}')
                     page.screenshot(path=str(artifacts / f'{engine}-{width}-{slug}-card-{index}.png'))
                     card.locator('.uml-close').press('Escape')
@@ -204,6 +213,8 @@ try:
             # Plain Markdown uses the same enhancement as MDX and rendered sheets.
             page.goto(base + '/notions/cpp-09/')
             page.locator('#starlight__search .pagefind-ui').wait_for(state='attached')
+            for table in page.locator('table.observable-values:visible').all():
+                assert table.evaluate('el => el.scrollWidth <= el.clientWidth + 1')
             for index in range(3):
                 trigger = page.locator('.uml-trigger').nth(index)
                 trigger.focus()
@@ -228,10 +239,12 @@ try:
         assert page.locator('[data-reading]').evaluate('el => el.scrollWidth <= el.clientWidth+1')
         expect(page.locator('[data-close]')).to_be_in_viewport()
         page.screenshot(path=str(artifacts / f'{engine}-text-200-percent.png'))
-        for slug in ['cpp-01', 'programme-minimal', 'premiers-affichages']:
+        for slug in ['cpp-01', 'programme-minimal', 'premiers-affichages', 'cpp-09']:
             page.goto(base + f'/notions/{slug}/')
             page.locator('#starlight__search .pagefind-ui').wait_for(state='attached')
             page.locator('html').evaluate("el => el.style.fontSize = '200%'")
+            for table in page.locator('table.observable-values:visible').all():
+                assert table.evaluate('el => el.scrollWidth <= el.clientWidth + 1')
             page.locator('.uml-trigger').first.click()
             card = page.locator('.uml-card:popover-open')
             expect(card).to_have_css('opacity', '1')
@@ -257,6 +270,10 @@ try:
         page.locator('.pagination-links a[rel="next"]').click()
         expect(page).to_have_url(base + '/notions/cpp-01/')
         page.locator('#starlight__search .pagefind-ui').wait_for(state='attached')
+        page.locator('.pagination-links a[rel="next"]').click()
+        expect(page).to_have_url(base + '/notions/cpp-09/')
+        page.locator('#starlight__search .pagefind-ui').wait_for(state='attached')
+        expect(page.locator('.pagination-links a[rel="prev"]')).to_have_attribute('href', '/notions/cpp-01/')
         page.get_by_role('button', name='Rechercher', exact=True).click()
         search = page.get_by_role('dialog', name='Rechercher', exact=True)
         search.get_by_placeholder('Rechercher', exact=True).fill('Suivre plusieurs affichages')
@@ -269,6 +286,16 @@ try:
             original = opened.value
             original.wait_for_load_state()
             assert original.url == base + f'/diagrams/examples/program-{key}.svg'
+            expect(original.locator('svg')).to_be_visible()
+            original.close()
+        page.goto(base + '/notions/cpp-09/')
+        page.locator('#starlight__search .pagefind-ui').wait_for(state='attached')
+        for asset in ['constant-limit', 'constant-wrong-limit']:
+            with page.expect_popup() as opened:
+                page.locator(f'a[href="/diagrams/examples/{asset}.svg"]').first.click()
+            original = opened.value
+            original.wait_for_load_state()
+            assert original.url == base + f'/diagrams/examples/{asset}.svg'
             expect(original.locator('svg')).to_be_visible()
             original.close()
         page.close()
@@ -345,7 +372,7 @@ try:
             expect(primary.locator('table')).to_be_visible()
             assert primary.locator('tr').count() == 6
             assert primary.locator('table').evaluate('el => el.scrollWidth <= el.clientWidth + 1')
-            for slug, count in [('programme-minimal', 2), ('premiers-affichages', 3)]:
+            for slug, count in [('programme-minimal', 2), ('premiers-affichages', 3), ('cpp-09', 3)]:
                 page.goto(base + f'/notions/{slug}/')
                 if javascript:
                     page.locator('#starlight__search .pagefind-ui').wait_for(state='attached')

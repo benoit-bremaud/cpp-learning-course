@@ -12,7 +12,7 @@ The first shared interaction under conception is the contextual example explorer
 - [Compact UML card specification](specs/uml-cards.md): progressive enhancement and motion behavior.
 - [Explorer diagrams](diagrams/example-explorer/01-use-case.md): UML views and the four pilot teaching activities.
 - [Measurement-count activity](diagrams/measurement-count/01-activity-update.md): initialization followed by assignment for CPP-01.
-- [Constant-limit activity](diagrams/constant-limit/01-activity-values.md): stable limit and independently mutable count for CPP-09.
+- [Historical constant-limit activity](diagrams/constant-limit/01-activity-values.md): original fragment-only CPP-09 model, superseded by the observable-constant extension below.
 
 The static build depends on authored content. Browser enhancements depend on generated HTML. Teaching content and the independent practice repositories do not depend on browser scripts. This direction keeps every lesson readable when JavaScript is unavailable.
 
@@ -37,3 +37,7 @@ The [approved ordered-output specification](specs/ordered-output.md) adds three 
 ## Observable variable values
 
 The [accepted CPP-01 extension](specs/observable-variables.md) replaces the primary fragment with one complete C++17 program. Its [five-action activity](diagrams/measurement-count/02-activity-observed-values.md) maps initialization, two observations around a literal assignment, and successful return to seven statements. The original two-action model remains historical. Companion fragments and the reader architecture are unchanged.
+
+## Observable constant values
+
+The [accepted CPP-09 extension](specs/observable-constants-lesson.md) defines three complete sources: two executable programs and one compiler-rejected case. The [stable-limit](diagrams/observable-constants/07-activity-stable-limit.md) and [wrong-limit](diagrams/observable-constants/07-activity-wrong-limit.md) activities each map twelve statements through six actions. The rejected source references only the expected conception, with no invented execution. [Glossary](glossary.md) and [traceability](traceability-matrix.md) scope the new requirement IDs; they are not a retrospective audit of all legacy specifications.

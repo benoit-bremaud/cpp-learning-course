@@ -2,6 +2,10 @@
 
 Status: detailed conception and graduated organization explicitly approved by the owner. Implementation and publication remain separate reviewed work.
 
+## Observable-source extension
+
+The [owner-approved observable-constants extension](observable-constants-lesson.md) supersedes the fragment-only source format, original three-action activity and fragment extraction plan below. CPP-09 now has three complete sources: two executable observations and one compile-only rejection with paired successful controls. The stable/wrong activities each cover twelve statements through six actions. The rejected card compares five statements to the expected conception without claiming execution. Original const semantics, requirement 3 and optional transfer remain applicable. The original activity triplet remains historical.
+
 ## Need
 
 Replace abstract explanations of const with concrete comparisons in the main lesson. Prerequisite: CPP-01's ordinary local integers, initialization and assignment. One new central idea: prohibit modification of a particular integer after its initialization. No array, loop, device API or exception mechanism is required.

@@ -19,9 +19,9 @@ Use native HTML details/summary embedded in Markdown and MDX, with shared styles
 | Excerpt | Reviewed diagram | Specific panel explanation |
 | --- | --- | --- |
 | CPP-01 measurement_count | measurement-count.svg, from measurement-count/02-activity-observed-values.svg | Initialize to 0, observe, assign 1, observe, return 0; five conceptual actions cover seven statements |
-| CPP-09 valid | constant-limit.svg | Fixed limit and independently mutable count |
-| CPP-09 forbidden assignment | constant-limit.svg | Reference the invariant; the invalid fragment cannot execute successfully; count actions are outside this fragment |
-| CPP-09 wrong initial value | constant-limit.svg | Requirement says 3, fragment initializes 30; only the first action is compared, later count actions are outside scope |
+| CPP-09 valid | constant-limit.svg, observable-constants/07-activity-stable-limit.svg | Complete source, six actions covering twelve statements; limit/count observed twice |
+| CPP-09 forbidden assignment | constant-limit.svg, expected reference only | Five authored statements; forbidden assignment rejected, writes/return never execute; count absent |
+| CPP-09 wrong initial value | constant-wrong-limit.svg, observable-constants/07-activity-wrong-limit.svg | Actual faulty behavior: constant 30 against required 3; six actions cover twelve statements |
 | Guided indicator | threshold-indicator.svg | Input, threshold, guard, two returns; preserve pinned source |
 | Stock | 04-activity-stock.svg | Two actions and values 12 then 11 |
 | Copy | 05-activity-copy.svg | Read initial integer value then modify only the original |
@@ -29,7 +29,7 @@ Use native HTML details/summary embedded in Markdown and MDX, with shared styles
 | Strict threshold | 07-activity-strict.svg | Strict guard excludes equality |
 | Inclusive threshold | 08-activity-inclusive.svg | Inclusive guard includes equality |
 
-Do not describe the full reference activity as the exact executable model of either short faulty fragment. Label it “Conception attendue de référence” and explicitly identify omitted actions. No new algorithm or teaching-code change is required.
+For the rejected source, do not describe the full reference activity as its executable model. Label it "Conception attendue de référence" and identify the absent count actions and nonexecuted writes/return. The wrong-initializer source has its own actual-behavior activity, explicitly contrasted with the requirement of 3.
 
 ## Files and verification
 
@@ -69,3 +69,7 @@ Each mapping has three action rows. Structural syntax and activity initial/final
 ## Observable-variable mapping update
 
 The [accepted observable-variable extension](observable-variables.md) replaces the one CPP-01 fragment with one complete marked program, keeping `measurement-primary` and fifteen teaching fences in total. Each observation maps two separate statements: read/write the variable, then write a newline. The original two-action fragment model is historical. Stock and copy retain their existing mappings and scoped fragments.
+
+## Observable-constant mapping update
+
+The [accepted CPP-09 extension](observable-constants-lesson.md) replaces all three fragments with marked complete sources, retaining constant-valid/constant-rejected/constant-wrong and fifteen teaching fences overall. Both runtime cases map all twelve statements in six rows; each observation groups four writes. The rejected case maps all five statements with explicit compile-only qualifications. No shared reader behavior changes. The old constant-limit activity remains historical; published snapshot provenance follows the new stable-limit render, while the wrong case uses the new wrong-limit render.

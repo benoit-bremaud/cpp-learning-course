@@ -23,10 +23,11 @@ for (const [route, examples] of [
   });
 }
 
-test('the seven course diagram snapshots match their authoritative local sources', async () => {
+test('the eight course diagram snapshots match their authoritative local sources', async () => {
   const pairs = [
     ['measurement-count', 'measurement-count/02-activity-observed-values'],
-    ['constant-limit', 'constant-limit/01-activity-values'],
+    ['constant-limit', 'observable-constants/07-activity-stable-limit'],
+    ['constant-wrong-limit', 'observable-constants/07-activity-wrong-limit'],
     ...['04-activity-stock', '05-activity-copy', '06-activity-reservoir', '07-activity-strict', '08-activity-inclusive']
       .map(name => [name, `example-explorer/${name}`]),
   ];
