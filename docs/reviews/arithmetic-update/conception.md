@@ -14,7 +14,7 @@ KISS/YAGNI/DRY: two short whole files make the contrast independently reproducib
 
 Anti-patterns: zero-baseline ambiguity, fake literal output, update portrayed as algebraic equality, invented events, signed overflow, stale availability/navigation and false practice alignment are covered by the explicit plan. The practice workshop total initializes a separate sum and is not presented as a dedicated self-update exercise. New reading does not take CPP-02's reserved integer-representation identity. Homepage availability corrections are scoped to adding the sixth intro, not a redesign.
 
-No remaining conception Must Have or Should Have finding was identified; no new Nice to Have item. This is structured local self-review, not an independent reviewer claim. Source/companion/schema/runtime boundaries were read before proposing changes.
+The initial local review identified no Must Have or Should Have finding; Codex subsequently found the traceability introduction error documented in Round 1 below. No new Nice to Have item. This is structured local self-review, not an independent reviewer claim. Source/companion/schema/runtime boundaries were read before proposing changes.
 
 ## Five local validation gates
 
@@ -27,6 +27,24 @@ No remaining conception Must Have or Should Have finding was identified; no new 
 Both fresh headless activity renders equal their authoritative SVGs, with 16px labels and natural sizes 235x544 and 225x522. The PNG previews and smoke screenshots were visually inspected. Authored links and ASCII hyphens were checked. White-panel/intrinsic sizing remains unchanged reader behavior, not a newly implemented #23 layout.
 
 CodeRabbit CLI is unavailable; no CodeRabbit or Copilot review is claimed. Existing nonblocking build notices remain. The known npm audit TLS-chain limitation is not reclassified as an audit pass; no manifest or lockfile changed. #7 remains separate. This docs-only smoke does not extend the #20 local-preview header waiver. The future implementation must perform the appropriate inspector/security applicability pass and obtain any needed disposition separately. The owner deferred a separate comprehensive QA campaign; no such campaign or automation was started.
+
+## PR #24 - Round 1 traceability correction
+
+Codex comment [4376466793](https://github.com/benoit-bremaud/cpp-learning-course/pull/24#discussion_r4376466793) was verified exact against the matrix and both specifications. The original file-level sentence said all requirements below were defined in the constants specification, while REQ-9..16/NFR-5..8 belong to the arithmetic specification. The owner validated Must Have (factual documentation error), weights 50/25/15/10 and correction A on 2026-10-26.
+
+The correction makes the introduction feature-neutral, gives the original #20 table its own heading and scopes its specification statement to that section. The existing #23 heading/source remains distinct. No requirement ID, table row, mapping, code, model, test or public asset changes. The two authoritative sources are now unambiguous without duplicating their correspondence in a global index sentence.
+
+| Criterion | Weight | A: section-scoped sources | C: both sources in global introduction | B: retain wording |
+| --- | ---: | --- | --- | --- |
+| Correctness | 50 | 5: each section names its source | 5: both sources named | 0: false attribution remains |
+| Targeted correction | 25 | 5: headings only, mappings unchanged | 4: source correspondence repeated globally | 5: no edit |
+| Readability | 15 | 4: one extra section heading | 5: references grouped at top | 1: ambiguous scope |
+| Estimated maintenance | 10 | 5: each section owns its reference | 3: global list follows additions | 1: ambiguity retained |
+| Total | 100 | 485/500 | 455/500 | 150/500 |
+
+Scores are owner-validated decision judgments. Transfer all ten maintenance points to readability and A/C tie at 475/500. C is the valid compact fallback, requiring a revised wording choice; B's correctness zero blocks merge. The owner selected A despite that sensitivity.
+
+Local correction read-through verifies both section scopes, all local links and unchanged table rows. The routine full test/coverage/production-browser gates are rerun for the corrected delivery, followed by exact-head Sonar and history/snapshot secrets checks. Their final head and scanner task are recorded in the PR description and resume note. The separate comprehensive QA campaign remains deferred. No independent reviewer or active security pass is claimed. After this correction, no known conception Must Have or Should Have remains locally; the new remote head still requires review. Inline reply, push and any review retry remain separately authorized; do not resolve the conversation.
 
 ## Owner dispositions and next gate
 

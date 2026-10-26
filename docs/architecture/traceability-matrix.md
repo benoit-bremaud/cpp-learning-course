@@ -1,6 +1,10 @@
 # Conception traceability matrix
 
-Status: owner-approved conception IDs for [#20](https://github.com/benoit-bremaud/cpp-learning-course/issues/20). Existing specifications keep their legacy scoped IDs; this is not a retrospective coverage claim. All requirements below are defined in [observable-constants-lesson](specs/observable-constants-lesson.md). Tests are proposed future verification, not implemented results.
+Each feature section names its authoritative specification. Existing specifications retain their legacy scoped IDs; this matrix does not claim a retrospective audit. Verification columns record conception contracts rather than a current execution report.
+
+## Observable-constants conception - #20
+
+Status: owner-approved conception IDs for [#20](https://github.com/benoit-bremaud/cpp-learning-course/issues/20). Existing specifications keep their legacy scoped IDs; this is not a retrospective coverage claim. Requirements in this #20 section are defined in [observable-constants-lesson](specs/observable-constants-lesson.md). Tests are proposed future verification, not implemented results.
 
 | Source / requirement | Realization | Proposed verification |
 | --- | --- | --- |
