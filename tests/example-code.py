@@ -23,15 +23,12 @@ copy = blocks('src/content/examples/variables/independent-copy.md')[0]
 reservoir = blocks('src/content/examples/conditions/reservoir-level.md')[0]
 strict, inclusive = blocks('src/content/examples/conditions/inclusive-threshold.md')
 guided, = blocks('src/content/docs/exemple-voyant.mdx')
-valid_const, rejected_const, wrong_const = blocks('src/content/docs/notions/cpp-09.md')
 # Compare executable tokens: the pinned reference includes an explanatory comment.
 assert re.sub(r'//[^\n]*|\s+', '', strict) == re.sub(r'//[^\n]*|\s+', '', guided)
 source = '#include <cassert>\n#include <initializer_list>\n' + reservoir + strict + inclusive
 source += '\nint main() {\n'
 source += '{' + checkpoints(stock, 'component_count', [12, 11]) + '}\n'
 source += '{' + copy.replace('int snapshot_count', 'assert(component_count == 12); int snapshot_count').replace('component_count = 11;', 'assert(snapshot_count == 12); component_count = 11;') + 'assert(component_count == 11 && snapshot_count == 12);}\n'
-source += '{' + valid_const + 'assert(measurement_limit == 3 && measurement_count == 1);}\n'
-source += '{' + wrong_const + 'assert(measurement_limit == 30 && measurement_limit != 3);}\n'
 source += '''
 for (int level : {0, 19}) assert(should_warn_low_level(level));
 for (int level : {20, 21, 100}) assert(!should_warn_low_level(level));
@@ -53,7 +50,4 @@ with tempfile.TemporaryDirectory(prefix='course-excerpts-') as folder:
     subprocess.run(command, check=True)
     result = subprocess.run([str(path / 'examples')], capture_output=True)
     assert result.returncode != 0, 'Boundary mutation escaped the assertions'
-    program.write_text('int main() {' + rejected_const + '}')
-    result = subprocess.run(command, capture_output=True, text=True)
-    assert result.returncode != 0 and 'measurement_limit' in result.stderr
-print('PASS: all nine remaining excerpts, intermediate values, boundary mutation and rejected const assignment')
+print('PASS: all six remaining excerpts, intermediate values and boundary mutation')

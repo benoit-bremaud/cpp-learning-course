@@ -214,7 +214,7 @@ try {
     collectedCoverage.push(...await page.coverage.stopJSCoverage());
     await page.coverage.startJSCoverage({ resetOnNavigation: false });
   }
-  for (const [slug, count] of [['programme-minimal', 2], ['premiers-affichages', 3]]) {
+  for (const [slug, count] of [['programme-minimal', 2], ['premiers-affichages', 3], ['cpp-09', 3]]) {
     await page.goto(base + `/notions/${slug}/`);
     await page.waitForSelector('[data-card-ready]');
     assert.equal(await page.locator('.uml-trigger').count(), count);
@@ -226,6 +226,11 @@ try {
       await trigger.press(key);
       await page.waitForSelector('.uml-card:popover-open[data-positioned]');
       await checkAccessibility(`${slug}: card ${index}`);
+      if (slug === 'cpp-09') {
+        assert.equal(await page.locator('.uml-card:popover-open tr').count(), [7, 6, 7][index]);
+        const asset = index === 2 ? 'constant-wrong-limit' : 'constant-limit';
+        assert.equal(await page.locator('.uml-card:popover-open img').getAttribute('src'), `/diagrams/examples/${asset}.svg`);
+      }
       await page.locator('.uml-card:popover-open .uml-close').press('Escape');
       assert.equal(await trigger.evaluate(el => el === document.activeElement), true);
     }
@@ -236,6 +241,17 @@ try {
     await page.waitForSelector('.uml-card:popover-open[data-positioned]');
     await checkAccessibility(`${slug}: narrow dark reduced-motion card`);
     assert.equal(await page.locator('.uml-card:popover-open').evaluate(el => getComputedStyle(el).transitionDuration), '0s');
+    if (slug === 'cpp-09') {
+      for (let index = 0; index < count; index++) {
+        await page.keyboard.press('Escape');
+        await page.locator('.uml-trigger').nth(index).click();
+        await checkAccessibility(`CPP-09: narrow dark card ${index}`);
+        assert.equal(await page.locator('.uml-card:popover-open tr').count(), [7, 6, 7][index]);
+      }
+      for (const table of await page.locator('table.observable-values:visible').all()) {
+        assert.equal(await table.evaluate(el => el.scrollWidth <= el.clientWidth + 1), true);
+      }
+    }
     await page.keyboard.press('Escape');
     await page.setViewportSize({ width: 1440, height: 1000 });
     await page.emulateMedia({ reducedMotion: 'no-preference', colorScheme: 'light' });
