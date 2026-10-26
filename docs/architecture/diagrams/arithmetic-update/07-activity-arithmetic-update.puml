@@ -1,0 +1,12 @@
+@startuml
+skinparam defaultFontSize 16
+skinparam shadowing false
+title act - Calculer\nle total suivant
+start
+:Initialiser\nmeasurement_count à 2;
+:Écrire le compteur,\npuis un saut de ligne;
+:Lire measurement_count,\najouter 1, puis stocker\nle résultat;
+:Écrire le compteur,\npuis un saut de ligne;
+:Renvoyer 0;
+stop
+@enduml
