@@ -1,0 +1,13 @@
+@startuml
+skinparam defaultFontSize 16
+skinparam shadowing false
+title act - Limite constante\nCompteur modifiable
+start
+:Initialiser l'entier constant\nmeasurement_limit à 3;
+:Initialiser\nmeasurement_count à 0;
+:Écrire la limite,\npuis le compteur,\nchacun sur sa ligne;
+:Affecter 1 à\nmeasurement_count;
+:Écrire la limite,\npuis le compteur,\nchacun sur sa ligne;
+:Renvoyer 0;
+stop
+@enduml
