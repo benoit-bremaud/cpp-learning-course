@@ -16,3 +16,22 @@ Status: owner-approved conception IDs for [#20](https://github.com/benoit-bremau
 | #20 -> NFR-2 | Existing validation/security/coverage pipeline | Full local tests, public-doc audit, exact-head Sonar and Gitleaks |
 | #20 -> NFR-3 | Existing browser-owned card behavior and current QA policy | Three engines, accessibility, inspector/security report and inspected screenshots |
 | #20 -> NFR-4 | Separate reviewed conception and owner approval gates | Recorded approvals, distinct conception/implementation PRs, preserved deferrals |
+
+## Approved arithmetic-update conception - #23
+
+Conception A and its file plan explicitly approved on 2026-10-26. Requirements below are defined in [arithmetic-update-lesson](specs/arithmetic-update-lesson.md). Tests/implementation remain proposed; no earlier IDs are reused.
+
+| Source / requirement | Realization | Proposed verification |
+| --- | --- | --- |
+| #23 -> REQ-9 | Narrow integer update contract | Source intent and French-content review |
+| #23 -> REQ-10 | Two complete source/card contracts | tests/arithmetic-update.test.mjs fixed inventory |
+| #23 -> REQ-11 | [ACT-arithmetic-update](diagrams/arithmetic-update/07-activity-arithmetic-update.md) and [ACT-literal-replacement](diagrams/arithmetic-update/07-activity-literal-replacement.md) | tests/program-output.py arithmetic-update mode, actual C++17 extraction |
+| #23 -> REQ-12 | REQ-12 -> ACT-arithmetic-update old-value read | Source-intent and fixed-result/fake-output mutations |
+| #23 -> REQ-13 | REQ-13 -> both five-action/seven-statement activities | Exact ordered mapping/card assertions |
+| #23 -> REQ-14 | Distinct actual literal behavior, required arithmetic result | Output contracts and manual explanation review |
+| #23 -> REQ-15 | Existing static reading progression plus new route | tests/arithmetic-update.test.mjs, reader and production navigation |
+| #23 -> REQ-16 | Fixed lesson and preserved prior inventories | Meaningful safe mutation suite |
+| #23 -> NFR-5 | NFR-5 -> both authoritative triplets | Deterministic render, snapshots, intrinsic geometry and mappings |
+| #23 -> NFR-6 | Existing validation/coverage pipeline | Full local checks, doc audit, exact-head Sonar and Gitleaks |
+| #23 -> NFR-7 | Existing reader/card architecture | Proportionate production QA with inspector/security applicability |
+| #23 -> NFR-8 | Separate reviewed conception and owner approvals | Approval records and distinct conception/implementation PRs |

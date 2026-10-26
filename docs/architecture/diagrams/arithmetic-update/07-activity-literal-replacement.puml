@@ -1,0 +1,12 @@
+@startuml
+skinparam defaultFontSize 16
+skinparam shadowing false
+title act - Remplacer par\nun total fourni
+start
+:Initialiser\nmeasurement_count à 2;
+:Écrire le compteur,\npuis un saut de ligne;
+:Affecter le total fourni 1\nà measurement_count;
+:Écrire le compteur,\npuis un saut de ligne;
+:Renvoyer 0;
+stop
+@enduml
