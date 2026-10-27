@@ -1,0 +1,12 @@
+@startuml
+skinparam defaultFontSize 16
+skinparam shadowing false
+title act - Comparer deux entiers
+start
+:Initialiser la cible à 3\net le compteur à 3;
+:Comparer avec == et mémoriser\nle résultat dans target_matched;
+:Comparer avec != et mémoriser\nle résultat dans target_different;
+:Écrire les deux booléens,\nchacun suivi d’un saut de ligne;
+:Renvoyer 0;
+stop
+@enduml
