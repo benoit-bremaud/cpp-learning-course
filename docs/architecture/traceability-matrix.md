@@ -39,3 +39,22 @@ Conception A and its file plan explicitly approved on 2026-10-26. Requirements b
 | #23 -> NFR-6 | Existing validation/coverage pipeline | Full local checks, doc audit, exact-head Sonar and Gitleaks |
 | #23 -> NFR-7 | Existing reader/card architecture | Proportionate production QA with inspector/security applicability |
 | #23 -> NFR-8 | Separate reviewed conception and owner approvals | Approval records and distinct conception/implementation PRs |
+
+## Approved equality-results conception - #26
+
+The owner approved concrete conception A and weights35/30/20/15 on2026-10-27. Requirements below are defined only in the accepted [equality-results specification](specs/equality-results-lesson.md). Realizations are accepted formal models; all lesson/test implementation and verification remains proposed. No prior scoped or normalized ID is reused.
+
+| Source / requirement | Proposed realization | Proposed verification |
+| --- | --- | --- |
+| #26 -> REQ-17 | Same-int equality/inequality and bool contract | Scope/prerequisite review, no CPP-04 completion claim |
+| #26 -> REQ-18 | Two fixed source/card contracts | tests/equality-results.test.mjs inventory and exact outputs |
+| #26 -> REQ-19 | [ACT-equality-pair](diagrams/equality-results/07-activity-equality-pair.md) and [ACT-equality-snapshot](diagrams/equality-results/07-activity-equality-snapshot.md) | Actual C++17 extraction plus independent safe2/3/4 truth probes |
+| #26 -> REQ-20 | REQ-20 -> both comparison-evaluation activities | Exact source intent, wrong-operator/fixed-result/fake-output mutations |
+| #26 -> REQ-21 | REQ-21 -> five-action/nine-statement pair and eight-action/twelve-statement snapshot | Exact ordered mappings, no invented decision diamond |
+| #26 -> REQ-22 | REQ-22 -> ACT-equality-snapshot evaluation moments | Stored/reevaluated output trace and semantic review |
+| #26 -> REQ-23 | Existing reading progression plus one new page | Seven-introduction links/counts, honest practice/catalog scope |
+| #26 -> REQ-24 | Fixed baseline and safe mutations | New test file, prior68 probes retained |
+| #26 -> NFR-9 | NFR-9 -> both authoritative triplets | Deterministic render/public snapshot and intrinsic paper geometry |
+| #26 -> NFR-10 | Existing validation/coverage pipeline | Full local gates, documentation audit, exact-head Sonar and Gitleaks |
+| #26 -> NFR-11 | Existing static reader/card architecture | Three engines, accessibility, inspector/security and inspected screenshots |
+| #26 -> NFR-12 | Separate conception/implementation and owner gates | Explicit approvals/publication boundaries, no Copilot |

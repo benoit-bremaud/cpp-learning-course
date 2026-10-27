@@ -1,0 +1,15 @@
+@startuml
+skinparam defaultFontSize 16
+skinparam shadowing false
+title act - Mémoriser puis recalculer
+start
+:Initialiser la cible à 3\net le compteur à 3;
+:Comparer avec == et mémoriser\nle résultat dans target_matched;
+:Écrire target_matched,\npuis un saut de ligne;
+:Remplacer le compteur par 2;
+:Écrire target_matched,\npuis un saut de ligne;
+:Comparer à nouveau avec ==\net remplacer target_matched;
+:Écrire target_matched,\npuis un saut de ligne;
+:Renvoyer 0;
+stop
+@enduml
