@@ -234,3 +234,5 @@ En lecture facultative, le [voyant guidé](../../exemple-voyant/) utilise un seu
 Les références et les pointeurs nécessiteront de distinguer un objet constant d’un accès qui interdit certaines modifications. Ils ne sont pas des prérequis ici.
 
 Tu peux essayer les trois fichiers dans ton IDE : les premier et troisième s’exécutent, le deuxième doit échouer à la compilation. L’exercice autonome dédié n’est pas encore publié dans le dépôt de pratique.
+
+**Suite :** [calculer une nouvelle valeur](../premiers-calculs/).
