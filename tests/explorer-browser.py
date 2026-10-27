@@ -133,11 +133,14 @@ try:
                 page.locator('[data-close]').click()
                 assert page.evaluate('document.documentElement.scrollWidth <= innerWidth+1')
             # Complete-program lessons reuse cards without requiring an explorer.
-            for slug, rows in [('programme-minimal', [3, 2]), ('premiers-affichages', [4, 4, 4]), ('cpp-09', [7, 6, 7])]:
+            for slug, rows in [('programme-minimal', [3, 2]), ('premiers-affichages', [4, 4, 4]), ('cpp-09', [7, 6, 7]), ('premiers-calculs', [6, 6])]:
                 page.goto(base + f'/notions/{slug}/')
                 page.locator('#starlight__search .pagefind-ui').wait_for(state='attached')
                 expect(page.locator('.uml-trigger')).to_have_count(len(rows))
                 expect(page.locator('[data-explorer]')).to_have_count(0)
+                if slug == 'premiers-calculs':
+                    for table in page.locator('table.observable-values:visible').all():
+                        assert table.evaluate('el => el.scrollWidth <= el.clientWidth + 1')
                 for diagram in page.locator('img[src^="/diagrams/"]:visible').all():
                     assert diagram.evaluate('''el => {
                       const r = el.getBoundingClientRect(); const p = el.parentElement;
@@ -168,6 +171,15 @@ try:
                     if slug == 'premiers-affichages':
                         expected_key = ['ordered', 'reversed', 'joined'][index]
                         expect(card.locator('img')).to_have_attribute('src', f'/diagrams/examples/program-{expected_key}.svg')
+                        expect(card).to_have_css('transition-delay', '0.08s, 0s, 0s')
+                        expect(card).to_have_css('transition-duration', '0.16s, 0.16s, 0.16s')
+                    if slug == 'premiers-calculs':
+                        expected_key = ['arithmetic-update', 'literal-replacement'][index]
+                        assert page.locator(f'[data-uml="program-{expected_key}"] .uml-card:popover-open').count() == 1
+                        assert trigger.evaluate('el => el.popoverTargetElement === el.parentElement.querySelector(".uml-card:popover-open")')
+                        expect(card.locator('img')).to_have_attribute('src', f'/diagrams/examples/program-{expected_key}.svg')
+                        assert card.locator('img').evaluate('el => el.complete && el.getBoundingClientRect().width <= el.naturalWidth + 1')
+                        assert card.locator('table').evaluate('el => el.scrollWidth <= el.clientWidth + 1')
                         expect(card).to_have_css('transition-delay', '0.08s, 0s, 0s')
                         expect(card).to_have_css('transition-duration', '0.16s, 0.16s, 0.16s')
                     if slug == 'cpp-09':
@@ -204,6 +216,14 @@ try:
                 expect(card).to_have_css('transition-duration', '0s')
                 page.screenshot(path=str(artifacts / f'{engine}-{width}-{slug}-dark.png'))
                 page.keyboard.press('Escape')
+                if slug == 'premiers-calculs':
+                    page.locator('.uml-trigger').last.click()
+                    card = page.locator('.uml-card:popover-open[data-positioned]')
+                    expect(card).to_have_css('opacity', '1')
+                    expect(card).to_have_css('transition-duration', '0s')
+                    assert card.locator('tr').count() == 6
+                    assert card.locator('table').evaluate('el => el.scrollWidth <= el.clientWidth + 1')
+                    page.keyboard.press('Escape')
                 page.reload()
                 page.locator('#starlight__search .pagefind-ui').wait_for(state='attached')
                 expect(page.locator('.uml-trigger')).to_have_count(len(rows))
@@ -239,7 +259,7 @@ try:
         assert page.locator('[data-reading]').evaluate('el => el.scrollWidth <= el.clientWidth+1')
         expect(page.locator('[data-close]')).to_be_in_viewport()
         page.screenshot(path=str(artifacts / f'{engine}-text-200-percent.png'))
-        for slug in ['cpp-01', 'programme-minimal', 'premiers-affichages', 'cpp-09']:
+        for slug in ['cpp-01', 'programme-minimal', 'premiers-affichages', 'cpp-09', 'premiers-calculs']:
             page.goto(base + f'/notions/{slug}/')
             page.locator('#starlight__search .pagefind-ui').wait_for(state='attached')
             page.locator('html').evaluate("el => el.style.fontSize = '200%'")
@@ -253,6 +273,15 @@ try:
             for table in card.locator('table.observable-values').all():
                 assert table.evaluate('el => el.scrollWidth <= el.clientWidth + 1')
             page.screenshot(path=str(artifacts / f'{engine}-{slug}-text-200-percent.png'))
+            if slug == 'premiers-calculs':
+                page.keyboard.press('Escape')
+                page.locator('.uml-trigger').last.click()
+                card = page.locator('.uml-card:popover-open')
+                expect(card).to_have_css('opacity', '1')
+                assert card.evaluate('el => el.scrollWidth <= el.clientWidth+1')
+                assert card.locator('table').evaluate('el => el.scrollWidth <= el.clientWidth+1')
+                expect(card.locator('.uml-close')).to_be_in_viewport()
+
         page.close()
         # Await Pagefind initialization before navigating away: Firefox reports an aborted
         # idle module import if a test leaves a freshly loaded route too quickly.
@@ -274,6 +303,11 @@ try:
         expect(page).to_have_url(base + '/notions/cpp-09/')
         page.locator('#starlight__search .pagefind-ui').wait_for(state='attached')
         expect(page.locator('.pagination-links a[rel="prev"]')).to_have_attribute('href', '/notions/cpp-01/')
+        page.locator('.pagination-links a[rel="next"]').click()
+        expect(page).to_have_url(base + '/notions/premiers-calculs/')
+        page.locator('#starlight__search .pagefind-ui').wait_for(state='attached')
+        expect(page.locator('.pagination-links a[rel="prev"]')).to_have_attribute('href', '/notions/cpp-09/')
+
         page.get_by_role('button', name='Rechercher', exact=True).click()
         search = page.get_by_role('dialog', name='Rechercher', exact=True)
         search.get_by_placeholder('Rechercher', exact=True).fill('Suivre plusieurs affichages')
@@ -296,6 +330,20 @@ try:
             original = opened.value
             original.wait_for_load_state()
             assert original.url == base + f'/diagrams/examples/{asset}.svg'
+            expect(original.locator('svg')).to_be_visible()
+            original.close()
+        page.get_by_role('button', name='Rechercher', exact=True).click()
+        search = page.get_by_role('dialog', name='Rechercher', exact=True)
+        search.get_by_placeholder('Rechercher', exact=True).fill('Calculer une nouvelle valeur')
+        search.locator('a.pagefind-ui__result-link[href="/notions/premiers-calculs/"]').click()
+        expect(page).to_have_url(base + '/notions/premiers-calculs/')
+        page.locator('#starlight__search .pagefind-ui').wait_for(state='attached')
+        for key in ['arithmetic-update', 'literal-replacement']:
+            with page.expect_popup() as opened:
+                page.locator(f'a[href="/diagrams/examples/program-{key}.svg"]').first.click()
+            original = opened.value
+            original.wait_for_load_state()
+            assert original.url == base + f'/diagrams/examples/program-{key}.svg'
             expect(original.locator('svg')).to_be_visible()
             original.close()
         page.close()
@@ -372,7 +420,7 @@ try:
             expect(primary.locator('table')).to_be_visible()
             assert primary.locator('tr').count() == 6
             assert primary.locator('table').evaluate('el => el.scrollWidth <= el.clientWidth + 1')
-            for slug, count in [('programme-minimal', 2), ('premiers-affichages', 3), ('cpp-09', 3)]:
+            for slug, count in [('programme-minimal', 2), ('premiers-affichages', 3), ('cpp-09', 3), ('premiers-calculs', 2)]:
                 page.goto(base + f'/notions/{slug}/')
                 if javascript:
                     page.locator('#starlight__search .pagefind-ui').wait_for(state='attached')

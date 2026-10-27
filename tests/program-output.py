@@ -31,9 +31,11 @@ def _validate_programs(lesson: Path, expected: dict[str, bytes], models: dict[st
     count = len(expected)
     count_label = {1: 'one', 2: 'two', 3: 'three'}[count]
     assert len(blocks) == count and len(marked) == count, f'Expected exactly {count_label} labelled C++ fences'
-    assert len(set(keys)) == count and set(keys) == set(expected), ('Expected unique ready and silent markers'
-        if count == 2 else ('Expected unique ordered, reversed and joined markers'
-                            if count == 3 else 'Expected unique measurement-observed marker'))
+    expected_keys = list(expected)
+    marker_label = (expected_keys[0] if count == 1 else
+                    ', '.join(expected_keys[:-1]) + ' and ' + expected_keys[-1])
+    marker_suffix = 'marker' if count == 1 else 'markers'
+    assert len(set(keys)) == count and set(keys) == set(expected), f'Expected unique {marker_label} {marker_suffix}'
     assert blocks == [code for _key, code in marked], 'Every C++ fence must be labelled'
     with tempfile.TemporaryDirectory(prefix='cpp-program-output-') as directory:
         for key, code in marked:
@@ -59,6 +61,18 @@ def _validate_programs(lesson: Path, expected: dict[str, bytes], models: dict[st
                     'std::cout<<"\\n"', 'measurement_count=1',
                     'std::cout<<measurement_count', 'std::cout<<"\\n"', 'return0', '',
                 ], 'measurement-observed: expected seven variable-observation statements'
+            if key in ['arithmetic-update', 'literal-replacement']:
+                # The literal 3 can match one output without expressing the old-value dependency.
+                body = re.fullmatch(r'\s*#include <iostream>\s+int main\(\)\s*\{([^{}]*)\}\s*', code)
+                assert body, f'{key}: expected one complete iostream/main source'
+                statements = re.sub(r'\s+', '', body[1]).split(';')
+                assignment = ('measurement_count=measurement_count+1' if key == 'arithmetic-update'
+                              else 'measurement_count=1')
+                assert statements == [
+                    'intmeasurement_count=2', 'std::cout<<measurement_count',
+                    'std::cout<<"\\n"', assignment,
+                    'std::cout<<measurement_count', 'std::cout<<"\\n"', 'return0', '',
+                ], f'{key}: expected seven arithmetic/replacement observation statements'
             snapshot = Path('public/diagrams/examples/measurement-count.svg' if key == 'measurement-observed'
                             else f'public/diagrams/examples/program-{key}.svg')
             authoritative = models[key]
@@ -69,10 +83,18 @@ def _validate_programs(lesson: Path, expected: dict[str, bytes], models: dict[st
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('path', nargs='?', type=Path, help='Isolated lesson mutation fixture')
-    parser.add_argument('--lesson', choices=['first-program', 'ordered-output', 'observable-variables'], default='first-program')
+    parser.add_argument('--lesson', choices=['first-program', 'ordered-output', 'observable-variables', 'arithmetic-update'], default='first-program')
     args = parser.parse_args()
     if args.lesson == 'first-program':
         validate_lesson(args.path or Path('src/content/docs/notions/programme-minimal.md'))
+    elif args.lesson == 'arithmetic-update':
+        _validate_programs(args.path or Path('src/content/docs/notions/premiers-calculs.md'), {
+            'arithmetic-update': b'2\n3\n',
+            'literal-replacement': b'2\n1\n',
+        }, {
+            key: Path(f'docs/architecture/diagrams/arithmetic-update/07-activity-{key}.svg')
+            for key in ['arithmetic-update', 'literal-replacement']
+        })
     elif args.lesson == 'observable-variables':
         _validate_programs(args.path or Path('src/content/docs/notions/cpp-01.mdx'), {
             'measurement-observed': b'0\n1\n',

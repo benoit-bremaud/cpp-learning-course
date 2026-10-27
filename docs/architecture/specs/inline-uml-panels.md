@@ -73,3 +73,14 @@ The [accepted observable-variable extension](observable-variables.md) replaces t
 ## Observable-constant mapping update
 
 The [accepted CPP-09 extension](observable-constants-lesson.md) replaces all three fragments with marked complete sources, retaining constant-valid/constant-rejected/constant-wrong and fifteen teaching fences overall. Both runtime cases map all twelve statements in six rows; each observation groups four writes. The rejected case maps all five statements with explicit compile-only qualifications. No shared reader behavior changes. The old constant-limit activity remains historical; published snapshot provenance follows the new stable-limit render, while the wrong case uses the new wrong-limit render.
+
+## Arithmetic-update mapping extension
+
+The [accepted arithmetic-update conception](arithmetic-update-lesson.md) adds two complete sources, for seventeen teaching C++ fences overall. Each primary model precedes its source; an immediately adjacent, uniquely keyed card maps all seven statements in five ordered actions. The read/add/store computation is one assignment action, and each observation groups a value write and a newline write. The literal variant has its own actual-behavior model; it is legal C++ against a different required result, not a compile rejection.
+
+| Excerpt/card key | Reviewed diagram | Contract |
+| --- | --- | --- |
+| program-arithmetic-update | arithmetic-update/07-activity-arithmetic-update.svg | Initialize2, observe2, read/add1/store3, observe3, return0 |
+| program-literal-replacement | arithmetic-update/07-activity-literal-replacement.svg | Initialize2, observe2, store supplied1, observe1, return0 |
+
+No explorer, companion, shared CSS or runtime behavior is added. Existing fifteen associations retain their keys and models.

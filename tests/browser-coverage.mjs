@@ -214,7 +214,7 @@ try {
     collectedCoverage.push(...await page.coverage.stopJSCoverage());
     await page.coverage.startJSCoverage({ resetOnNavigation: false });
   }
-  for (const [slug, count] of [['programme-minimal', 2], ['premiers-affichages', 3], ['cpp-09', 3]]) {
+  for (const [slug, count] of [['programme-minimal', 2], ['premiers-affichages', 3], ['cpp-09', 3], ['premiers-calculs', 2]]) {
     await page.goto(base + `/notions/${slug}/`);
     await page.waitForSelector('[data-card-ready]');
     assert.equal(await page.locator('.uml-trigger').count(), count);
@@ -226,6 +226,12 @@ try {
       await trigger.press(key);
       await page.waitForSelector('.uml-card:popover-open[data-positioned]');
       await checkAccessibility(`${slug}: card ${index}`);
+      if (slug === 'premiers-calculs') {
+        assert.equal(await page.locator('.uml-card:popover-open tr').count(), 6);
+        const key = ['arithmetic-update', 'literal-replacement'][index];
+        assert.equal(await page.locator('.uml-card:popover-open img').getAttribute('src'), `/diagrams/examples/program-${key}.svg`);
+        assert.equal(await trigger.evaluate(el => el.popoverTargetElement === el.parentElement.querySelector('.uml-card:popover-open')), true);
+      }
       if (slug === 'cpp-09') {
         assert.equal(await page.locator('.uml-card:popover-open tr').count(), [7, 6, 7][index]);
         const asset = index === 2 ? 'constant-wrong-limit' : 'constant-limit';
@@ -241,6 +247,18 @@ try {
     await page.waitForSelector('.uml-card:popover-open[data-positioned]');
     await checkAccessibility(`${slug}: narrow dark reduced-motion card`);
     assert.equal(await page.locator('.uml-card:popover-open').evaluate(el => getComputedStyle(el).transitionDuration), '0s');
+    if (slug === 'premiers-calculs') {
+      for (let index = 0; index < count; index++) {
+        await page.keyboard.press('Escape');
+        await page.locator('.uml-trigger').nth(index).click();
+        await checkAccessibility(`arithmetic-update: narrow dark card ${index}`);
+        assert.equal(await page.locator('.uml-card:popover-open tr').count(), 6);
+        assert.equal(await page.locator('.uml-card:popover-open').evaluate(el => getComputedStyle(el).transitionDuration), '0s');
+      }
+      for (const table of await page.locator('table.observable-values:visible').all()) {
+        assert.equal(await table.evaluate(el => el.scrollWidth <= el.clientWidth + 1), true);
+      }
+    }
     if (slug === 'cpp-09') {
       for (let index = 0; index < count; index++) {
         await page.keyboard.press('Escape');

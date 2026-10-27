@@ -76,6 +76,6 @@ test('built ordered-output lesson preserves three adjacent mappings and publishe
   assert.match(html, /href="[^\"]*programme-minimal\//);
   assert.match(html, /href="[^\"]*cpp-01\//);
   const progression = await readFile('src/content/docs/parcours.md', 'utf8');
-  assert.match(progression, /Les cinq premières étapes/);
+  assert.match(progression, /Les six premières étapes/);
   assert.match(progression, /\(\.\.\/notions\/premiers-affichages\/\)/);
 });

@@ -41,3 +41,7 @@ The [accepted CPP-01 extension](specs/observable-variables.md) replaces the prim
 ## Observable constant values
 
 The [accepted CPP-09 extension](specs/observable-constants-lesson.md) defines three complete sources: two executable programs and one compiler-rejected case. The [stable-limit](diagrams/observable-constants/07-activity-stable-limit.md) and [wrong-limit](diagrams/observable-constants/07-activity-wrong-limit.md) activities each map twelve statements through six actions. The rejected source references only the expected conception, with no invented execution. [Glossary](glossary.md) and [traceability](traceability-matrix.md) scope the new requirement IDs; they are not a retrospective audit of all legacy specifications.
+
+## Arithmetic update
+
+The [accepted arithmetic-update lesson](specs/arithmetic-update-lesson.md) contrasts computing from an old value with storing a supplied literal. The [arithmetic activity](diagrams/arithmetic-update/07-activity-arithmetic-update.md) and [literal replacement](diagrams/arithmetic-update/07-activity-literal-replacement.md) each map seven statements through five actions. The nonzero initial value makes the different outputs visible; source intent also guards against a fixed literal result that matches one baseline. The separate sum-initialization practice is not claimed as a dedicated self-update exercise.
